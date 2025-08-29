@@ -1,0 +1,457 @@
+provider:
+  name: coreapp
+
+data_sources:
+  app_group:
+    read:
+      path: /apps/core.eda.nokia.com
+      method: GET
+
+  cluster_role:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+      method: GET
+
+  cluster_role_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clusterroles
+      method: GET
+
+  deviation:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/{name}
+      method: GET
+
+  deviation_action:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
+      method: GET
+
+  deviation_action_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions
+      method: GET
+
+  deviation_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations
+      method: GET
+
+  edge_interface:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
+      method: GET
+
+  edge_interface_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces
+      method: GET
+
+  http_proxy:
+    read:
+      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
+      method: GET
+
+  http_proxy_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/httpproxies
+      method: GET
+
+  index_allocation_pool:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
+      method: GET
+
+  index_allocation_pool_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools
+      method: GET
+
+  ip_allocation_pool:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
+      method: GET
+
+  ip_allocation_pool_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools
+      method: GET
+
+  ip_in_subnet_allocation_pool:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
+      method: GET
+
+  ip_in_subnet_allocation_pool_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools
+      method: GET
+
+  license:
+    read:
+      path: /apps/core.eda.nokia.com/v1/licenses/{name}
+      method: GET
+
+  license_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/licenses
+      method: GET
+
+  namespace:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{name}
+      method: GET
+
+  namespace_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces
+      method: GET
+
+  node_profile:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
+      method: GET
+
+  node_profile_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles
+      method: GET
+
+  node_user:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
+      method: GET
+
+  node_user_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
+      method: GET
+
+  resource_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1
+      method: GET
+
+  role:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
+      method: GET
+
+  role_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
+      method: GET
+
+  subnet_allocation_pool:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
+      method: GET
+
+  subnet_allocation_pool_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
+      method: GET
+
+  topo_breakout:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
+      method: GET
+
+  topo_breakout_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts
+      method: GET
+
+  topo_link:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
+      method: GET
+
+  topo_link_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks
+      method: GET
+
+  topo_node:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
+      method: GET
+
+  topo_node_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
+      method: GET
+
+  udp_proxy:
+    read:
+      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
+      method: GET
+
+  udp_proxy_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/udpproxies
+      method: GET
+
+  workflow:
+    read:
+      path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}
+      method: GET
+
+  workflow_definition:
+    read:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
+      method: GET
+
+  workflow_definition_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions
+      method: GET
+
+  workflow_get_inputs_resp_elem:
+    read:
+      path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}/_input
+      method: GET
+
+  workflow_list:
+    read:
+      path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows
+      method: GET
+
+resources:
+  cluster_role:
+    create:
+      path: /apps/core.eda.nokia.com/v1/clusterroles
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+      method: DELETE
+
+  deviation_action:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
+      method: DELETE
+
+  edge_interface:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
+      method: DELETE
+
+  http_proxy:
+    create:
+      path: /apps/core.eda.nokia.com/v1/httpproxies
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
+      method: DELETE
+
+  index_allocation_pool:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
+      method: DELETE
+
+  ip_allocation_pool:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
+      method: DELETE
+
+  ip_in_subnet_allocation_pool:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
+      method: DELETE
+
+  namespace:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{name}
+      method: DELETE
+
+  node_profile:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
+      method: DELETE
+
+  node_user:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
+      method: DELETE
+
+  role:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
+      method: DELETE
+
+  subnet_allocation_pool:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
+      method: DELETE
+
+  topo_breakout:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
+      method: DELETE
+
+  topo_link:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
+      method: DELETE
+
+  topo_node:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
+      method: DELETE
+
+  udp_proxy:
+    create:
+      path: /apps/core.eda.nokia.com/v1/udpproxies
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
+      method: DELETE
+
+  workflow_definition:
+    create:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
+      method: DELETE
