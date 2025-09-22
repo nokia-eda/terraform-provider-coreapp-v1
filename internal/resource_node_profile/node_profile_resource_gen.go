@@ -100,7 +100,7 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 					},
 					"dhcp": schema.SingleNestedAttribute{
 						Attributes: map[string]schema.Attribute{
-							"dhcp4options": schema.ListNestedAttribute{
+							"dhcp4_options": schema.ListNestedAttribute{
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"option": schema.StringAttribute{
@@ -301,9 +301,9 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									CustomType: Dhcp4optionsType{
+									CustomType: Dhcp4OptionsType{
 										ObjectType: types.ObjectType{
-											AttrTypes: Dhcp4optionsValue{}.AttributeTypes(ctx),
+											AttrTypes: Dhcp4OptionsValue{}.AttributeTypes(ctx),
 										},
 									},
 								},
@@ -311,7 +311,7 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 								Description:         "DHCPv4 options to return to TopoNodes referencing this NodeProfile.",
 								MarkdownDescription: "DHCPv4 options to return to TopoNodes referencing this NodeProfile.",
 							},
-							"dhcp6options": schema.ListNestedAttribute{
+							"dhcp6_options": schema.ListNestedAttribute{
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"option": schema.StringAttribute{
@@ -334,9 +334,9 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									CustomType: Dhcp6optionsType{
+									CustomType: Dhcp6OptionsType{
 										ObjectType: types.ObjectType{
-											AttrTypes: Dhcp6optionsValue{}.AttributeTypes(ctx),
+											AttrTypes: Dhcp6OptionsValue{}.AttributeTypes(ctx),
 										},
 									},
 								},
@@ -2421,40 +2421,40 @@ func (t DhcpType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 
 	attributes := in.Attributes()
 
-	dhcp4optionsAttribute, ok := attributes["dhcp4options"]
+	dhcp4OptionsAttribute, ok := attributes["dhcp4_options"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`dhcp4options is missing from object`)
+			`dhcp4_options is missing from object`)
 
 		return nil, diags
 	}
 
-	dhcp4optionsVal, ok := dhcp4optionsAttribute.(basetypes.ListValue)
+	dhcp4OptionsVal, ok := dhcp4OptionsAttribute.(basetypes.ListValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`dhcp4options expected to be basetypes.ListValue, was: %T`, dhcp4optionsAttribute))
+			fmt.Sprintf(`dhcp4_options expected to be basetypes.ListValue, was: %T`, dhcp4OptionsAttribute))
 	}
 
-	dhcp6optionsAttribute, ok := attributes["dhcp6options"]
+	dhcp6OptionsAttribute, ok := attributes["dhcp6_options"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`dhcp6options is missing from object`)
+			`dhcp6_options is missing from object`)
 
 		return nil, diags
 	}
 
-	dhcp6optionsVal, ok := dhcp6optionsAttribute.(basetypes.ListValue)
+	dhcp6OptionsVal, ok := dhcp6OptionsAttribute.(basetypes.ListValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`dhcp6options expected to be basetypes.ListValue, was: %T`, dhcp6optionsAttribute))
+			fmt.Sprintf(`dhcp6_options expected to be basetypes.ListValue, was: %T`, dhcp6OptionsAttribute))
 	}
 
 	managementPoolv4Attribute, ok := attributes["management_poolv4"]
@@ -2516,8 +2516,8 @@ func (t DhcpType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 	}
 
 	return DhcpValue{
-		Dhcp4options:           dhcp4optionsVal,
-		Dhcp6options:           dhcp6optionsVal,
+		Dhcp4Options:           dhcp4OptionsVal,
+		Dhcp6Options:           dhcp6OptionsVal,
 		ManagementPoolv4:       managementPoolv4Val,
 		ManagementPoolv6:       managementPoolv6Val,
 		PreferredAddressFamily: preferredAddressFamilyVal,
@@ -2588,40 +2588,40 @@ func NewDhcpValue(attributeTypes map[string]attr.Type, attributes map[string]att
 		return NewDhcpValueUnknown(), diags
 	}
 
-	dhcp4optionsAttribute, ok := attributes["dhcp4options"]
+	dhcp4OptionsAttribute, ok := attributes["dhcp4_options"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`dhcp4options is missing from object`)
+			`dhcp4_options is missing from object`)
 
 		return NewDhcpValueUnknown(), diags
 	}
 
-	dhcp4optionsVal, ok := dhcp4optionsAttribute.(basetypes.ListValue)
+	dhcp4OptionsVal, ok := dhcp4OptionsAttribute.(basetypes.ListValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`dhcp4options expected to be basetypes.ListValue, was: %T`, dhcp4optionsAttribute))
+			fmt.Sprintf(`dhcp4_options expected to be basetypes.ListValue, was: %T`, dhcp4OptionsAttribute))
 	}
 
-	dhcp6optionsAttribute, ok := attributes["dhcp6options"]
+	dhcp6OptionsAttribute, ok := attributes["dhcp6_options"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`dhcp6options is missing from object`)
+			`dhcp6_options is missing from object`)
 
 		return NewDhcpValueUnknown(), diags
 	}
 
-	dhcp6optionsVal, ok := dhcp6optionsAttribute.(basetypes.ListValue)
+	dhcp6OptionsVal, ok := dhcp6OptionsAttribute.(basetypes.ListValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`dhcp6options expected to be basetypes.ListValue, was: %T`, dhcp6optionsAttribute))
+			fmt.Sprintf(`dhcp6_options expected to be basetypes.ListValue, was: %T`, dhcp6OptionsAttribute))
 	}
 
 	managementPoolv4Attribute, ok := attributes["management_poolv4"]
@@ -2683,8 +2683,8 @@ func NewDhcpValue(attributeTypes map[string]attr.Type, attributes map[string]att
 	}
 
 	return DhcpValue{
-		Dhcp4options:           dhcp4optionsVal,
-		Dhcp6options:           dhcp6optionsVal,
+		Dhcp4Options:           dhcp4OptionsVal,
+		Dhcp6Options:           dhcp6OptionsVal,
 		ManagementPoolv4:       managementPoolv4Val,
 		ManagementPoolv6:       managementPoolv6Val,
 		PreferredAddressFamily: preferredAddressFamilyVal,
@@ -2760,8 +2760,8 @@ func (t DhcpType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = DhcpValue{}
 
 type DhcpValue struct {
-	Dhcp4options           basetypes.ListValue   `tfsdk:"dhcp4options"`
-	Dhcp6options           basetypes.ListValue   `tfsdk:"dhcp6options"`
+	Dhcp4Options           basetypes.ListValue   `tfsdk:"dhcp4_options"`
+	Dhcp6Options           basetypes.ListValue   `tfsdk:"dhcp6_options"`
 	ManagementPoolv4       basetypes.StringValue `tfsdk:"management_poolv4"`
 	ManagementPoolv6       basetypes.StringValue `tfsdk:"management_poolv6"`
 	PreferredAddressFamily basetypes.StringValue `tfsdk:"preferred_address_family"`
@@ -2774,11 +2774,11 @@ func (v DhcpValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 	var val tftypes.Value
 	var err error
 
-	attrTypes["dhcp4options"] = basetypes.ListType{
-		ElemType: Dhcp4optionsValue{}.Type(ctx),
+	attrTypes["dhcp4_options"] = basetypes.ListType{
+		ElemType: Dhcp4OptionsValue{}.Type(ctx),
 	}.TerraformType(ctx)
-	attrTypes["dhcp6options"] = basetypes.ListType{
-		ElemType: Dhcp6optionsValue{}.Type(ctx),
+	attrTypes["dhcp6_options"] = basetypes.ListType{
+		ElemType: Dhcp6OptionsValue{}.Type(ctx),
 	}.TerraformType(ctx)
 	attrTypes["management_poolv4"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["management_poolv6"] = basetypes.StringType{}.TerraformType(ctx)
@@ -2790,21 +2790,21 @@ func (v DhcpValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 	case attr.ValueStateKnown:
 		vals := make(map[string]tftypes.Value, 5)
 
-		val, err = v.Dhcp4options.ToTerraformValue(ctx)
+		val, err = v.Dhcp4Options.ToTerraformValue(ctx)
 
 		if err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
 
-		vals["dhcp4options"] = val
+		vals["dhcp4_options"] = val
 
-		val, err = v.Dhcp6options.ToTerraformValue(ctx)
+		val, err = v.Dhcp6Options.ToTerraformValue(ctx)
 
 		if err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
 
-		vals["dhcp6options"] = val
+		vals["dhcp6_options"] = val
 
 		val, err = v.ManagementPoolv4.ToTerraformValue(ctx)
 
@@ -2859,70 +2859,70 @@ func (v DhcpValue) String() string {
 func (v DhcpValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	dhcp4options := types.ListValueMust(
-		Dhcp4optionsType{
+	dhcp4Options := types.ListValueMust(
+		Dhcp4OptionsType{
 			basetypes.ObjectType{
-				AttrTypes: Dhcp4optionsValue{}.AttributeTypes(ctx),
+				AttrTypes: Dhcp4OptionsValue{}.AttributeTypes(ctx),
 			},
 		},
-		v.Dhcp4options.Elements(),
+		v.Dhcp4Options.Elements(),
 	)
 
-	if v.Dhcp4options.IsNull() {
-		dhcp4options = types.ListNull(
-			Dhcp4optionsType{
+	if v.Dhcp4Options.IsNull() {
+		dhcp4Options = types.ListNull(
+			Dhcp4OptionsType{
 				basetypes.ObjectType{
-					AttrTypes: Dhcp4optionsValue{}.AttributeTypes(ctx),
+					AttrTypes: Dhcp4OptionsValue{}.AttributeTypes(ctx),
 				},
 			},
 		)
 	}
 
-	if v.Dhcp4options.IsUnknown() {
-		dhcp4options = types.ListUnknown(
-			Dhcp4optionsType{
+	if v.Dhcp4Options.IsUnknown() {
+		dhcp4Options = types.ListUnknown(
+			Dhcp4OptionsType{
 				basetypes.ObjectType{
-					AttrTypes: Dhcp4optionsValue{}.AttributeTypes(ctx),
+					AttrTypes: Dhcp4OptionsValue{}.AttributeTypes(ctx),
 				},
 			},
 		)
 	}
 
-	dhcp6options := types.ListValueMust(
-		Dhcp6optionsType{
+	dhcp6Options := types.ListValueMust(
+		Dhcp6OptionsType{
 			basetypes.ObjectType{
-				AttrTypes: Dhcp6optionsValue{}.AttributeTypes(ctx),
+				AttrTypes: Dhcp6OptionsValue{}.AttributeTypes(ctx),
 			},
 		},
-		v.Dhcp6options.Elements(),
+		v.Dhcp6Options.Elements(),
 	)
 
-	if v.Dhcp6options.IsNull() {
-		dhcp6options = types.ListNull(
-			Dhcp6optionsType{
+	if v.Dhcp6Options.IsNull() {
+		dhcp6Options = types.ListNull(
+			Dhcp6OptionsType{
 				basetypes.ObjectType{
-					AttrTypes: Dhcp6optionsValue{}.AttributeTypes(ctx),
+					AttrTypes: Dhcp6OptionsValue{}.AttributeTypes(ctx),
 				},
 			},
 		)
 	}
 
-	if v.Dhcp6options.IsUnknown() {
-		dhcp6options = types.ListUnknown(
-			Dhcp6optionsType{
+	if v.Dhcp6Options.IsUnknown() {
+		dhcp6Options = types.ListUnknown(
+			Dhcp6OptionsType{
 				basetypes.ObjectType{
-					AttrTypes: Dhcp6optionsValue{}.AttributeTypes(ctx),
+					AttrTypes: Dhcp6OptionsValue{}.AttributeTypes(ctx),
 				},
 			},
 		)
 	}
 
 	attributeTypes := map[string]attr.Type{
-		"dhcp4options": basetypes.ListType{
-			ElemType: Dhcp4optionsValue{}.Type(ctx),
+		"dhcp4_options": basetypes.ListType{
+			ElemType: Dhcp4OptionsValue{}.Type(ctx),
 		},
-		"dhcp6options": basetypes.ListType{
-			ElemType: Dhcp6optionsValue{}.Type(ctx),
+		"dhcp6_options": basetypes.ListType{
+			ElemType: Dhcp6OptionsValue{}.Type(ctx),
 		},
 		"management_poolv4":        basetypes.StringType{},
 		"management_poolv6":        basetypes.StringType{},
@@ -2940,8 +2940,8 @@ func (v DhcpValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"dhcp4options":             dhcp4options,
-			"dhcp6options":             dhcp6options,
+			"dhcp4_options":            dhcp4Options,
+			"dhcp6_options":            dhcp6Options,
 			"management_poolv4":        v.ManagementPoolv4,
 			"management_poolv6":        v.ManagementPoolv6,
 			"preferred_address_family": v.PreferredAddressFamily,
@@ -2965,11 +2965,11 @@ func (v DhcpValue) Equal(o attr.Value) bool {
 		return true
 	}
 
-	if !v.Dhcp4options.Equal(other.Dhcp4options) {
+	if !v.Dhcp4Options.Equal(other.Dhcp4Options) {
 		return false
 	}
 
-	if !v.Dhcp6options.Equal(other.Dhcp6options) {
+	if !v.Dhcp6Options.Equal(other.Dhcp6Options) {
 		return false
 	}
 
@@ -2998,11 +2998,11 @@ func (v DhcpValue) Type(ctx context.Context) attr.Type {
 
 func (v DhcpValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
-		"dhcp4options": basetypes.ListType{
-			ElemType: Dhcp4optionsValue{}.Type(ctx),
+		"dhcp4_options": basetypes.ListType{
+			ElemType: Dhcp4OptionsValue{}.Type(ctx),
 		},
-		"dhcp6options": basetypes.ListType{
-			ElemType: Dhcp6optionsValue{}.Type(ctx),
+		"dhcp6_options": basetypes.ListType{
+			ElemType: Dhcp6OptionsValue{}.Type(ctx),
 		},
 		"management_poolv4":        basetypes.StringType{},
 		"management_poolv6":        basetypes.StringType{},
@@ -3010,14 +3010,14 @@ func (v DhcpValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	}
 }
 
-var _ basetypes.ObjectTypable = Dhcp4optionsType{}
+var _ basetypes.ObjectTypable = Dhcp4OptionsType{}
 
-type Dhcp4optionsType struct {
+type Dhcp4OptionsType struct {
 	basetypes.ObjectType
 }
 
-func (t Dhcp4optionsType) Equal(o attr.Type) bool {
-	other, ok := o.(Dhcp4optionsType)
+func (t Dhcp4OptionsType) Equal(o attr.Type) bool {
+	other, ok := o.(Dhcp4OptionsType)
 
 	if !ok {
 		return false
@@ -3026,11 +3026,11 @@ func (t Dhcp4optionsType) Equal(o attr.Type) bool {
 	return t.ObjectType.Equal(other.ObjectType)
 }
 
-func (t Dhcp4optionsType) String() string {
-	return "Dhcp4optionsType"
+func (t Dhcp4OptionsType) String() string {
+	return "Dhcp4OptionsType"
 }
 
-func (t Dhcp4optionsType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
+func (t Dhcp4OptionsType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	attributes := in.Attributes()
@@ -3075,26 +3075,26 @@ func (t Dhcp4optionsType) ValueFromObject(ctx context.Context, in basetypes.Obje
 		return nil, diags
 	}
 
-	return Dhcp4optionsValue{
+	return Dhcp4OptionsValue{
 		Option: optionVal,
 		Value:  valueVal,
 		state:  attr.ValueStateKnown,
 	}, diags
 }
 
-func NewDhcp4optionsValueNull() Dhcp4optionsValue {
-	return Dhcp4optionsValue{
+func NewDhcp4OptionsValueNull() Dhcp4OptionsValue {
+	return Dhcp4OptionsValue{
 		state: attr.ValueStateNull,
 	}
 }
 
-func NewDhcp4optionsValueUnknown() Dhcp4optionsValue {
-	return Dhcp4optionsValue{
+func NewDhcp4OptionsValueUnknown() Dhcp4OptionsValue {
+	return Dhcp4OptionsValue{
 		state: attr.ValueStateUnknown,
 	}
 }
 
-func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (Dhcp4optionsValue, diag.Diagnostics) {
+func NewDhcp4OptionsValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (Dhcp4OptionsValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/521
@@ -3105,11 +3105,11 @@ func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 
 		if !ok {
 			diags.AddError(
-				"Missing Dhcp4optionsValue Attribute Value",
-				"While creating a Dhcp4optionsValue value, a missing attribute value was detected. "+
-					"A Dhcp4optionsValue must contain values for all attributes, even if null or unknown. "+
+				"Missing Dhcp4OptionsValue Attribute Value",
+				"While creating a Dhcp4OptionsValue value, a missing attribute value was detected. "+
+					"A Dhcp4OptionsValue must contain values for all attributes, even if null or unknown. "+
 					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Dhcp4optionsValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
+					fmt.Sprintf("Dhcp4OptionsValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
 			)
 
 			continue
@@ -3117,12 +3117,12 @@ func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 
 		if !attributeType.Equal(attribute.Type(ctx)) {
 			diags.AddError(
-				"Invalid Dhcp4optionsValue Attribute Type",
-				"While creating a Dhcp4optionsValue value, an invalid attribute value was detected. "+
-					"A Dhcp4optionsValue must use a matching attribute type for the value. "+
+				"Invalid Dhcp4OptionsValue Attribute Type",
+				"While creating a Dhcp4OptionsValue value, an invalid attribute value was detected. "+
+					"A Dhcp4OptionsValue must use a matching attribute type for the value. "+
 					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Dhcp4optionsValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
-					fmt.Sprintf("Dhcp4optionsValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
+					fmt.Sprintf("Dhcp4OptionsValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
+					fmt.Sprintf("Dhcp4OptionsValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
 			)
 		}
 	}
@@ -3132,17 +3132,17 @@ func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 
 		if !ok {
 			diags.AddError(
-				"Extra Dhcp4optionsValue Attribute Value",
-				"While creating a Dhcp4optionsValue value, an extra attribute value was detected. "+
-					"A Dhcp4optionsValue must not contain values beyond the expected attribute types. "+
+				"Extra Dhcp4OptionsValue Attribute Value",
+				"While creating a Dhcp4OptionsValue value, an extra attribute value was detected. "+
+					"A Dhcp4OptionsValue must not contain values beyond the expected attribute types. "+
 					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Extra Dhcp4optionsValue Attribute Name: %s", name),
+					fmt.Sprintf("Extra Dhcp4OptionsValue Attribute Name: %s", name),
 			)
 		}
 	}
 
 	if diags.HasError() {
-		return NewDhcp4optionsValueUnknown(), diags
+		return NewDhcp4OptionsValueUnknown(), diags
 	}
 
 	optionAttribute, ok := attributes["option"]
@@ -3152,7 +3152,7 @@ func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 			"Attribute Missing",
 			`option is missing from object`)
 
-		return NewDhcp4optionsValueUnknown(), diags
+		return NewDhcp4OptionsValueUnknown(), diags
 	}
 
 	optionVal, ok := optionAttribute.(basetypes.StringValue)
@@ -3170,7 +3170,7 @@ func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 			"Attribute Missing",
 			`value is missing from object`)
 
-		return NewDhcp4optionsValueUnknown(), diags
+		return NewDhcp4OptionsValueUnknown(), diags
 	}
 
 	valueVal, ok := valueAttribute.(basetypes.ListValue)
@@ -3182,18 +3182,18 @@ func NewDhcp4optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 	}
 
 	if diags.HasError() {
-		return NewDhcp4optionsValueUnknown(), diags
+		return NewDhcp4OptionsValueUnknown(), diags
 	}
 
-	return Dhcp4optionsValue{
+	return Dhcp4OptionsValue{
 		Option: optionVal,
 		Value:  valueVal,
 		state:  attr.ValueStateKnown,
 	}, diags
 }
 
-func NewDhcp4optionsValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) Dhcp4optionsValue {
-	object, diags := NewDhcp4optionsValue(attributeTypes, attributes)
+func NewDhcp4OptionsValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) Dhcp4OptionsValue {
+	object, diags := NewDhcp4OptionsValue(attributeTypes, attributes)
 
 	if diags.HasError() {
 		// This could potentially be added to the diag package.
@@ -3207,15 +3207,15 @@ func NewDhcp4optionsValueMust(attributeTypes map[string]attr.Type, attributes ma
 				diagnostic.Detail()))
 		}
 
-		panic("NewDhcp4optionsValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
+		panic("NewDhcp4OptionsValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
 	}
 
 	return object
 }
 
-func (t Dhcp4optionsType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
+func (t Dhcp4OptionsType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
 	if in.Type() == nil {
-		return NewDhcp4optionsValueNull(), nil
+		return NewDhcp4OptionsValueNull(), nil
 	}
 
 	if !in.Type().Equal(t.TerraformType(ctx)) {
@@ -3223,11 +3223,11 @@ func (t Dhcp4optionsType) ValueFromTerraform(ctx context.Context, in tftypes.Val
 	}
 
 	if !in.IsKnown() {
-		return NewDhcp4optionsValueUnknown(), nil
+		return NewDhcp4OptionsValueUnknown(), nil
 	}
 
 	if in.IsNull() {
-		return NewDhcp4optionsValueNull(), nil
+		return NewDhcp4OptionsValueNull(), nil
 	}
 
 	attributes := map[string]attr.Value{}
@@ -3250,22 +3250,22 @@ func (t Dhcp4optionsType) ValueFromTerraform(ctx context.Context, in tftypes.Val
 		attributes[k] = a
 	}
 
-	return NewDhcp4optionsValueMust(Dhcp4optionsValue{}.AttributeTypes(ctx), attributes), nil
+	return NewDhcp4OptionsValueMust(Dhcp4OptionsValue{}.AttributeTypes(ctx), attributes), nil
 }
 
-func (t Dhcp4optionsType) ValueType(ctx context.Context) attr.Value {
-	return Dhcp4optionsValue{}
+func (t Dhcp4OptionsType) ValueType(ctx context.Context) attr.Value {
+	return Dhcp4OptionsValue{}
 }
 
-var _ basetypes.ObjectValuable = Dhcp4optionsValue{}
+var _ basetypes.ObjectValuable = Dhcp4OptionsValue{}
 
-type Dhcp4optionsValue struct {
+type Dhcp4OptionsValue struct {
 	Option basetypes.StringValue `tfsdk:"option"`
 	Value  basetypes.ListValue   `tfsdk:"value"`
 	state  attr.ValueState
 }
 
-func (v Dhcp4optionsValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+func (v Dhcp4OptionsValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
 	attrTypes := make(map[string]tftypes.Type, 2)
 
 	var val tftypes.Value
@@ -3312,19 +3312,19 @@ func (v Dhcp4optionsValue) ToTerraformValue(ctx context.Context) (tftypes.Value,
 	}
 }
 
-func (v Dhcp4optionsValue) IsNull() bool {
+func (v Dhcp4OptionsValue) IsNull() bool {
 	return v.state == attr.ValueStateNull
 }
 
-func (v Dhcp4optionsValue) IsUnknown() bool {
+func (v Dhcp4OptionsValue) IsUnknown() bool {
 	return v.state == attr.ValueStateUnknown
 }
 
-func (v Dhcp4optionsValue) String() string {
-	return "Dhcp4optionsValue"
+func (v Dhcp4OptionsValue) String() string {
+	return "Dhcp4OptionsValue"
 }
 
-func (v Dhcp4optionsValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
+func (v Dhcp4OptionsValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	var valueVal basetypes.ListValue
@@ -3373,8 +3373,8 @@ func (v Dhcp4optionsValue) ToObjectValue(ctx context.Context) (basetypes.ObjectV
 	return objVal, diags
 }
 
-func (v Dhcp4optionsValue) Equal(o attr.Value) bool {
-	other, ok := o.(Dhcp4optionsValue)
+func (v Dhcp4OptionsValue) Equal(o attr.Value) bool {
+	other, ok := o.(Dhcp4OptionsValue)
 
 	if !ok {
 		return false
@@ -3399,15 +3399,15 @@ func (v Dhcp4optionsValue) Equal(o attr.Value) bool {
 	return true
 }
 
-func (v Dhcp4optionsValue) Type(ctx context.Context) attr.Type {
-	return Dhcp4optionsType{
+func (v Dhcp4OptionsValue) Type(ctx context.Context) attr.Type {
+	return Dhcp4OptionsType{
 		basetypes.ObjectType{
 			AttrTypes: v.AttributeTypes(ctx),
 		},
 	}
 }
 
-func (v Dhcp4optionsValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
+func (v Dhcp4OptionsValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
 		"option": basetypes.StringType{},
 		"value": basetypes.ListType{
@@ -3416,14 +3416,14 @@ func (v Dhcp4optionsValue) AttributeTypes(ctx context.Context) map[string]attr.T
 	}
 }
 
-var _ basetypes.ObjectTypable = Dhcp6optionsType{}
+var _ basetypes.ObjectTypable = Dhcp6OptionsType{}
 
-type Dhcp6optionsType struct {
+type Dhcp6OptionsType struct {
 	basetypes.ObjectType
 }
 
-func (t Dhcp6optionsType) Equal(o attr.Type) bool {
-	other, ok := o.(Dhcp6optionsType)
+func (t Dhcp6OptionsType) Equal(o attr.Type) bool {
+	other, ok := o.(Dhcp6OptionsType)
 
 	if !ok {
 		return false
@@ -3432,11 +3432,11 @@ func (t Dhcp6optionsType) Equal(o attr.Type) bool {
 	return t.ObjectType.Equal(other.ObjectType)
 }
 
-func (t Dhcp6optionsType) String() string {
-	return "Dhcp6optionsType"
+func (t Dhcp6OptionsType) String() string {
+	return "Dhcp6OptionsType"
 }
 
-func (t Dhcp6optionsType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
+func (t Dhcp6OptionsType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	attributes := in.Attributes()
@@ -3481,26 +3481,26 @@ func (t Dhcp6optionsType) ValueFromObject(ctx context.Context, in basetypes.Obje
 		return nil, diags
 	}
 
-	return Dhcp6optionsValue{
+	return Dhcp6OptionsValue{
 		Option: optionVal,
 		Value:  valueVal,
 		state:  attr.ValueStateKnown,
 	}, diags
 }
 
-func NewDhcp6optionsValueNull() Dhcp6optionsValue {
-	return Dhcp6optionsValue{
+func NewDhcp6OptionsValueNull() Dhcp6OptionsValue {
+	return Dhcp6OptionsValue{
 		state: attr.ValueStateNull,
 	}
 }
 
-func NewDhcp6optionsValueUnknown() Dhcp6optionsValue {
-	return Dhcp6optionsValue{
+func NewDhcp6OptionsValueUnknown() Dhcp6OptionsValue {
+	return Dhcp6OptionsValue{
 		state: attr.ValueStateUnknown,
 	}
 }
 
-func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (Dhcp6optionsValue, diag.Diagnostics) {
+func NewDhcp6OptionsValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (Dhcp6OptionsValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/521
@@ -3511,11 +3511,11 @@ func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 
 		if !ok {
 			diags.AddError(
-				"Missing Dhcp6optionsValue Attribute Value",
-				"While creating a Dhcp6optionsValue value, a missing attribute value was detected. "+
-					"A Dhcp6optionsValue must contain values for all attributes, even if null or unknown. "+
+				"Missing Dhcp6OptionsValue Attribute Value",
+				"While creating a Dhcp6OptionsValue value, a missing attribute value was detected. "+
+					"A Dhcp6OptionsValue must contain values for all attributes, even if null or unknown. "+
 					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Dhcp6optionsValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
+					fmt.Sprintf("Dhcp6OptionsValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
 			)
 
 			continue
@@ -3523,12 +3523,12 @@ func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 
 		if !attributeType.Equal(attribute.Type(ctx)) {
 			diags.AddError(
-				"Invalid Dhcp6optionsValue Attribute Type",
-				"While creating a Dhcp6optionsValue value, an invalid attribute value was detected. "+
-					"A Dhcp6optionsValue must use a matching attribute type for the value. "+
+				"Invalid Dhcp6OptionsValue Attribute Type",
+				"While creating a Dhcp6OptionsValue value, an invalid attribute value was detected. "+
+					"A Dhcp6OptionsValue must use a matching attribute type for the value. "+
 					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Dhcp6optionsValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
-					fmt.Sprintf("Dhcp6optionsValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
+					fmt.Sprintf("Dhcp6OptionsValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
+					fmt.Sprintf("Dhcp6OptionsValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
 			)
 		}
 	}
@@ -3538,17 +3538,17 @@ func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 
 		if !ok {
 			diags.AddError(
-				"Extra Dhcp6optionsValue Attribute Value",
-				"While creating a Dhcp6optionsValue value, an extra attribute value was detected. "+
-					"A Dhcp6optionsValue must not contain values beyond the expected attribute types. "+
+				"Extra Dhcp6OptionsValue Attribute Value",
+				"While creating a Dhcp6OptionsValue value, an extra attribute value was detected. "+
+					"A Dhcp6OptionsValue must not contain values beyond the expected attribute types. "+
 					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Extra Dhcp6optionsValue Attribute Name: %s", name),
+					fmt.Sprintf("Extra Dhcp6OptionsValue Attribute Name: %s", name),
 			)
 		}
 	}
 
 	if diags.HasError() {
-		return NewDhcp6optionsValueUnknown(), diags
+		return NewDhcp6OptionsValueUnknown(), diags
 	}
 
 	optionAttribute, ok := attributes["option"]
@@ -3558,7 +3558,7 @@ func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 			"Attribute Missing",
 			`option is missing from object`)
 
-		return NewDhcp6optionsValueUnknown(), diags
+		return NewDhcp6OptionsValueUnknown(), diags
 	}
 
 	optionVal, ok := optionAttribute.(basetypes.StringValue)
@@ -3576,7 +3576,7 @@ func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 			"Attribute Missing",
 			`value is missing from object`)
 
-		return NewDhcp6optionsValueUnknown(), diags
+		return NewDhcp6OptionsValueUnknown(), diags
 	}
 
 	valueVal, ok := valueAttribute.(basetypes.ListValue)
@@ -3588,18 +3588,18 @@ func NewDhcp6optionsValue(attributeTypes map[string]attr.Type, attributes map[st
 	}
 
 	if diags.HasError() {
-		return NewDhcp6optionsValueUnknown(), diags
+		return NewDhcp6OptionsValueUnknown(), diags
 	}
 
-	return Dhcp6optionsValue{
+	return Dhcp6OptionsValue{
 		Option: optionVal,
 		Value:  valueVal,
 		state:  attr.ValueStateKnown,
 	}, diags
 }
 
-func NewDhcp6optionsValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) Dhcp6optionsValue {
-	object, diags := NewDhcp6optionsValue(attributeTypes, attributes)
+func NewDhcp6OptionsValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) Dhcp6OptionsValue {
+	object, diags := NewDhcp6OptionsValue(attributeTypes, attributes)
 
 	if diags.HasError() {
 		// This could potentially be added to the diag package.
@@ -3613,15 +3613,15 @@ func NewDhcp6optionsValueMust(attributeTypes map[string]attr.Type, attributes ma
 				diagnostic.Detail()))
 		}
 
-		panic("NewDhcp6optionsValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
+		panic("NewDhcp6OptionsValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
 	}
 
 	return object
 }
 
-func (t Dhcp6optionsType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
+func (t Dhcp6OptionsType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
 	if in.Type() == nil {
-		return NewDhcp6optionsValueNull(), nil
+		return NewDhcp6OptionsValueNull(), nil
 	}
 
 	if !in.Type().Equal(t.TerraformType(ctx)) {
@@ -3629,11 +3629,11 @@ func (t Dhcp6optionsType) ValueFromTerraform(ctx context.Context, in tftypes.Val
 	}
 
 	if !in.IsKnown() {
-		return NewDhcp6optionsValueUnknown(), nil
+		return NewDhcp6OptionsValueUnknown(), nil
 	}
 
 	if in.IsNull() {
-		return NewDhcp6optionsValueNull(), nil
+		return NewDhcp6OptionsValueNull(), nil
 	}
 
 	attributes := map[string]attr.Value{}
@@ -3656,22 +3656,22 @@ func (t Dhcp6optionsType) ValueFromTerraform(ctx context.Context, in tftypes.Val
 		attributes[k] = a
 	}
 
-	return NewDhcp6optionsValueMust(Dhcp6optionsValue{}.AttributeTypes(ctx), attributes), nil
+	return NewDhcp6OptionsValueMust(Dhcp6OptionsValue{}.AttributeTypes(ctx), attributes), nil
 }
 
-func (t Dhcp6optionsType) ValueType(ctx context.Context) attr.Value {
-	return Dhcp6optionsValue{}
+func (t Dhcp6OptionsType) ValueType(ctx context.Context) attr.Value {
+	return Dhcp6OptionsValue{}
 }
 
-var _ basetypes.ObjectValuable = Dhcp6optionsValue{}
+var _ basetypes.ObjectValuable = Dhcp6OptionsValue{}
 
-type Dhcp6optionsValue struct {
+type Dhcp6OptionsValue struct {
 	Option basetypes.StringValue `tfsdk:"option"`
 	Value  basetypes.ListValue   `tfsdk:"value"`
 	state  attr.ValueState
 }
 
-func (v Dhcp6optionsValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+func (v Dhcp6OptionsValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
 	attrTypes := make(map[string]tftypes.Type, 2)
 
 	var val tftypes.Value
@@ -3718,19 +3718,19 @@ func (v Dhcp6optionsValue) ToTerraformValue(ctx context.Context) (tftypes.Value,
 	}
 }
 
-func (v Dhcp6optionsValue) IsNull() bool {
+func (v Dhcp6OptionsValue) IsNull() bool {
 	return v.state == attr.ValueStateNull
 }
 
-func (v Dhcp6optionsValue) IsUnknown() bool {
+func (v Dhcp6OptionsValue) IsUnknown() bool {
 	return v.state == attr.ValueStateUnknown
 }
 
-func (v Dhcp6optionsValue) String() string {
-	return "Dhcp6optionsValue"
+func (v Dhcp6OptionsValue) String() string {
+	return "Dhcp6OptionsValue"
 }
 
-func (v Dhcp6optionsValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
+func (v Dhcp6OptionsValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	var valueVal basetypes.ListValue
@@ -3779,8 +3779,8 @@ func (v Dhcp6optionsValue) ToObjectValue(ctx context.Context) (basetypes.ObjectV
 	return objVal, diags
 }
 
-func (v Dhcp6optionsValue) Equal(o attr.Value) bool {
-	other, ok := o.(Dhcp6optionsValue)
+func (v Dhcp6OptionsValue) Equal(o attr.Value) bool {
+	other, ok := o.(Dhcp6OptionsValue)
 
 	if !ok {
 		return false
@@ -3805,15 +3805,15 @@ func (v Dhcp6optionsValue) Equal(o attr.Value) bool {
 	return true
 }
 
-func (v Dhcp6optionsValue) Type(ctx context.Context) attr.Type {
-	return Dhcp6optionsType{
+func (v Dhcp6OptionsValue) Type(ctx context.Context) attr.Type {
+	return Dhcp6OptionsType{
 		basetypes.ObjectType{
 			AttrTypes: v.AttributeTypes(ctx),
 		},
 	}
 }
 
-func (v Dhcp6optionsValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
+func (v Dhcp6OptionsValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
 		"option": basetypes.StringType{},
 		"value": basetypes.ListType{

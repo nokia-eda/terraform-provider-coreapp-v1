@@ -23,7 +23,7 @@ description: |-
 
 - `fields` (String) a comma-separated list of resource fields to fetch/return.  If unspecified, all fields are fetched.  If empty, only key-fields are fetched.
 - `filter` (String) an EQL "where" expression that will be used to filter the set of resources returned.
-- `labelselector` (String) a label selector string to filter the results based on CR labels
+- `label_selector` (String) a label selector string to filter the results based on CR labels
 
 ### Read-Only
 
@@ -83,10 +83,10 @@ Read-Only:
 
 Read-Only:
 
-- `group_bindings_1` (Attributes List) List of TopoNodes user has been deployed to, along with corresponding groups. (see [below for nested schema](#nestedatt--items--status--group_bindings_1))
+- `group_bindings` (Attributes List) List of TopoNodes user has been deployed to, along with corresponding groups. (see [below for nested schema](#nestedatt--items--status--group_bindings))
 
-<a id="nestedatt--items--status--group_bindings_1"></a>
-### Nested Schema for `items.status.group_bindings_1`
+<a id="nestedatt--items--status--group_bindings"></a>
+### Nested Schema for `items.status.group_bindings`
 
 Read-Only:
 

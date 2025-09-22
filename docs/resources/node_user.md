@@ -75,10 +75,10 @@ Optional:
 
 Optional:
 
-- `group_bindings_1` (Attributes List) List of TopoNodes user has been deployed to, along with corresponding groups. (see [below for nested schema](#nestedatt--status--group_bindings_1))
+- `group_bindings` (Attributes List) List of TopoNodes user has been deployed to, along with corresponding groups. (see [below for nested schema](#nestedatt--status--group_bindings))
 
-<a id="nestedatt--status--group_bindings_1"></a>
-### Nested Schema for `status.group_bindings_1`
+<a id="nestedatt--status--group_bindings"></a>
+### Nested Schema for `status.group_bindings`
 
 Optional:
 

@@ -23,7 +23,7 @@ description: |-
 
 - `fields` (String) a comma-separated list of resource fields to fetch/return.  If unspecified, all fields are fetched.  If empty, only key-fields are fetched.
 - `filter` (String) an EQL "where" expression that will be used to filter the set of resources returned.
-- `labelselector` (String) a label selector string to filter the results based on CR labels
+- `label_selector` (String) a label selector string to filter the results based on CR labels
 
 ### Read-Only
 
@@ -74,14 +74,14 @@ Optional:
 
 Optional:
 
-- `dhcp4options` (Attributes List) DHCPv4 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--items--spec--dhcp--dhcp4options))
-- `dhcp6options` (Attributes List) DHCPv6 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--items--spec--dhcp--dhcp6options))
+- `dhcp4_options` (Attributes List) DHCPv4 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--items--spec--dhcp--dhcp4_options))
+- `dhcp6_options` (Attributes List) DHCPv6 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--items--spec--dhcp--dhcp6_options))
 - `management_poolv4` (String) IPInSubnetAllocationPool to use for IPv4 allocations of the management address for TopoNodes referencing this NodeProfile.
 - `management_poolv6` (String) IPInSubnetAllocationPool to use for IPv6 allocations of the management address for TopoNodes referencing this NodeProfile.
 - `preferred_address_family` (String) Preferred IP address family
 
-<a id="nestedatt--items--spec--dhcp--dhcp4options"></a>
-### Nested Schema for `items.spec.dhcp.dhcp4options`
+<a id="nestedatt--items--spec--dhcp--dhcp4_options"></a>
+### Nested Schema for `items.spec.dhcp.dhcp4_options`
 
 Optional:
 
@@ -89,8 +89,8 @@ Optional:
 - `value` (List of String) Value to return to the TopoNode for the specified option.
 
 
-<a id="nestedatt--items--spec--dhcp--dhcp6options"></a>
-### Nested Schema for `items.spec.dhcp.dhcp6options`
+<a id="nestedatt--items--spec--dhcp--dhcp6_options"></a>
+### Nested Schema for `items.spec.dhcp.dhcp6_options`
 
 Optional:
 

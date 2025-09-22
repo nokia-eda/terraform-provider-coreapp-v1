@@ -119,8 +119,8 @@ Optional:
 
 Optional:
 
-- `nodedetails` (String) Address and port used to connected to the node.
-- `nodestate` (String) The current state of the connection between NPP and the node.
+- `node_details` (String) Address and port used to connected to the node.
+- `node_state` (String) The current state of the connection between NPP and the node.
 "TryingToConnect"
    NPP is attempting to connect and establish connectivity to the node
 "WaitingForInitialCfg"
@@ -136,9 +136,9 @@ Optional:
 "NoIpAddress"
    NPP is running but there is no IP address for node. This only happen in sim setups when
    CX has not created the simulated node, or the simulated pod failed to launch due to image error.
-- `nppdetails` (String) NPP address and port for this TopoNode.
-- `npppod` (String) NPP pod name
-- `nppstate` (String) The current state of the connection between ConfigEngine and NPP.
+- `npp_details` (String) NPP address and port for this TopoNode.
+- `npp_pod` (String) NPP pod name
+- `npp_state` (String) The current state of the connection between ConfigEngine and NPP.
 - `operating_system` (String) Operational operating system running on this TopoNode, e.g. srl, sros.
 - `platform` (String) Operational platform type of this TopoNode, e.g. 7220 IXR-D3L.
 - `simulate` (Boolean) Simulate using CX - if true CX is reponsible for generating the TargetNode resource.

@@ -39,14 +39,14 @@ Optional:
 
 - `bridge_domain` (String) Reference to a Bridge Domain
 - `encap_type` (String) Indicates if the EdgeInterface uses VLAN tagging
-- `gateway_ipv4addresses` (Attributes List) List of gateway IPv4 addresses in ip/mask form - e.g. 192.168.0.1/24 (see [below for nested schema](#nestedatt--spec--gateway_ipv4addresses))
-- `gateway_ipv6addresses` (Attributes List) List of gateway IPv6 addresses in ip/mask form - e.g. fc00::1/120 (see [below for nested schema](#nestedatt--spec--gateway_ipv6addresses))
+- `gateway_ipv4_addresses` (Attributes List) List of gateway IPv4 addresses in ip/mask form - e.g. 192.168.0.1/24 (see [below for nested schema](#nestedatt--spec--gateway_ipv4_addresses))
+- `gateway_ipv6_addresses` (Attributes List) List of gateway IPv6 addresses in ip/mask form - e.g. fc00::1/120 (see [below for nested schema](#nestedatt--spec--gateway_ipv6_addresses))
 - `interface_resource` (String) Reference to an interface
 - `router` (String) Reference to a Router
 - `vlan_id` (Number) Single value between 0-4094 supported
 
-<a id="nestedatt--spec--gateway_ipv4addresses"></a>
-### Nested Schema for `spec.gateway_ipv4addresses`
+<a id="nestedatt--spec--gateway_ipv4_addresses"></a>
+### Nested Schema for `spec.gateway_ipv4_addresses`
 
 Optional:
 
@@ -54,8 +54,8 @@ Optional:
 - `primary` (Boolean) Indicates which address to use as primary for broadcast
 
 
-<a id="nestedatt--spec--gateway_ipv6addresses"></a>
-### Nested Schema for `spec.gateway_ipv6addresses`
+<a id="nestedatt--spec--gateway_ipv6_addresses"></a>
+### Nested Schema for `spec.gateway_ipv6_addresses`
 
 Optional:
 

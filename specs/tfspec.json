@@ -262,7 +262,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -784,7 +784,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -962,7 +962,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -1235,7 +1235,7 @@
                                     }
                                 },
                                 {
-                                    "name": "gateway_ipv4addresses",
+                                    "name": "gateway_ipv4_addresses",
                                     "list_nested": {
                                         "computed_optional_required": "optional",
                                         "nested_object": {
@@ -1260,7 +1260,7 @@
                                     }
                                 },
                                 {
-                                    "name": "gateway_ipv6addresses",
+                                    "name": "gateway_ipv6_addresses",
                                     "list_nested": {
                                         "computed_optional_required": "optional",
                                         "nested_object": {
@@ -1338,7 +1338,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -1433,7 +1433,7 @@
                                                     }
                                                 },
                                                 {
-                                                    "name": "gateway_ipv4addresses",
+                                                    "name": "gateway_ipv4_addresses",
                                                     "list_nested": {
                                                         "computed_optional_required": "optional",
                                                         "nested_object": {
@@ -1458,7 +1458,7 @@
                                                     }
                                                 },
                                                 {
-                                                    "name": "gateway_ipv6addresses",
+                                                    "name": "gateway_ipv6_addresses",
                                                     "list_nested": {
                                                         "computed_optional_required": "optional",
                                                         "nested_object": {
@@ -1641,7 +1641,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -1941,7 +1941,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -2329,7 +2329,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -2724,7 +2724,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -3075,7 +3075,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -3331,7 +3331,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -3529,7 +3529,7 @@
                                         "computed_optional_required": "optional",
                                         "attributes": [
                                             {
-                                                "name": "dhcp4options",
+                                                "name": "dhcp4_options",
                                                 "list_nested": {
                                                     "computed_optional_required": "optional",
                                                     "nested_object": {
@@ -3557,7 +3557,7 @@
                                                 }
                                             },
                                             {
-                                                "name": "dhcp6options",
+                                                "name": "dhcp6_options",
                                                 "list_nested": {
                                                     "computed_optional_required": "optional",
                                                     "nested_object": {
@@ -3765,7 +3765,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -3865,7 +3865,7 @@
                                                         "computed_optional_required": "optional",
                                                         "attributes": [
                                                             {
-                                                                "name": "dhcp4options",
+                                                                "name": "dhcp4_options",
                                                                 "list_nested": {
                                                                     "computed_optional_required": "optional",
                                                                     "nested_object": {
@@ -3893,7 +3893,7 @@
                                                                 }
                                                             },
                                                             {
-                                                                "name": "dhcp6options",
+                                                                "name": "dhcp6_options",
                                                                 "list_nested": {
                                                                     "computed_optional_required": "optional",
                                                                     "nested_object": {
@@ -4301,7 +4301,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -4780,7 +4780,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -5174,7 +5174,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -5507,7 +5507,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -5884,7 +5884,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -6338,35 +6338,35 @@
                             "computed_optional_required": "computed",
                             "attributes": [
                                 {
-                                    "name": "nodedetails",
+                                    "name": "node_details",
                                     "string": {
                                         "computed_optional_required": "computed",
                                         "description": "Address and port used to connected to the node."
                                     }
                                 },
                                 {
-                                    "name": "nodestate",
+                                    "name": "node_state",
                                     "string": {
                                         "computed_optional_required": "computed",
                                         "description": "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of commiting\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happen in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error."
                                     }
                                 },
                                 {
-                                    "name": "nppdetails",
+                                    "name": "npp_details",
                                     "string": {
                                         "computed_optional_required": "computed",
                                         "description": "NPP address and port for this TopoNode."
                                     }
                                 },
                                 {
-                                    "name": "npppod",
+                                    "name": "npp_pod",
                                     "string": {
                                         "computed_optional_required": "computed",
                                         "description": "NPP pod name"
                                     }
                                 },
                                 {
-                                    "name": "nppstate",
+                                    "name": "npp_state",
                                     "string": {
                                         "computed_optional_required": "computed",
                                         "description": "The current state of the connection between ConfigEngine and NPP."
@@ -6426,7 +6426,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -6650,35 +6650,35 @@
                                             "computed_optional_required": "computed",
                                             "attributes": [
                                                 {
-                                                    "name": "nodedetails",
+                                                    "name": "node_details",
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "Address and port used to connected to the node."
                                                     }
                                                 },
                                                 {
-                                                    "name": "nodestate",
+                                                    "name": "node_state",
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of commiting\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happen in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error."
                                                     }
                                                 },
                                                 {
-                                                    "name": "nppdetails",
+                                                    "name": "npp_details",
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "NPP address and port for this TopoNode."
                                                     }
                                                 },
                                                 {
-                                                    "name": "npppod",
+                                                    "name": "npp_pod",
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "NPP pod name"
                                                     }
                                                 },
                                                 {
-                                                    "name": "nppstate",
+                                                    "name": "npp_state",
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "The current state of the connection between ConfigEngine and NPP."
@@ -6864,7 +6864,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -7274,7 +7274,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -7531,7 +7531,7 @@
                         }
                     },
                     {
-                        "name": "labelselector",
+                        "name": "label_selector",
                         "string": {
                             "computed_optional_required": "computed_optional",
                             "description": "a label selector string to filter the results based on CR labels"
@@ -8380,7 +8380,7 @@
                                     }
                                 },
                                 {
-                                    "name": "gateway_ipv4addresses",
+                                    "name": "gateway_ipv4_addresses",
                                     "list_nested": {
                                         "computed_optional_required": "optional",
                                         "nested_object": {
@@ -8405,7 +8405,7 @@
                                     }
                                 },
                                 {
-                                    "name": "gateway_ipv6addresses",
+                                    "name": "gateway_ipv6_addresses",
                                     "list_nested": {
                                         "computed_optional_required": "optional",
                                         "nested_object": {
@@ -9676,7 +9676,7 @@
                                         "computed_optional_required": "optional",
                                         "attributes": [
                                             {
-                                                "name": "dhcp4options",
+                                                "name": "dhcp4_options",
                                                 "list_nested": {
                                                     "computed_optional_required": "optional",
                                                     "nested_object": {
@@ -9728,7 +9728,7 @@
                                                 }
                                             },
                                             {
-                                                "name": "dhcp6options",
+                                                "name": "dhcp6_options",
                                                 "list_nested": {
                                                     "computed_optional_required": "optional",
                                                     "nested_object": {
@@ -11676,35 +11676,35 @@
                             "computed_optional_required": "computed_optional",
                             "attributes": [
                                 {
-                                    "name": "nodedetails",
+                                    "name": "node_details",
                                     "string": {
                                         "computed_optional_required": "computed_optional",
                                         "description": "Address and port used to connected to the node."
                                     }
                                 },
                                 {
-                                    "name": "nodestate",
+                                    "name": "node_state",
                                     "string": {
                                         "computed_optional_required": "computed_optional",
                                         "description": "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of commiting\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happen in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error."
                                     }
                                 },
                                 {
-                                    "name": "nppdetails",
+                                    "name": "npp_details",
                                     "string": {
                                         "computed_optional_required": "computed_optional",
                                         "description": "NPP address and port for this TopoNode."
                                     }
                                 },
                                 {
-                                    "name": "npppod",
+                                    "name": "npp_pod",
                                     "string": {
                                         "computed_optional_required": "computed_optional",
                                         "description": "NPP pod name"
                                     }
                                 },
                                 {
-                                    "name": "nppstate",
+                                    "name": "npp_state",
                                     "string": {
                                         "computed_optional_required": "computed_optional",
                                         "description": "The current state of the connection between ConfigEngine and NPP."

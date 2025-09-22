@@ -146,7 +146,7 @@ func NodeUserResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"status": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
-					"group_bindings_1": schema.ListNestedAttribute{
+					"group_bindings": schema.ListNestedAttribute{
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"groups": schema.ListAttribute{
@@ -1860,7 +1860,7 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 
 	attributes := in.Attributes()
 
-	groupBindings1Attribute, ok := attributes["group_bindings_1"]
+	groupBindings1Attribute, ok := attributes["group_bindings"]
 
 	if !ok {
 		diags.AddError(
@@ -1951,7 +1951,7 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 		return NewStatusValueUnknown(), diags
 	}
 
-	groupBindings1Attribute, ok := attributes["group_bindings_1"]
+	groupBindings1Attribute, ok := attributes["group_bindings"]
 
 	if !ok {
 		diags.AddError(
@@ -2047,7 +2047,7 @@ func (t StatusType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = StatusValue{}
 
 type StatusValue struct {
-	GroupBindings1 basetypes.ListValue `tfsdk:"group_bindings_1"`
+	GroupBindings1 basetypes.ListValue `tfsdk:"group_bindings"`
 	state          attr.ValueState
 }
 
@@ -2057,7 +2057,7 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 	var val tftypes.Value
 	var err error
 
-	attrTypes["group_bindings_1"] = basetypes.ListType{
+	attrTypes["group_bindings"] = basetypes.ListType{
 		ElemType: GroupBindings1Value{}.Type(ctx),
 	}.TerraformType(ctx)
 
@@ -2073,7 +2073,7 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
 
-		vals["group_bindings_1"] = val
+		vals["group_bindings"] = val
 
 		if err := tftypes.ValidateValue(objectType, vals); err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
@@ -2134,7 +2134,7 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 	}
 
 	attributeTypes := map[string]attr.Type{
-		"group_bindings_1": basetypes.ListType{
+		"group_bindings": basetypes.ListType{
 			ElemType: GroupBindings1Value{}.Type(ctx),
 		},
 	}
@@ -2150,7 +2150,7 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"group_bindings_1": groupBindings1,
+			"group_bindings": groupBindings1,
 		})
 
 	return objVal, diags
@@ -2188,7 +2188,7 @@ func (v StatusValue) Type(ctx context.Context) attr.Type {
 
 func (v StatusValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
-		"group_bindings_1": basetypes.ListType{
+		"group_bindings": basetypes.ListType{
 			ElemType: GroupBindings1Value{}.Type(ctx),
 		},
 	}

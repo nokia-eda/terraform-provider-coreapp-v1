@@ -245,31 +245,31 @@ func TopoNodeResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"status": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
-					"nodedetails": schema.StringAttribute{
+					"node_details": schema.StringAttribute{
 						Optional:            true,
 						Computed:            true,
 						Description:         "Address and port used to connected to the node.",
 						MarkdownDescription: "Address and port used to connected to the node.",
 					},
-					"nodestate": schema.StringAttribute{
+					"node_state": schema.StringAttribute{
 						Optional:            true,
 						Computed:            true,
 						Description:         "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of commiting\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happen in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error.",
 						MarkdownDescription: "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of commiting\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happen in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error.",
 					},
-					"nppdetails": schema.StringAttribute{
+					"npp_details": schema.StringAttribute{
 						Optional:            true,
 						Computed:            true,
 						Description:         "NPP address and port for this TopoNode.",
 						MarkdownDescription: "NPP address and port for this TopoNode.",
 					},
-					"npppod": schema.StringAttribute{
+					"npp_pod": schema.StringAttribute{
 						Optional:            true,
 						Computed:            true,
 						Description:         "NPP pod name",
 						MarkdownDescription: "NPP pod name",
 					},
-					"nppstate": schema.StringAttribute{
+					"npp_state": schema.StringAttribute{
 						Optional:            true,
 						Computed:            true,
 						Description:         "The current state of the connection between ConfigEngine and NPP.",
@@ -3055,94 +3055,94 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 
 	attributes := in.Attributes()
 
-	nodedetailsAttribute, ok := attributes["nodedetails"]
+	nodeDetailsAttribute, ok := attributes["node_details"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nodedetails is missing from object`)
+			`node_details is missing from object`)
 
 		return nil, diags
 	}
 
-	nodedetailsVal, ok := nodedetailsAttribute.(basetypes.StringValue)
+	nodeDetailsVal, ok := nodeDetailsAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nodedetails expected to be basetypes.StringValue, was: %T`, nodedetailsAttribute))
+			fmt.Sprintf(`node_details expected to be basetypes.StringValue, was: %T`, nodeDetailsAttribute))
 	}
 
-	nodestateAttribute, ok := attributes["nodestate"]
+	nodeStateAttribute, ok := attributes["node_state"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nodestate is missing from object`)
+			`node_state is missing from object`)
 
 		return nil, diags
 	}
 
-	nodestateVal, ok := nodestateAttribute.(basetypes.StringValue)
+	nodeStateVal, ok := nodeStateAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nodestate expected to be basetypes.StringValue, was: %T`, nodestateAttribute))
+			fmt.Sprintf(`node_state expected to be basetypes.StringValue, was: %T`, nodeStateAttribute))
 	}
 
-	nppdetailsAttribute, ok := attributes["nppdetails"]
+	nppDetailsAttribute, ok := attributes["npp_details"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nppdetails is missing from object`)
+			`npp_details is missing from object`)
 
 		return nil, diags
 	}
 
-	nppdetailsVal, ok := nppdetailsAttribute.(basetypes.StringValue)
+	nppDetailsVal, ok := nppDetailsAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nppdetails expected to be basetypes.StringValue, was: %T`, nppdetailsAttribute))
+			fmt.Sprintf(`npp_details expected to be basetypes.StringValue, was: %T`, nppDetailsAttribute))
 	}
 
-	npppodAttribute, ok := attributes["npppod"]
+	nppPodAttribute, ok := attributes["npp_pod"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`npppod is missing from object`)
+			`npp_pod is missing from object`)
 
 		return nil, diags
 	}
 
-	npppodVal, ok := npppodAttribute.(basetypes.StringValue)
+	nppPodVal, ok := nppPodAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`npppod expected to be basetypes.StringValue, was: %T`, npppodAttribute))
+			fmt.Sprintf(`npp_pod expected to be basetypes.StringValue, was: %T`, nppPodAttribute))
 	}
 
-	nppstateAttribute, ok := attributes["nppstate"]
+	nppStateAttribute, ok := attributes["npp_state"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nppstate is missing from object`)
+			`npp_state is missing from object`)
 
 		return nil, diags
 	}
 
-	nppstateVal, ok := nppstateAttribute.(basetypes.StringValue)
+	nppStateVal, ok := nppStateAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nppstate expected to be basetypes.StringValue, was: %T`, nppstateAttribute))
+			fmt.Sprintf(`npp_state expected to be basetypes.StringValue, was: %T`, nppStateAttribute))
 	}
 
 	operatingSystemAttribute, ok := attributes["operating_system"]
@@ -3222,11 +3222,11 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 	}
 
 	return StatusValue{
-		Nodedetails:     nodedetailsVal,
-		Nodestate:       nodestateVal,
-		Nppdetails:      nppdetailsVal,
-		Npppod:          npppodVal,
-		Nppstate:        nppstateVal,
+		NodeDetails:     nodeDetailsVal,
+		NodeState:       nodeStateVal,
+		NppDetails:      nppDetailsVal,
+		NppPod:          nppPodVal,
+		NppState:        nppStateVal,
 		OperatingSystem: operatingSystemVal,
 		Platform:        platformVal,
 		Simulate:        simulateVal,
@@ -3298,94 +3298,94 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 		return NewStatusValueUnknown(), diags
 	}
 
-	nodedetailsAttribute, ok := attributes["nodedetails"]
+	nodeDetailsAttribute, ok := attributes["node_details"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nodedetails is missing from object`)
+			`node_details is missing from object`)
 
 		return NewStatusValueUnknown(), diags
 	}
 
-	nodedetailsVal, ok := nodedetailsAttribute.(basetypes.StringValue)
+	nodeDetailsVal, ok := nodeDetailsAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nodedetails expected to be basetypes.StringValue, was: %T`, nodedetailsAttribute))
+			fmt.Sprintf(`node_details expected to be basetypes.StringValue, was: %T`, nodeDetailsAttribute))
 	}
 
-	nodestateAttribute, ok := attributes["nodestate"]
+	nodeStateAttribute, ok := attributes["node_state"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nodestate is missing from object`)
+			`node_state is missing from object`)
 
 		return NewStatusValueUnknown(), diags
 	}
 
-	nodestateVal, ok := nodestateAttribute.(basetypes.StringValue)
+	nodeStateVal, ok := nodeStateAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nodestate expected to be basetypes.StringValue, was: %T`, nodestateAttribute))
+			fmt.Sprintf(`node_state expected to be basetypes.StringValue, was: %T`, nodeStateAttribute))
 	}
 
-	nppdetailsAttribute, ok := attributes["nppdetails"]
+	nppDetailsAttribute, ok := attributes["npp_details"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nppdetails is missing from object`)
+			`npp_details is missing from object`)
 
 		return NewStatusValueUnknown(), diags
 	}
 
-	nppdetailsVal, ok := nppdetailsAttribute.(basetypes.StringValue)
+	nppDetailsVal, ok := nppDetailsAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nppdetails expected to be basetypes.StringValue, was: %T`, nppdetailsAttribute))
+			fmt.Sprintf(`npp_details expected to be basetypes.StringValue, was: %T`, nppDetailsAttribute))
 	}
 
-	npppodAttribute, ok := attributes["npppod"]
+	nppPodAttribute, ok := attributes["npp_pod"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`npppod is missing from object`)
+			`npp_pod is missing from object`)
 
 		return NewStatusValueUnknown(), diags
 	}
 
-	npppodVal, ok := npppodAttribute.(basetypes.StringValue)
+	nppPodVal, ok := nppPodAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`npppod expected to be basetypes.StringValue, was: %T`, npppodAttribute))
+			fmt.Sprintf(`npp_pod expected to be basetypes.StringValue, was: %T`, nppPodAttribute))
 	}
 
-	nppstateAttribute, ok := attributes["nppstate"]
+	nppStateAttribute, ok := attributes["npp_state"]
 
 	if !ok {
 		diags.AddError(
 			"Attribute Missing",
-			`nppstate is missing from object`)
+			`npp_state is missing from object`)
 
 		return NewStatusValueUnknown(), diags
 	}
 
-	nppstateVal, ok := nppstateAttribute.(basetypes.StringValue)
+	nppStateVal, ok := nppStateAttribute.(basetypes.StringValue)
 
 	if !ok {
 		diags.AddError(
 			"Attribute Wrong Type",
-			fmt.Sprintf(`nppstate expected to be basetypes.StringValue, was: %T`, nppstateAttribute))
+			fmt.Sprintf(`npp_state expected to be basetypes.StringValue, was: %T`, nppStateAttribute))
 	}
 
 	operatingSystemAttribute, ok := attributes["operating_system"]
@@ -3465,11 +3465,11 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 	}
 
 	return StatusValue{
-		Nodedetails:     nodedetailsVal,
-		Nodestate:       nodestateVal,
-		Nppdetails:      nppdetailsVal,
-		Npppod:          npppodVal,
-		Nppstate:        nppstateVal,
+		NodeDetails:     nodeDetailsVal,
+		NodeState:       nodeStateVal,
+		NppDetails:      nppDetailsVal,
+		NppPod:          nppPodVal,
+		NppState:        nppStateVal,
 		OperatingSystem: operatingSystemVal,
 		Platform:        platformVal,
 		Simulate:        simulateVal,
@@ -3546,11 +3546,11 @@ func (t StatusType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = StatusValue{}
 
 type StatusValue struct {
-	Nodedetails     basetypes.StringValue `tfsdk:"nodedetails"`
-	Nodestate       basetypes.StringValue `tfsdk:"nodestate"`
-	Nppdetails      basetypes.StringValue `tfsdk:"nppdetails"`
-	Npppod          basetypes.StringValue `tfsdk:"npppod"`
-	Nppstate        basetypes.StringValue `tfsdk:"nppstate"`
+	NodeDetails     basetypes.StringValue `tfsdk:"node_details"`
+	NodeState       basetypes.StringValue `tfsdk:"node_state"`
+	NppDetails      basetypes.StringValue `tfsdk:"npp_details"`
+	NppPod          basetypes.StringValue `tfsdk:"npp_pod"`
+	NppState        basetypes.StringValue `tfsdk:"npp_state"`
 	OperatingSystem basetypes.StringValue `tfsdk:"operating_system"`
 	Platform        basetypes.StringValue `tfsdk:"platform"`
 	Simulate        basetypes.BoolValue   `tfsdk:"simulate"`
@@ -3564,11 +3564,11 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 	var val tftypes.Value
 	var err error
 
-	attrTypes["nodedetails"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["nodestate"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["nppdetails"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["npppod"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["nppstate"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["node_details"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["node_state"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["npp_details"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["npp_pod"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["npp_state"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["operating_system"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["platform"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["simulate"] = basetypes.BoolType{}.TerraformType(ctx)
@@ -3580,45 +3580,45 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 	case attr.ValueStateKnown:
 		vals := make(map[string]tftypes.Value, 9)
 
-		val, err = v.Nodedetails.ToTerraformValue(ctx)
+		val, err = v.NodeDetails.ToTerraformValue(ctx)
 
 		if err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
 
-		vals["nodedetails"] = val
+		vals["node_details"] = val
 
-		val, err = v.Nodestate.ToTerraformValue(ctx)
-
-		if err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		vals["nodestate"] = val
-
-		val, err = v.Nppdetails.ToTerraformValue(ctx)
+		val, err = v.NodeState.ToTerraformValue(ctx)
 
 		if err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
 
-		vals["nppdetails"] = val
+		vals["node_state"] = val
 
-		val, err = v.Npppod.ToTerraformValue(ctx)
-
-		if err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		vals["npppod"] = val
-
-		val, err = v.Nppstate.ToTerraformValue(ctx)
+		val, err = v.NppDetails.ToTerraformValue(ctx)
 
 		if err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
 
-		vals["nppstate"] = val
+		vals["npp_details"] = val
+
+		val, err = v.NppPod.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["npp_pod"] = val
+
+		val, err = v.NppState.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["npp_state"] = val
 
 		val, err = v.OperatingSystem.ToTerraformValue(ctx)
 
@@ -3682,11 +3682,11 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 	var diags diag.Diagnostics
 
 	attributeTypes := map[string]attr.Type{
-		"nodedetails":      basetypes.StringType{},
-		"nodestate":        basetypes.StringType{},
-		"nppdetails":       basetypes.StringType{},
-		"npppod":           basetypes.StringType{},
-		"nppstate":         basetypes.StringType{},
+		"node_details":     basetypes.StringType{},
+		"node_state":       basetypes.StringType{},
+		"npp_details":      basetypes.StringType{},
+		"npp_pod":          basetypes.StringType{},
+		"npp_state":        basetypes.StringType{},
 		"operating_system": basetypes.StringType{},
 		"platform":         basetypes.StringType{},
 		"simulate":         basetypes.BoolType{},
@@ -3704,11 +3704,11 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"nodedetails":      v.Nodedetails,
-			"nodestate":        v.Nodestate,
-			"nppdetails":       v.Nppdetails,
-			"npppod":           v.Npppod,
-			"nppstate":         v.Nppstate,
+			"node_details":     v.NodeDetails,
+			"node_state":       v.NodeState,
+			"npp_details":      v.NppDetails,
+			"npp_pod":          v.NppPod,
+			"npp_state":        v.NppState,
 			"operating_system": v.OperatingSystem,
 			"platform":         v.Platform,
 			"simulate":         v.Simulate,
@@ -3733,23 +3733,23 @@ func (v StatusValue) Equal(o attr.Value) bool {
 		return true
 	}
 
-	if !v.Nodedetails.Equal(other.Nodedetails) {
+	if !v.NodeDetails.Equal(other.NodeDetails) {
 		return false
 	}
 
-	if !v.Nodestate.Equal(other.Nodestate) {
+	if !v.NodeState.Equal(other.NodeState) {
 		return false
 	}
 
-	if !v.Nppdetails.Equal(other.Nppdetails) {
+	if !v.NppDetails.Equal(other.NppDetails) {
 		return false
 	}
 
-	if !v.Npppod.Equal(other.Npppod) {
+	if !v.NppPod.Equal(other.NppPod) {
 		return false
 	}
 
-	if !v.Nppstate.Equal(other.Nppstate) {
+	if !v.NppState.Equal(other.NppState) {
 		return false
 	}
 
@@ -3782,11 +3782,11 @@ func (v StatusValue) Type(ctx context.Context) attr.Type {
 
 func (v StatusValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
-		"nodedetails":      basetypes.StringType{},
-		"nodestate":        basetypes.StringType{},
-		"nppdetails":       basetypes.StringType{},
-		"npppod":           basetypes.StringType{},
-		"nppstate":         basetypes.StringType{},
+		"node_details":     basetypes.StringType{},
+		"node_state":       basetypes.StringType{},
+		"npp_details":      basetypes.StringType{},
+		"npp_pod":          basetypes.StringType{},
+		"npp_state":        basetypes.StringType{},
 		"operating_system": basetypes.StringType{},
 		"platform":         basetypes.StringType{},
 		"simulate":         basetypes.BoolType{},

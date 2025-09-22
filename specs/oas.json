@@ -5469,8 +5469,7 @@
             "title": "Status",
             "type": "object",
             "x-eda-nokia-com": {
-              "ui-order-priority": 20,
-              "ui-visible-if": "false"
+              "ui-order-priority": 20
             }
           }
         },
