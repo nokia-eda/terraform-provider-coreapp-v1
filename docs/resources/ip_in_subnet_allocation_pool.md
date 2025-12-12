@@ -24,7 +24,9 @@ Consult application documentation to know which pool type to use for a given use
 
 ### Optional
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `name` (String) name of the IPInSubnetAllocationPool
 - `namespace` (String) the namespace scope in which to operate
@@ -77,6 +79,10 @@ Required:
 - `name` (String) Name of this allocation.
 - `value` (String) Allocation to reserve.
 
+Optional:
+
+- `pool_instance` (String) Pool instance, if empty applies to all instances.
+
 
 <a id="nestedatt--spec--segments--reservations"></a>
 ### Nested Schema for `spec.segments.reservations`
@@ -87,6 +93,25 @@ Required:
 - `start` (String) Value to start reserving.
 
 
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Optional:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Optional:
+
+- `count` (Number)
 
 
 <a id="nestedatt--status"></a>

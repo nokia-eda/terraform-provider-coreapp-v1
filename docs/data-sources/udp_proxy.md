@@ -26,7 +26,9 @@ description: |-
 
 ### Read-Only
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
 - `status` (Attributes) UdpProxyStatus defines the observed state of UdpProxy (see [below for nested schema](#nestedatt--status))
@@ -45,6 +47,25 @@ of the datagram until there is no traffic at all for at least the idle timeout i
 - `proxy_port` (Number) The UDP port on which to listen for datagrams and then proxy to the destination
 
 
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Read-Only:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Read-Only:
+
+- `count` (Number)
+
+
 <a id="nestedatt--metadata"></a>
 ### Nested Schema for `metadata`
 
@@ -53,6 +74,7 @@ Read-Only:
 - `annotations` (Map of String)
 - `labels` (Map of String)
 - `name` (String)
+- `namespace` (String)
 
 
 <a id="nestedatt--status"></a>

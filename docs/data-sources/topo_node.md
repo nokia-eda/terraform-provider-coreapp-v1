@@ -27,7 +27,9 @@ description: |-
 
 ### Read-Only
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
 - `status` (Attributes) TopoNodeStatus defines the observed state of TopoNode (see [below for nested schema](#nestedatt--status))
@@ -86,6 +88,8 @@ Optional:
 "emulate"
    indicates that changes will be accepted at the NPP level, without pushing them to a endpoint. NPP validation
    still occurs.  If no IP address is present, we also run in emulate mode.
+"monitor"
+   indicates that state will be collectd but config will not be pushed to a endpoint. NPP validation still occurs.
 
 
 <a id="nestedatt--spec--production_address"></a>
@@ -96,6 +100,25 @@ Optional:
 - `ipv4` (String) The IPv4 production address
 - `ipv6` (String) The IPv6 production address
 
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Read-Only:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Read-Only:
+
+- `count` (Number)
 
 
 <a id="nestedatt--metadata"></a>

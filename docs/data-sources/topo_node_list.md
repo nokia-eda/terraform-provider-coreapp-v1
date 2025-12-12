@@ -24,6 +24,7 @@ description: |-
 - `fields` (String) a comma-separated list of resource fields to fetch/return.  If unspecified, all fields are fetched.  If empty, only key-fields are fetched.
 - `filter` (String) an EQL "where" expression that will be used to filter the set of resources returned.
 - `label_selector` (String) a label selector string to filter the results based on CR labels
+- `labelselector` (String) Deprecated: a label selector string to filter the results based on CR labels
 
 ### Read-Only
 
@@ -40,7 +41,9 @@ Optional:
 
 Read-Only:
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
 - `status` (Attributes) TopoNodeStatus defines the observed state of TopoNode (see [below for nested schema](#nestedatt--items--status))
@@ -99,6 +102,8 @@ Optional:
 "emulate"
    indicates that changes will be accepted at the NPP level, without pushing them to a endpoint. NPP validation
    still occurs.  If no IP address is present, we also run in emulate mode.
+"monitor"
+   indicates that state will be collectd but config will not be pushed to a endpoint. NPP validation still occurs.
 
 
 <a id="nestedatt--items--spec--production_address"></a>
@@ -109,6 +114,25 @@ Optional:
 - `ipv4` (String) The IPv4 production address
 - `ipv6` (String) The IPv6 production address
 
+
+
+<a id="nestedatt--items--alarms"></a>
+### Nested Schema for `items.alarms`
+
+Read-Only:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--items--deviations"></a>
+### Nested Schema for `items.deviations`
+
+Read-Only:
+
+- `count` (Number)
 
 
 <a id="nestedatt--items--metadata"></a>

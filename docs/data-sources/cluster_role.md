@@ -27,7 +27,9 @@ ClusterRoles and users are bound via groups, selecting a set of users and a set 
 
 ### Read-Only
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
 - `status` (Attributes) RoleStatus defines the observed state of Role (see [below for nested schema](#nestedatt--status))
@@ -81,6 +83,25 @@ anything if the prefix matches.
 
 
 
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Read-Only:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Read-Only:
+
+- `count` (Number)
+
+
 <a id="nestedatt--metadata"></a>
 ### Nested Schema for `metadata`
 
@@ -89,6 +110,7 @@ Read-Only:
 - `annotations` (Map of String)
 - `labels` (Map of String)
 - `name` (String)
+- `namespace` (String)
 
 
 <a id="nestedatt--status"></a>

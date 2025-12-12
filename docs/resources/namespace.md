@@ -23,7 +23,9 @@ Namespaces allow for resource segmentation, enabling multiple teams or applicati
 
 ### Optional
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `name` (String) name of the Namespace
 - `status` (Attributes) NamespaceStatus defines the observed state of Namespace (see [below for nested schema](#nestedatt--status))
@@ -39,6 +41,7 @@ Optional:
 
 - `annotations` (Map of String)
 - `labels` (Map of String)
+- `namespace` (String)
 
 
 <a id="nestedatt--spec"></a>
@@ -46,7 +49,35 @@ Optional:
 
 Optional:
 
+- `bootstrap` (Attributes) Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty. (see [below for nested schema](#nestedatt--spec--bootstrap))
 - `description` (String) An optional description of the use of the namespace.
+
+<a id="nestedatt--spec--bootstrap"></a>
+### Nested Schema for `spec.bootstrap`
+
+Optional:
+
+- `from_namespace` (String) The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.
+
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Optional:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Optional:
+
+- `count` (Number)
 
 
 <a id="nestedatt--status"></a>

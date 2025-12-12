@@ -22,7 +22,9 @@ description: |-
 
 ### Optional
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `name` (String) name of the HttpProxy
 - `status` (Attributes) HttpProxyStatus defines the observed state of HttpProxy (see [below for nested schema](#nestedatt--status))
@@ -38,6 +40,7 @@ Optional:
 
 - `annotations` (Map of String)
 - `labels` (Map of String)
+- `namespace` (String)
 
 
 <a id="nestedatt--spec"></a>
@@ -49,6 +52,25 @@ Required:
 If "atDestination", then no authentication happens in API server and any auth tokens are forwarded as is.
 If "inApiServer", then authentication happens within the API server and auth tokens are stripped prior to forwarding.
 - `root_url` (String) The proxy destination, including the protocol.
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Optional:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Optional:
+
+- `count` (Number)
 
 
 <a id="nestedatt--status"></a>

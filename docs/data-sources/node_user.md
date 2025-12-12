@@ -28,7 +28,9 @@ Additionally a NodeUser is referenced by a NodeProfile to indicate how NPP shoul
 
 ### Read-Only
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
 - `status` (Attributes) Deployment status of this NodeUser. (see [below for nested schema](#nestedatt--status))
@@ -52,6 +54,25 @@ Optional:
 - `node_selector` (List of String) Selector to use when selecting TopoNodes to deploy this user to.
 - `nodes` (List of String) TopoNodes to deploy this user to.
 
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Read-Only:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Read-Only:
+
+- `count` (Number)
 
 
 <a id="nestedatt--metadata"></a>

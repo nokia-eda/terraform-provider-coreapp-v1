@@ -23,7 +23,9 @@ ClusterRoles and users are bound via groups, selecting a set of users and a set 
 
 ### Optional
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `name` (String) name of the ClusterRole
 - `status` (Attributes) RoleStatus defines the observed state of Role (see [below for nested schema](#nestedatt--status))
@@ -39,6 +41,7 @@ Optional:
 
 - `annotations` (Map of String)
 - `labels` (Map of String)
+- `namespace` (String)
 
 
 <a id="nestedatt--spec"></a>
@@ -88,6 +91,25 @@ prefix matches. It can end in "/**" in which case the URL path can be
 anything if the prefix matches.
 - `permissions` (String) The permissions for the API server URL for the rule.
 
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Optional:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Optional:
+
+- `count` (Number)
 
 
 <a id="nestedatt--status"></a>

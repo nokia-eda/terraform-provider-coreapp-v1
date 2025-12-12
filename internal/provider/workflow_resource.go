@@ -11,41 +11,40 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/eda/apiclient"
-	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/resource_topo_node"
+	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/resource_workflow"
 	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/tfutils"
 )
 
 const (
-	create_rs_topoNode = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes"
-	read_rs_topoNode   = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}"
-	update_rs_topoNode = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}"
-	delete_rs_topoNode = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}"
+	create_rs_workflow = "/workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows"
+	read_rs_workflow   = "/workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}"
+	delete_rs_workflow = "/workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}"
 )
 
 var (
-	_ resource.Resource                = (*topoNodeResource)(nil)
-	_ resource.ResourceWithConfigure   = (*topoNodeResource)(nil)
-	_ resource.ResourceWithImportState = (*topoNodeResource)(nil)
+	_ resource.Resource                = (*workflowResource)(nil)
+	_ resource.ResourceWithConfigure   = (*workflowResource)(nil)
+	_ resource.ResourceWithImportState = (*workflowResource)(nil)
 )
 
-func NewTopoNodeResource() resource.Resource {
-	return &topoNodeResource{}
+func NewWorkflowResource() resource.Resource {
+	return &workflowResource{}
 }
 
-type topoNodeResource struct {
+type workflowResource struct {
 	client *apiclient.EdaApiClient
 }
 
-func (r *topoNodeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_topo_node"
+func (r *workflowResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_workflow"
 }
 
-func (r *topoNodeResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
-	resp.Schema = resource_topo_node.TopoNodeResourceSchema(ctx)
+func (r *workflowResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+	resp.Schema = resource_workflow.WorkflowResourceSchema(ctx)
 }
 
-func (r *topoNodeResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data resource_topo_node.TopoNodeModel
+func (r *workflowResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data resource_workflow.WorkflowModel
 
 	// Read Terraform plan data into the model
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -70,19 +69,19 @@ func (r *topoNodeResource) Create(ctx context.Context, req resource.CreateReques
 
 	// Create API call logic
 	tflog.Info(ctx, "Create()::API request", map[string]any{
-		"path": create_rs_topoNode,
+		"path": create_rs_workflow,
 		"body": spew.Sdump(reqBody),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err = r.client.Create(ctx, create_rs_topoNode, map[string]string{
+	err = r.client.Create(ctx, create_rs_workflow, map[string]string{
 		"namespace": tfutils.StringValue(data.Metadata.Namespace),
 	}, reqBody, &result)
 
 	tflog.Info(ctx, "Create()::API returned", map[string]any{
-		"path":      create_rs_topoNode,
+		"path":      create_rs_workflow,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -95,13 +94,13 @@ func (r *topoNodeResource) Create(ctx context.Context, req resource.CreateReques
 	// Read the resource again to populate any values not available in the response from Create()
 	t0 = time.Now()
 
-	err = r.client.Get(ctx, read_rs_topoNode, map[string]string{
+	err = r.client.Get(ctx, read_rs_workflow, map[string]string{
 		"namespace": tfutils.StringValue(data.Metadata.Namespace),
 		"name":      tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_rs_topoNode,
+		"path":      read_rs_workflow,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -121,8 +120,8 @@ func (r *topoNodeResource) Create(ctx context.Context, req resource.CreateReques
 	resp.Diagnostics.Append(resp.State.Set(ctx, data)...)
 }
 
-func (r *topoNodeResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data resource_topo_node.TopoNodeModel
+func (r *workflowResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data resource_workflow.WorkflowModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -133,20 +132,20 @@ func (r *topoNodeResource) Read(ctx context.Context, req resource.ReadRequest, r
 
 	// Read API call logic
 	tflog.Info(ctx, "Read()::API request", map[string]any{
-		"path": read_rs_topoNode,
+		"path": read_rs_workflow,
 		"data": spew.Sdump(data),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err := r.client.Get(ctx, read_rs_topoNode, map[string]string{
+	err := r.client.Get(ctx, read_rs_workflow, map[string]string{
 		"namespace": tfutils.StringValue(data.Metadata.Namespace),
 		"name":      tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_rs_topoNode,
+		"path":      read_rs_workflow,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -167,85 +166,13 @@ func (r *topoNodeResource) Read(ctx context.Context, req resource.ReadRequest, r
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *topoNodeResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data resource_topo_node.TopoNodeModel
-
-	// Read Terraform plan data into the model
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
-
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	err := tfutils.FillMissingValues(ctx, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("Error filling missing values", err.Error())
-		return
-	}
-
-	reqBody, err := tfutils.ModelToAnyMap(ctx, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("Error building request", err.Error())
-		return
-	}
-
-	// Update API call logic
-	tflog.Info(ctx, "Update()::API request", map[string]any{
-		"path": update_rs_topoNode,
-		"body": spew.Sdump(reqBody),
-	})
-
-	t0 := time.Now()
-	result := map[string]any{}
-
-	err = r.client.Update(ctx, update_rs_topoNode, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
-	}, reqBody, &result)
-
-	tflog.Info(ctx, "Update()::API returned", map[string]any{
-		"path":      update_rs_topoNode,
-		"result":    spew.Sdump(result),
-		"timeTaken": time.Since(t0).String(),
-	})
-
-	if err != nil {
-		resp.Diagnostics.AddError("Error updating resource", err.Error())
-		return
-	}
-
-	// Read the resource again to populate any values not available in the response from Update()
-	t0 = time.Now()
-
-	err = r.client.Get(ctx, read_rs_topoNode, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
-	}, &result)
-
-	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_rs_topoNode,
-		"result":    spew.Sdump(result),
-		"timeTaken": time.Since(t0).String(),
-	})
-
-	if err != nil {
-		resp.Diagnostics.AddError("Error reading resource", err.Error())
-		return
-	}
-
-	// Convert API response to Terraform model
-	err = tfutils.AnyMapToModel(ctx, result, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("Failed to build response from API result", err.Error())
-		return
-	}
-
-	// Save updated data into Terraform state
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+func (r *workflowResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	// Update not supported for this resource
+	resp.Diagnostics.AddError("Update not supported", "This resource does not support update operation.")
 }
 
-func (r *topoNodeResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data resource_topo_node.TopoNodeModel
+func (r *workflowResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data resource_workflow.WorkflowModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -256,20 +183,20 @@ func (r *topoNodeResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	// Delete API call logic
 	tflog.Info(ctx, "Delete()::API request", map[string]any{
-		"path": delete_rs_topoNode,
+		"path": delete_rs_workflow,
 		"data": spew.Sdump(data),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err := r.client.Delete(ctx, delete_rs_topoNode, map[string]string{
+	err := r.client.Delete(ctx, delete_rs_workflow, map[string]string{
 		"namespace": tfutils.StringValue(data.Metadata.Namespace),
 		"name":      tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Delete()::API returned", map[string]any{
-		"path":      delete_rs_topoNode,
+		"path":      delete_rs_workflow,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -281,7 +208,7 @@ func (r *topoNodeResource) Delete(ctx context.Context, req resource.DeleteReques
 }
 
 // Configure adds the provider configured client to the resource.
-func (r *topoNodeResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *workflowResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	// Add a nil check when handling ProviderData because Terraform
 	// sets that data after it calls the ConfigureProvider RPC.
 	if req.ProviderData == nil {
@@ -301,7 +228,7 @@ func (r *topoNodeResource) Configure(_ context.Context, req resource.ConfigureRe
 }
 
 // ImportState implements resource.ResourceWithImportState.
-func (r *topoNodeResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *workflowResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	parts := strings.Split(req.ID, "/")
 	if len(parts) < 2 {
 		resp.Diagnostics.AddError("Invalid ID", fmt.Sprintf("Expected format: id = <namespace/name>, got: id = %s", req.ID))

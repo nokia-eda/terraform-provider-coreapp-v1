@@ -442,6 +442,17 @@ resources:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
       method: DELETE
 
+  workflow:
+    create:
+      path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows
+      method: POST
+    read:
+      path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}
+      method: GET
+    delete:
+      path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}
+      method: DELETE
+
   workflow_definition:
     create:
       path: /apps/core.eda.nokia.com/v1/workflowdefinitions

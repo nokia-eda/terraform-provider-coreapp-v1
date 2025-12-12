@@ -28,7 +28,9 @@ They are the only means to which and end user can accept or reject deviations, a
 
 ### Read-Only
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
 - `api_version` (String)
+- `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
 - `status` (Attributes) DeviationActionStatus defines the observed state of DeviationAction (see [below for nested schema](#nestedatt--status))
@@ -50,6 +52,25 @@ Optional:
 - `path` (String) Path to match Deviation resources on this target. Only one action is allowed per path.
 - `recurse` (Boolean) Recursively accept/reject Deviations from the specified path.
 
+
+
+<a id="nestedatt--alarms"></a>
+### Nested Schema for `alarms`
+
+Read-Only:
+
+- `critical` (Number)
+- `major` (Number)
+- `minor` (Number)
+- `warning` (Number)
+
+
+<a id="nestedatt--deviations"></a>
+### Nested Schema for `deviations`
+
+Read-Only:
+
+- `count` (Number)
 
 
 <a id="nestedatt--metadata"></a>
