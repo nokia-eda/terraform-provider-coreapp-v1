@@ -115,59 +115,6 @@ k8_s_topology_request:
       path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}/_topology
       method: POST
 
-patch:
-  - update:
-      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
-      method: PATCH
-  - update:
-      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
-      method: PATCH
-
 resource_history:
   - read:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}/_revs
@@ -369,6 +316,9 @@ com.nokia.eda.core.v1.cluster_role:
   - update:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.cluster_role_list:
   - read:
@@ -398,6 +348,9 @@ com.nokia.eda.core.v1.deviation_action:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.deviation_action_list:
   - read:
@@ -433,6 +386,9 @@ com.nokia.eda.core.v1.edge_interface:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.edge_interface_list:
   - read:
@@ -460,6 +416,9 @@ com.nokia.eda.core.v1.http_proxy:
   - update:
       path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.http_proxy_list:
   - read:
@@ -484,6 +443,9 @@ com.nokia.eda.core.v1.ip_allocation_pool:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.ip_allocation_pool_list:
   - read:
@@ -511,6 +473,9 @@ com.nokia.eda.core.v1.ip_in_subnet_allocation_pool:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.ip_in_subnet_allocation_pool_list:
   - read:
@@ -538,6 +503,9 @@ com.nokia.eda.core.v1.index_allocation_pool:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.index_allocation_pool_list:
   - read:
@@ -575,6 +543,9 @@ com.nokia.eda.core.v1.namespace:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.namespace_list:
   - read:
@@ -599,6 +570,9 @@ com.nokia.eda.core.v1.node_profile:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.node_profile_list:
   - read:
@@ -626,6 +600,9 @@ com.nokia.eda.core.v1.node_user:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.node_user_list:
   - read:
@@ -653,6 +630,9 @@ com.nokia.eda.core.v1.role:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.role_list:
   - read:
@@ -680,6 +660,9 @@ com.nokia.eda.core.v1.subnet_allocation_pool:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.subnet_allocation_pool_list:
   - read:
@@ -707,6 +690,9 @@ com.nokia.eda.core.v1.topo_breakout:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.topo_breakout_list:
   - read:
@@ -734,6 +720,9 @@ com.nokia.eda.core.v1.topo_link:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.topo_link_list:
   - read:
@@ -761,6 +750,9 @@ com.nokia.eda.core.v1.topo_node:
   - update:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.topo_node_list:
   - read:
@@ -788,6 +780,9 @@ com.nokia.eda.core.v1.udp_proxy:
   - update:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.udp_proxy_list:
   - read:
@@ -820,6 +815,9 @@ com.nokia.eda.core.v1.workflow_definition:
   - update:
       path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
       method: PUT
+  - update:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
+      method: PATCH
 
 com.nokia.eda.core.v1.workflow_definition_list:
   - read:
@@ -844,8 +842,8 @@ com.nokia.eda.core.v1.workflow_list:
 
 totalPaths: 136
 totalSchemas: 185
-usedSchemas: 68
-unusedSchemas: 117
+usedSchemas: 67
+unusedSchemas: 118
 unusedSchemaList:
   - AppGroupVersion
   - ErrorIndex
@@ -854,6 +852,7 @@ unusedSchemaList:
   - IntentTarget
   - K8SPatchOp
   - OverlayState
+  - Patch
   - Resource
   - ResourceHistoryEntry
   - StatusDetails

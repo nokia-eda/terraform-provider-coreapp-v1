@@ -167,20 +167,56 @@
         "type": "array"
       },
       "K8SPatchOp": {
+        "description": "The definition for a JSON patch for a resource, as in RFC 6902",
         "properties": {
           "from": {
+            "description": "Only applies to a \"move\" operation, and is the path to the field/value within\nthe target JSON object that should be moved to the location specified by the \"path\"\nfield.",
+            "example": "/a/b/c",
             "type": "string"
           },
           "op": {
+            "description": "The type of operation this patch should perform.",
+            "enum": [
+              "add",
+              "remove",
+              "replace",
+              "move",
+              "copy",
+              "test"
+            ],
+            "example": "replace",
             "type": "string"
           },
           "path": {
+            "description": "The path to the field within the target JSON object\nthat should be patched according to the \"op\" field.",
+            "example": "/a/b/d",
             "type": "string"
           },
           "value": {
+            "description": "This field would be set to the value which the user intends to put in the\nfield referenced by the \"path\" field.  The type of the value should match\nthe type of the field as indicated by the schema of the resource being\npatched.",
+            "example": "example for a string field",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "object"
+              }
+            ],
             "type": "object"
           },
           "x-permissive": {
+            "description": "For an \"add\" operation, an already-present field referenced by the \"path\" will\nresult in an error unless this field is true.  Similarly for a non-existent\ntarget field of a \"remove\" operation.",
             "type": "boolean"
           }
         },
@@ -9363,7 +9399,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -9385,7 +9421,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -10497,7 +10533,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -10519,7 +10555,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -12359,7 +12395,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -12381,7 +12417,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -13763,7 +13799,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -13785,7 +13821,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -14739,7 +14775,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -14761,7 +14797,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -15715,7 +15751,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -15737,7 +15773,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -16691,7 +16727,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -16713,7 +16749,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -17667,7 +17703,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -17689,7 +17725,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -18643,7 +18679,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -18665,7 +18701,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -19619,7 +19655,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -19641,7 +19677,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -20595,7 +20631,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -20617,7 +20653,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -21571,7 +21607,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -21593,7 +21629,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -22547,7 +22583,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -22569,7 +22605,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -23523,7 +23559,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -23545,7 +23581,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -24153,7 +24189,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -24175,7 +24211,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -25639,7 +25675,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -25661,7 +25697,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
@@ -26509,7 +26545,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/json-patch+json": {
               "schema": {
                 "$ref": "#/components/schemas/Patch"
               }
@@ -26531,7 +26567,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "The response for a successful EDA resource patch operation."
           },
           "default": {
             "content": {
