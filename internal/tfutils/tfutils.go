@@ -26,22 +26,15 @@ var (
 	mapLock           sync.Mutex
 	ignoreCaseVisitor = map[string]bool{}
 	snakeToCamelNames = map[string]string{
-		"completiontime":         "completion-time",
-		"continueonerror":        "continue-on-error",
 		"gateway_ipv4_addresses": "gatewayIPV4Addresses",
 		"gateway_ipv6_addresses": "gatewayIPV6Addresses",
-		"grpc_port":              "gRPCPort",
 		"node_details":           "node-details",
 		"node_state":             "node-state",
 		"npp_details":            "npp-details",
 		"npp_pod":                "npp-pod",
 		"npp_state":              "npp-state",
 		"root_url":               "rootUrl",
-		"runson":                 "runs-on",
-		"starttime":              "start-time",
-		"timeoutminutes":         "timeout-minutes",
 		"transaction_id":         "transactionId",
-		"workflowid":             "workflow-id",
 	}
 	camelToSnakeNames = map[string]string{}
 	acronyms          = map[string]string{
@@ -55,7 +48,6 @@ var (
 		"dhcp":  "DHCP",
 		"dn":    "DN",
 		"ecmp":  "ECMP",
-		"eda":   "EDA",
 		"eler":  "ELER",
 		"evpn":  "EVPN",
 		"fib":   "FIB",
@@ -68,7 +60,6 @@ var (
 		"irb":   "IRB",
 		"l2cp":  "L2CP",
 		"ldap":  "LDAP",
-		"ldp":   "LDP",
 		"mac":   "MAC",
 		"mtu":   "MTU",
 		"nd":    "ND",
@@ -79,7 +70,6 @@ var (
 		"safi":  "SAFI",
 		"spf":   "SPF",
 		"tls":   "TLS",
-		"ui":    "UI",
 		"uri":   "URI",
 		"url":   "URL",
 		"uuid":  "UUID",
@@ -832,11 +822,9 @@ func FillMissingValues(ctx context.Context, model any) error {
 				return err
 			}
 			fieldVal.Set(reflect.ValueOf(nullValue))
-		} else if !attrVal.IsNull() {
-			// Only recurse into ObjectTypable values that are neither
-			// unknown nor null. A null value has no nested unknowns to
-			// fill, and recursing would produce an empty attribute map
-			// that fails ObjectValue construction.
+		} else {
+			// Check if the attr.Type of the field is an ObjectTypable
+			// and set the appropriate null value in the field
 			switch attrVal.Type(ctx).(type) {
 			case basetypes.ObjectTypable:
 				tflog.Trace(ctx, "FillMissingValues()::ObjectTypable case",

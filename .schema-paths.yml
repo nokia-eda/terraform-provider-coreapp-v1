@@ -5,21 +5,6 @@ app_group:
 
 intent_targets:
   - read:
-      path: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarms/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}/_targets
-      method: GET
-  - read:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}/_targets
       method: GET
   - read:
@@ -27,9 +12,6 @@ intent_targets:
       method: GET
   - read:
       path: /apps/core.eda.nokia.com/v1/licenses/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}/_targets
       method: GET
   - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}/_targets
@@ -59,9 +41,6 @@ intent_targets:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}/_targets
       method: GET
   - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}/_targets
-      method: GET
-  - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}/_targets
       method: GET
   - read:
@@ -74,16 +53,7 @@ intent_targets:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}/_targets
       method: GET
   - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}/_targets
-      method: GET
-  - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}/_targets
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}/_targets
       method: GET
   - read:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}/_targets
@@ -94,22 +64,10 @@ intent_targets:
 
 k8_s_topology_request:
   - create:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}/_topology
-      method: POST
-  - create:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}/_topology
-      method: POST
-  - create:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}/_topology
-      method: POST
-  - create:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}/_topology
       method: POST
   - create:
       path: /apps/core.eda.nokia.com/v1/httpproxies/{name}/_topology
-      method: POST
-  - create:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}/_topology
       method: POST
   - create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}/_topology
@@ -136,9 +94,6 @@ k8_s_topology_request:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}/_topology
       method: POST
   - create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}/_topology
-      method: POST
-  - create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}/_topology
       method: POST
   - create:
@@ -151,16 +106,7 @@ k8_s_topology_request:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}/_topology
       method: POST
   - create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}/_topology
-      method: POST
-  - create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{name}/_topology
-      method: POST
-  - create:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}/_topology
-      method: POST
-  - create:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}/_topology
       method: POST
   - create:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}/_topology
@@ -171,21 +117,6 @@ k8_s_topology_request:
 
 resource_history:
   - read:
-      path: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarms/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}/_revs
-      method: GET
-  - read:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}/_revs
       method: GET
   - read:
@@ -193,9 +124,6 @@ resource_history:
       method: GET
   - read:
       path: /apps/core.eda.nokia.com/v1/licenses/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}/_revs
       method: GET
   - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}/_revs
@@ -225,9 +153,6 @@ resource_history:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}/_revs
       method: GET
   - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}/_revs
-      method: GET
-  - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}/_revs
       method: GET
   - read:
@@ -240,16 +165,7 @@ resource_history:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}/_revs
       method: GET
   - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}/_revs
-      method: GET
-  - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}/_revs
-      method: GET
-  - read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}/_revs
       method: GET
   - read:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}/_revs
@@ -263,24 +179,71 @@ resource_list:
       path: /apps/core.eda.nokia.com/v1
       method: GET
 
+resource_topology:
+  - read:
+      path: /apps/core.eda.nokia.com/v1/clusterroles/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/httpproxies/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/licenses/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/udpproxies/{name}/_topology
+      method: GET
+  - read:
+      path: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}/_topology
+      method: GET
+
 status:
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: DELETE
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: DELETE
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: DELETE
   - delete:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
       method: DELETE
   - delete:
       path: /apps/core.eda.nokia.com/v1/httpproxies/{name}
-      method: DELETE
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
       method: DELETE
   - delete:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
@@ -307,9 +270,6 @@ status:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
       method: DELETE
   - delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: DELETE
-  - delete:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
       method: DELETE
   - delete:
@@ -322,16 +282,7 @@ status:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
       method: DELETE
   - delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: DELETE
-  - delete:
       path: /apps/core.eda.nokia.com/v1/namespaces/{name}
-      method: DELETE
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: DELETE
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
       method: DELETE
   - delete:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
@@ -354,107 +305,6 @@ workflow_input_data:
   - update:
       path: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}/_input
       method: PUT
-
-com.nokia.eda.core.v1.alarm:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarms/{name}
-      method: GET
-
-com.nokia.eda.core.v1.alarm_definition:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}
-      method: GET
-
-com.nokia.eda.core.v1.alarm_definition_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmdefinitions
-      method: GET
-
-com.nokia.eda.core.v1.alarm_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarms
-      method: GET
-
-com.nokia.eda.core.v1.alarm_policy:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.alarm_policy_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies
-      method: DELETE
-
-com.nokia.eda.core.v1.alarm_policy_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/_deleted
-      method: GET
-
-com.nokia.eda.core.v1.branch:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/branches
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.branch_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/branches
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/branches
-      method: DELETE
-
-com.nokia.eda.core.v1.branch_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/branches/_deleted
-      method: GET
-
-com.nokia.eda.core.v1.cluster_provider:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.cluster_provider_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders
-      method: DELETE
-
-com.nokia.eda.core.v1.cluster_provider_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/_deleted
-      method: GET
 
 com.nokia.eda.core.v1.cluster_role:
   - create:
@@ -683,33 +533,6 @@ com.nokia.eda.core.v1.license_list:
       path: /apps/core.eda.nokia.com/v1/licenses
       method: GET
 
-com.nokia.eda.core.v1.log_output:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/logoutputs
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.log_output_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/logoutputs
-      method: DELETE
-
-com.nokia.eda.core.v1.log_output_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/_deleted
-      method: GET
-
 com.nokia.eda.core.v1.namespace:
   - create:
       path: /apps/core.eda.nokia.com/v1/namespaces
@@ -767,33 +590,6 @@ com.nokia.eda.core.v1.node_profile_deleted_resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/_deleted
       method: GET
 
-com.nokia.eda.core.v1.node_security_profile:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.node_security_profile_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
-      method: DELETE
-
-com.nokia.eda.core.v1.node_security_profile_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/_deleted
-      method: GET
-
 com.nokia.eda.core.v1.node_user:
   - create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
@@ -824,33 +620,6 @@ com.nokia.eda.core.v1.node_user_deleted_resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/_deleted
       method: GET
 
-com.nokia.eda.core.v1.pipeline_definition:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.pipeline_definition_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions
-      method: DELETE
-
-com.nokia.eda.core.v1.pipeline_definition_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/_deleted
-      method: GET
-
 com.nokia.eda.core.v1.role:
   - create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
@@ -879,36 +648,6 @@ com.nokia.eda.core.v1.role_list:
 com.nokia.eda.core.v1.role_deleted_resources:
   - read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/_deleted
-      method: GET
-
-com.nokia.eda.core.v1.satellite_profile:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.satellite_profile_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
-      method: DELETE
-  - read:
-      path: /apps/core.eda.nokia.com/v1/satelliteprofiles
-      method: GET
-
-com.nokia.eda.core.v1.satellite_profile_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/_deleted
       method: GET
 
 com.nokia.eda.core.v1.subnet_allocation_pool:
@@ -1031,36 +770,6 @@ com.nokia.eda.core.v1.topo_node_deleted_resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/_deleted
       method: GET
 
-com.nokia.eda.core.v1.transaction_pipeline:
-  - create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-      method: POST
-  - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: GET
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: PUT
-  - update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: PATCH
-
-com.nokia.eda.core.v1.transaction_pipeline_list:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-      method: GET
-  - delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-      method: DELETE
-  - read:
-      path: /apps/core.eda.nokia.com/v1/transactionpipelines
-      method: GET
-
-com.nokia.eda.core.v1.transaction_pipeline_deleted_resources:
-  - read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/_deleted
-      method: GET
-
 com.nokia.eda.core.v1.udp_proxy:
   - create:
       path: /apps/core.eda.nokia.com/v1/udpproxies
@@ -1131,12 +840,14 @@ com.nokia.eda.core.v1.workflow_list:
       path: /workflows/v1/core.eda.nokia.com/v1/workflows
       method: GET
 
-totalPaths: 192
-totalSchemas: 249
-usedSchemas: 94
-unusedSchemas: 155
+totalPaths: 136
+totalSchemas: 185
+usedSchemas: 67
+unusedSchemas: 118
 unusedSchemaList:
   - AppGroupVersion
+  - ErrorIndex
+  - ErrorItem
   - ErrorResponse
   - IntentTarget
   - K8SPatchOp
@@ -1144,7 +855,6 @@ unusedSchemaList:
   - Patch
   - Resource
   - ResourceHistoryEntry
-  - ResourceTopology
   - StatusDetails
   - TopoAttrMetadata
   - TopoAttribute
@@ -1176,24 +886,6 @@ unusedSchemaList:
   - Topology
   - WorkflowIdentifier
   - WorkflowInputDataElem
-  - com.nokia.eda.core.v1.AlarmDefinition_alarms
-  - com.nokia.eda.core.v1.AlarmDefinition_deviations
-  - com.nokia.eda.core.v1.AlarmDefinition_metadata
-  - com.nokia.eda.core.v1.AlarmPolicy_DeletedResourceEntry
-  - com.nokia.eda.core.v1.AlarmPolicy_alarms
-  - com.nokia.eda.core.v1.AlarmPolicy_deviations
-  - com.nokia.eda.core.v1.AlarmPolicy_metadata
-  - com.nokia.eda.core.v1.Alarm_alarms
-  - com.nokia.eda.core.v1.Alarm_deviations
-  - com.nokia.eda.core.v1.Alarm_metadata
-  - com.nokia.eda.core.v1.Branch_DeletedResourceEntry
-  - com.nokia.eda.core.v1.Branch_alarms
-  - com.nokia.eda.core.v1.Branch_deviations
-  - com.nokia.eda.core.v1.Branch_metadata
-  - com.nokia.eda.core.v1.ClusterProvider_DeletedResourceEntry
-  - com.nokia.eda.core.v1.ClusterProvider_alarms
-  - com.nokia.eda.core.v1.ClusterProvider_deviations
-  - com.nokia.eda.core.v1.ClusterProvider_metadata
   - com.nokia.eda.core.v1.ClusterRole_DeletedResourceEntry
   - com.nokia.eda.core.v1.ClusterRole_alarms
   - com.nokia.eda.core.v1.ClusterRole_deviations
@@ -1228,10 +920,6 @@ unusedSchemaList:
   - com.nokia.eda.core.v1.License_alarms
   - com.nokia.eda.core.v1.License_deviations
   - com.nokia.eda.core.v1.License_metadata
-  - com.nokia.eda.core.v1.LogOutput_DeletedResourceEntry
-  - com.nokia.eda.core.v1.LogOutput_alarms
-  - com.nokia.eda.core.v1.LogOutput_deviations
-  - com.nokia.eda.core.v1.LogOutput_metadata
   - com.nokia.eda.core.v1.Namespace_DeletedResourceEntry
   - com.nokia.eda.core.v1.Namespace_alarms
   - com.nokia.eda.core.v1.Namespace_deviations
@@ -1240,26 +928,14 @@ unusedSchemaList:
   - com.nokia.eda.core.v1.NodeProfile_alarms
   - com.nokia.eda.core.v1.NodeProfile_deviations
   - com.nokia.eda.core.v1.NodeProfile_metadata
-  - com.nokia.eda.core.v1.NodeSecurityProfile_DeletedResourceEntry
-  - com.nokia.eda.core.v1.NodeSecurityProfile_alarms
-  - com.nokia.eda.core.v1.NodeSecurityProfile_deviations
-  - com.nokia.eda.core.v1.NodeSecurityProfile_metadata
   - com.nokia.eda.core.v1.NodeUser_DeletedResourceEntry
   - com.nokia.eda.core.v1.NodeUser_alarms
   - com.nokia.eda.core.v1.NodeUser_deviations
   - com.nokia.eda.core.v1.NodeUser_metadata
-  - com.nokia.eda.core.v1.PipelineDefinition_DeletedResourceEntry
-  - com.nokia.eda.core.v1.PipelineDefinition_alarms
-  - com.nokia.eda.core.v1.PipelineDefinition_deviations
-  - com.nokia.eda.core.v1.PipelineDefinition_metadata
   - com.nokia.eda.core.v1.Role_DeletedResourceEntry
   - com.nokia.eda.core.v1.Role_alarms
   - com.nokia.eda.core.v1.Role_deviations
   - com.nokia.eda.core.v1.Role_metadata
-  - com.nokia.eda.core.v1.SatelliteProfile_DeletedResourceEntry
-  - com.nokia.eda.core.v1.SatelliteProfile_alarms
-  - com.nokia.eda.core.v1.SatelliteProfile_deviations
-  - com.nokia.eda.core.v1.SatelliteProfile_metadata
   - com.nokia.eda.core.v1.SubnetAllocationPool_DeletedResourceEntry
   - com.nokia.eda.core.v1.SubnetAllocationPool_alarms
   - com.nokia.eda.core.v1.SubnetAllocationPool_deviations
@@ -1276,10 +952,6 @@ unusedSchemaList:
   - com.nokia.eda.core.v1.TopoNode_alarms
   - com.nokia.eda.core.v1.TopoNode_deviations
   - com.nokia.eda.core.v1.TopoNode_metadata
-  - com.nokia.eda.core.v1.TransactionPipeline_DeletedResourceEntry
-  - com.nokia.eda.core.v1.TransactionPipeline_alarms
-  - com.nokia.eda.core.v1.TransactionPipeline_deviations
-  - com.nokia.eda.core.v1.TransactionPipeline_metadata
   - com.nokia.eda.core.v1.UdpProxy_DeletedResourceEntry
   - com.nokia.eda.core.v1.UdpProxy_alarms
   - com.nokia.eda.core.v1.UdpProxy_deviations

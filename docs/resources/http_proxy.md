@@ -53,20 +53,6 @@ If "atDestination", then no authentication happens in API server and any auth to
 If "inApiServer", then authentication happens within the API server and auth tokens are stripped prior to forwarding.
 - `root_url` (String) The proxy destination, including the protocol.
 
-Optional:
-
-- `signature_header_verification` (Attributes) SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header. (see [below for nested schema](#nestedatt--spec--signature_header_verification))
-
-<a id="nestedatt--spec--signature_header_verification"></a>
-### Nested Schema for `spec.signature_header_verification`
-
-Required:
-
-- `algorithm` (String) Algorithm is the HMAC algorithm used to verify the signature.
-- `header` (String) Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).
-- `key_secret` (String) KeySecret is the name of the Kubernetes secret (in the pod namespace) whose "key" data entry holds the HMAC key.
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`

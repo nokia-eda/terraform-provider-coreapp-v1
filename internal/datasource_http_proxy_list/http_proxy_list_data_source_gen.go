@@ -113,33 +113,6 @@ func HttpProxyListDataSourceSchema(ctx context.Context) schema.Schema {
 									Description:         "The proxy destination, including the protocol.",
 									MarkdownDescription: "The proxy destination, including the protocol.",
 								},
-								"signature_header_verification": schema.SingleNestedAttribute{
-									Attributes: map[string]schema.Attribute{
-										"algorithm": schema.StringAttribute{
-											Optional:            true,
-											Description:         "Algorithm is the HMAC algorithm used to verify the signature.",
-											MarkdownDescription: "Algorithm is the HMAC algorithm used to verify the signature.",
-										},
-										"header": schema.StringAttribute{
-											Optional:            true,
-											Description:         "Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).",
-											MarkdownDescription: "Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).",
-										},
-										"key_secret": schema.StringAttribute{
-											Optional:            true,
-											Description:         "KeySecret is the name of the Kubernetes secret (in the pod namespace) whose \"key\" data entry holds the HMAC key.",
-											MarkdownDescription: "KeySecret is the name of the Kubernetes secret (in the pod namespace) whose \"key\" data entry holds the HMAC key.",
-										},
-									},
-									CustomType: SignatureHeaderVerificationType{
-										ObjectType: types.ObjectType{
-											AttrTypes: SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-										},
-									},
-									Optional:            true,
-									Description:         "SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header.",
-									MarkdownDescription: "SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header.",
-								},
 							},
 							CustomType: SpecType{
 								ObjectType: types.ObjectType{
@@ -176,8 +149,8 @@ func HttpProxyListDataSourceSchema(ctx context.Context) schema.Schema {
 			"label_selector": schema.StringAttribute{
 				Optional:            true,
 				Computed:            true,
-				Description:         "A label selector string to filter the results based on resource labels. If specified multiple times, the union of resources which satisfy a label-selector will be returned.",
-				MarkdownDescription: "A label selector string to filter the results based on resource labels. If specified multiple times, the union of resources which satisfy a label-selector will be returned.",
+				Description:         "a label selector string to filter the results based on CR labels",
+				MarkdownDescription: "a label selector string to filter the results based on CR labels",
 			},
 			"labelselector": schema.StringAttribute{
 				Optional:            true,
@@ -2413,33 +2386,14 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 			fmt.Sprintf(`root_url expected to be basetypes.StringValue, was: %T`, rootUrlAttribute))
 	}
 
-	signatureHeaderVerificationAttribute, ok := attributes["signature_header_verification"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`signature_header_verification is missing from object`)
-
-		return nil, diags
-	}
-
-	signatureHeaderVerificationVal, ok := signatureHeaderVerificationAttribute.(basetypes.ObjectValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`signature_header_verification expected to be basetypes.ObjectValue, was: %T`, signatureHeaderVerificationAttribute))
-	}
-
 	if diags.HasError() {
 		return nil, diags
 	}
 
 	return SpecValue{
-		AuthType:                    authTypeVal,
-		RootUrl:                     rootUrlVal,
-		SignatureHeaderVerification: signatureHeaderVerificationVal,
-		state:                       attr.ValueStateKnown,
+		AuthType: authTypeVal,
+		RootUrl:  rootUrlVal,
+		state:    attr.ValueStateKnown,
 	}, diags
 }
 
@@ -2542,33 +2496,14 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 			fmt.Sprintf(`root_url expected to be basetypes.StringValue, was: %T`, rootUrlAttribute))
 	}
 
-	signatureHeaderVerificationAttribute, ok := attributes["signature_header_verification"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`signature_header_verification is missing from object`)
-
-		return NewSpecValueUnknown(), diags
-	}
-
-	signatureHeaderVerificationVal, ok := signatureHeaderVerificationAttribute.(basetypes.ObjectValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`signature_header_verification expected to be basetypes.ObjectValue, was: %T`, signatureHeaderVerificationAttribute))
-	}
-
 	if diags.HasError() {
 		return NewSpecValueUnknown(), diags
 	}
 
 	return SpecValue{
-		AuthType:                    authTypeVal,
-		RootUrl:                     rootUrlVal,
-		SignatureHeaderVerification: signatureHeaderVerificationVal,
-		state:                       attr.ValueStateKnown,
+		AuthType: authTypeVal,
+		RootUrl:  rootUrlVal,
+		state:    attr.ValueStateKnown,
 	}, diags
 }
 
@@ -2640,29 +2575,25 @@ func (t SpecType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = SpecValue{}
 
 type SpecValue struct {
-	AuthType                    basetypes.StringValue `tfsdk:"auth_type"`
-	RootUrl                     basetypes.StringValue `tfsdk:"root_url"`
-	SignatureHeaderVerification basetypes.ObjectValue `tfsdk:"signature_header_verification"`
-	state                       attr.ValueState
+	AuthType basetypes.StringValue `tfsdk:"auth_type"`
+	RootUrl  basetypes.StringValue `tfsdk:"root_url"`
+	state    attr.ValueState
 }
 
 func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 3)
+	attrTypes := make(map[string]tftypes.Type, 2)
 
 	var val tftypes.Value
 	var err error
 
 	attrTypes["auth_type"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["root_url"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["signature_header_verification"] = basetypes.ObjectType{
-		AttrTypes: SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-	}.TerraformType(ctx)
 
 	objectType := tftypes.Object{AttributeTypes: attrTypes}
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 3)
+		vals := make(map[string]tftypes.Value, 2)
 
 		val, err = v.AuthType.ToTerraformValue(ctx)
 
@@ -2679,14 +2610,6 @@ func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 		}
 
 		vals["root_url"] = val
-
-		val, err = v.SignatureHeaderVerification.ToTerraformValue(ctx)
-
-		if err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		vals["signature_header_verification"] = val
 
 		if err := tftypes.ValidateValue(objectType, vals); err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
@@ -2717,33 +2640,9 @@ func (v SpecValue) String() string {
 func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	var signatureHeaderVerification basetypes.ObjectValue
-
-	if v.SignatureHeaderVerification.IsNull() {
-		signatureHeaderVerification = types.ObjectNull(
-			SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-		)
-	}
-
-	if v.SignatureHeaderVerification.IsUnknown() {
-		signatureHeaderVerification = types.ObjectUnknown(
-			SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-		)
-	}
-
-	if !v.SignatureHeaderVerification.IsNull() && !v.SignatureHeaderVerification.IsUnknown() {
-		signatureHeaderVerification = types.ObjectValueMust(
-			SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-			v.SignatureHeaderVerification.Attributes(),
-		)
-	}
-
 	attributeTypes := map[string]attr.Type{
 		"auth_type": basetypes.StringType{},
 		"root_url":  basetypes.StringType{},
-		"signature_header_verification": basetypes.ObjectType{
-			AttrTypes: SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-		},
 	}
 
 	if v.IsNull() {
@@ -2757,9 +2656,8 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"auth_type":                     v.AuthType,
-			"root_url":                      v.RootUrl,
-			"signature_header_verification": signatureHeaderVerification,
+			"auth_type": v.AuthType,
+			"root_url":  v.RootUrl,
 		})
 
 	return objVal, diags
@@ -2788,10 +2686,6 @@ func (v SpecValue) Equal(o attr.Value) bool {
 		return false
 	}
 
-	if !v.SignatureHeaderVerification.Equal(other.SignatureHeaderVerification) {
-		return false
-	}
-
 	return true
 }
 
@@ -2807,443 +2701,6 @@ func (v SpecValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
 		"auth_type": basetypes.StringType{},
 		"root_url":  basetypes.StringType{},
-		"signature_header_verification": basetypes.ObjectType{
-			AttrTypes: SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
-		},
-	}
-}
-
-var _ basetypes.ObjectTypable = SignatureHeaderVerificationType{}
-
-type SignatureHeaderVerificationType struct {
-	basetypes.ObjectType
-}
-
-func (t SignatureHeaderVerificationType) Equal(o attr.Type) bool {
-	other, ok := o.(SignatureHeaderVerificationType)
-
-	if !ok {
-		return false
-	}
-
-	return t.ObjectType.Equal(other.ObjectType)
-}
-
-func (t SignatureHeaderVerificationType) String() string {
-	return "SignatureHeaderVerificationType"
-}
-
-func (t SignatureHeaderVerificationType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
-	var diags diag.Diagnostics
-
-	attributes := in.Attributes()
-
-	algorithmAttribute, ok := attributes["algorithm"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`algorithm is missing from object`)
-
-		return nil, diags
-	}
-
-	algorithmVal, ok := algorithmAttribute.(basetypes.StringValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`algorithm expected to be basetypes.StringValue, was: %T`, algorithmAttribute))
-	}
-
-	headerAttribute, ok := attributes["header"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`header is missing from object`)
-
-		return nil, diags
-	}
-
-	headerVal, ok := headerAttribute.(basetypes.StringValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`header expected to be basetypes.StringValue, was: %T`, headerAttribute))
-	}
-
-	keySecretAttribute, ok := attributes["key_secret"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`key_secret is missing from object`)
-
-		return nil, diags
-	}
-
-	keySecretVal, ok := keySecretAttribute.(basetypes.StringValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`key_secret expected to be basetypes.StringValue, was: %T`, keySecretAttribute))
-	}
-
-	if diags.HasError() {
-		return nil, diags
-	}
-
-	return SignatureHeaderVerificationValue{
-		Algorithm: algorithmVal,
-		Header:    headerVal,
-		KeySecret: keySecretVal,
-		state:     attr.ValueStateKnown,
-	}, diags
-}
-
-func NewSignatureHeaderVerificationValueNull() SignatureHeaderVerificationValue {
-	return SignatureHeaderVerificationValue{
-		state: attr.ValueStateNull,
-	}
-}
-
-func NewSignatureHeaderVerificationValueUnknown() SignatureHeaderVerificationValue {
-	return SignatureHeaderVerificationValue{
-		state: attr.ValueStateUnknown,
-	}
-}
-
-func NewSignatureHeaderVerificationValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (SignatureHeaderVerificationValue, diag.Diagnostics) {
-	var diags diag.Diagnostics
-
-	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/521
-	ctx := context.Background()
-
-	for name, attributeType := range attributeTypes {
-		attribute, ok := attributes[name]
-
-		if !ok {
-			diags.AddError(
-				"Missing SignatureHeaderVerificationValue Attribute Value",
-				"While creating a SignatureHeaderVerificationValue value, a missing attribute value was detected. "+
-					"A SignatureHeaderVerificationValue must contain values for all attributes, even if null or unknown. "+
-					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("SignatureHeaderVerificationValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
-			)
-
-			continue
-		}
-
-		if !attributeType.Equal(attribute.Type(ctx)) {
-			diags.AddError(
-				"Invalid SignatureHeaderVerificationValue Attribute Type",
-				"While creating a SignatureHeaderVerificationValue value, an invalid attribute value was detected. "+
-					"A SignatureHeaderVerificationValue must use a matching attribute type for the value. "+
-					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("SignatureHeaderVerificationValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
-					fmt.Sprintf("SignatureHeaderVerificationValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
-			)
-		}
-	}
-
-	for name := range attributes {
-		_, ok := attributeTypes[name]
-
-		if !ok {
-			diags.AddError(
-				"Extra SignatureHeaderVerificationValue Attribute Value",
-				"While creating a SignatureHeaderVerificationValue value, an extra attribute value was detected. "+
-					"A SignatureHeaderVerificationValue must not contain values beyond the expected attribute types. "+
-					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
-					fmt.Sprintf("Extra SignatureHeaderVerificationValue Attribute Name: %s", name),
-			)
-		}
-	}
-
-	if diags.HasError() {
-		return NewSignatureHeaderVerificationValueUnknown(), diags
-	}
-
-	algorithmAttribute, ok := attributes["algorithm"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`algorithm is missing from object`)
-
-		return NewSignatureHeaderVerificationValueUnknown(), diags
-	}
-
-	algorithmVal, ok := algorithmAttribute.(basetypes.StringValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`algorithm expected to be basetypes.StringValue, was: %T`, algorithmAttribute))
-	}
-
-	headerAttribute, ok := attributes["header"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`header is missing from object`)
-
-		return NewSignatureHeaderVerificationValueUnknown(), diags
-	}
-
-	headerVal, ok := headerAttribute.(basetypes.StringValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`header expected to be basetypes.StringValue, was: %T`, headerAttribute))
-	}
-
-	keySecretAttribute, ok := attributes["key_secret"]
-
-	if !ok {
-		diags.AddError(
-			"Attribute Missing",
-			`key_secret is missing from object`)
-
-		return NewSignatureHeaderVerificationValueUnknown(), diags
-	}
-
-	keySecretVal, ok := keySecretAttribute.(basetypes.StringValue)
-
-	if !ok {
-		diags.AddError(
-			"Attribute Wrong Type",
-			fmt.Sprintf(`key_secret expected to be basetypes.StringValue, was: %T`, keySecretAttribute))
-	}
-
-	if diags.HasError() {
-		return NewSignatureHeaderVerificationValueUnknown(), diags
-	}
-
-	return SignatureHeaderVerificationValue{
-		Algorithm: algorithmVal,
-		Header:    headerVal,
-		KeySecret: keySecretVal,
-		state:     attr.ValueStateKnown,
-	}, diags
-}
-
-func NewSignatureHeaderVerificationValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) SignatureHeaderVerificationValue {
-	object, diags := NewSignatureHeaderVerificationValue(attributeTypes, attributes)
-
-	if diags.HasError() {
-		// This could potentially be added to the diag package.
-		diagsStrings := make([]string, 0, len(diags))
-
-		for _, diagnostic := range diags {
-			diagsStrings = append(diagsStrings, fmt.Sprintf(
-				"%s | %s | %s",
-				diagnostic.Severity(),
-				diagnostic.Summary(),
-				diagnostic.Detail()))
-		}
-
-		panic("NewSignatureHeaderVerificationValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
-	}
-
-	return object
-}
-
-func (t SignatureHeaderVerificationType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
-	if in.Type() == nil {
-		return NewSignatureHeaderVerificationValueNull(), nil
-	}
-
-	if !in.Type().Equal(t.TerraformType(ctx)) {
-		return nil, fmt.Errorf("expected %s, got %s", t.TerraformType(ctx), in.Type())
-	}
-
-	if !in.IsKnown() {
-		return NewSignatureHeaderVerificationValueUnknown(), nil
-	}
-
-	if in.IsNull() {
-		return NewSignatureHeaderVerificationValueNull(), nil
-	}
-
-	attributes := map[string]attr.Value{}
-
-	val := map[string]tftypes.Value{}
-
-	err := in.As(&val)
-
-	if err != nil {
-		return nil, err
-	}
-
-	for k, v := range val {
-		a, err := t.AttrTypes[k].ValueFromTerraform(ctx, v)
-
-		if err != nil {
-			return nil, err
-		}
-
-		attributes[k] = a
-	}
-
-	return NewSignatureHeaderVerificationValueMust(SignatureHeaderVerificationValue{}.AttributeTypes(ctx), attributes), nil
-}
-
-func (t SignatureHeaderVerificationType) ValueType(ctx context.Context) attr.Value {
-	return SignatureHeaderVerificationValue{}
-}
-
-var _ basetypes.ObjectValuable = SignatureHeaderVerificationValue{}
-
-type SignatureHeaderVerificationValue struct {
-	Algorithm basetypes.StringValue `tfsdk:"algorithm"`
-	Header    basetypes.StringValue `tfsdk:"header"`
-	KeySecret basetypes.StringValue `tfsdk:"key_secret"`
-	state     attr.ValueState
-}
-
-func (v SignatureHeaderVerificationValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 3)
-
-	var val tftypes.Value
-	var err error
-
-	attrTypes["algorithm"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["header"] = basetypes.StringType{}.TerraformType(ctx)
-	attrTypes["key_secret"] = basetypes.StringType{}.TerraformType(ctx)
-
-	objectType := tftypes.Object{AttributeTypes: attrTypes}
-
-	switch v.state {
-	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 3)
-
-		val, err = v.Algorithm.ToTerraformValue(ctx)
-
-		if err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		vals["algorithm"] = val
-
-		val, err = v.Header.ToTerraformValue(ctx)
-
-		if err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		vals["header"] = val
-
-		val, err = v.KeySecret.ToTerraformValue(ctx)
-
-		if err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		vals["key_secret"] = val
-
-		if err := tftypes.ValidateValue(objectType, vals); err != nil {
-			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
-		}
-
-		return tftypes.NewValue(objectType, vals), nil
-	case attr.ValueStateNull:
-		return tftypes.NewValue(objectType, nil), nil
-	case attr.ValueStateUnknown:
-		return tftypes.NewValue(objectType, tftypes.UnknownValue), nil
-	default:
-		panic(fmt.Sprintf("unhandled Object state in ToTerraformValue: %s", v.state))
-	}
-}
-
-func (v SignatureHeaderVerificationValue) IsNull() bool {
-	return v.state == attr.ValueStateNull
-}
-
-func (v SignatureHeaderVerificationValue) IsUnknown() bool {
-	return v.state == attr.ValueStateUnknown
-}
-
-func (v SignatureHeaderVerificationValue) String() string {
-	return "SignatureHeaderVerificationValue"
-}
-
-func (v SignatureHeaderVerificationValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
-	var diags diag.Diagnostics
-
-	attributeTypes := map[string]attr.Type{
-		"algorithm":  basetypes.StringType{},
-		"header":     basetypes.StringType{},
-		"key_secret": basetypes.StringType{},
-	}
-
-	if v.IsNull() {
-		return types.ObjectNull(attributeTypes), diags
-	}
-
-	if v.IsUnknown() {
-		return types.ObjectUnknown(attributeTypes), diags
-	}
-
-	objVal, diags := types.ObjectValue(
-		attributeTypes,
-		map[string]attr.Value{
-			"algorithm":  v.Algorithm,
-			"header":     v.Header,
-			"key_secret": v.KeySecret,
-		})
-
-	return objVal, diags
-}
-
-func (v SignatureHeaderVerificationValue) Equal(o attr.Value) bool {
-	other, ok := o.(SignatureHeaderVerificationValue)
-
-	if !ok {
-		return false
-	}
-
-	if v.state != other.state {
-		return false
-	}
-
-	if v.state != attr.ValueStateKnown {
-		return true
-	}
-
-	if !v.Algorithm.Equal(other.Algorithm) {
-		return false
-	}
-
-	if !v.Header.Equal(other.Header) {
-		return false
-	}
-
-	if !v.KeySecret.Equal(other.KeySecret) {
-		return false
-	}
-
-	return true
-}
-
-func (v SignatureHeaderVerificationValue) Type(ctx context.Context) attr.Type {
-	return SignatureHeaderVerificationType{
-		basetypes.ObjectType{
-			AttrTypes: v.AttributeTypes(ctx),
-		},
-	}
-}
-
-func (v SignatureHeaderVerificationValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
-	return map[string]attr.Type{
-		"algorithm":  basetypes.StringType{},
-		"header":     basetypes.StringType{},
-		"key_secret": basetypes.StringType{},
 	}
 }
 

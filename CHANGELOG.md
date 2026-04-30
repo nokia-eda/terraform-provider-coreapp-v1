@@ -1,9 +1,5 @@
 # Changelog
 
-## 1.0.2
-
-- Add DHCP option 56-NTPServers to the list of allowed values.
-
 ## 1.0.1
 
 - Fix K8s Patch operation for the resource.

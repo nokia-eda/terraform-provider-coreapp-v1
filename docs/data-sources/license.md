@@ -81,6 +81,5 @@ Read-Only:
 - `expiration_date` (String) Date and time the license expires.
 - `expired` (Boolean) Indicates if the license has expired.
 - `issued_date` (String) Date and time the license was issued.
-- `start_date` (String) Date and time the license starts
 - `used` (Boolean) Indicates if license has been used.
 - `valid` (Boolean) Indicates if the license is valid.

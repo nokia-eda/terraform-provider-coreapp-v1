@@ -2,59 +2,9 @@ provider:
   name: coreapp
 
 data_sources:
-  alarm:
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarms/{name}
-      method: GET
-
-  alarm_definition:
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}
-      method: GET
-
-  alarm_definition_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarmdefinitions
-      method: GET
-
-  alarm_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarms
-      method: GET
-
-  alarm_policy:
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: GET
-
-  alarm_policy_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies
-      method: GET
-
   app_group:
     read:
       path: /apps/core.eda.nokia.com
-      method: GET
-
-  branch:
-    read:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: GET
-
-  branch_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/branches
-      method: GET
-
-  cluster_provider:
-    read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: GET
-
-  cluster_provider_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders
       method: GET
 
   cluster_role:
@@ -147,16 +97,6 @@ data_sources:
       path: /apps/core.eda.nokia.com/v1/licenses
       method: GET
 
-  log_output:
-    read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: GET
-
-  log_output_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs
-      method: GET
-
   namespace:
     read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{name}
@@ -177,16 +117,6 @@ data_sources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles
       method: GET
 
-  node_security_profile:
-    read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: GET
-
-  node_security_profile_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
-      method: GET
-
   node_user:
     read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
@@ -195,16 +125,6 @@ data_sources:
   node_user_list:
     read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
-      method: GET
-
-  pipeline_definition:
-    read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: GET
-
-  pipeline_definition_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions
       method: GET
 
   resource_list:
@@ -220,16 +140,6 @@ data_sources:
   role_list:
     read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
-      method: GET
-
-  satellite_profile:
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: GET
-
-  satellite_profile_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
       method: GET
 
   subnet_allocation_pool:
@@ -272,16 +182,6 @@ data_sources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
       method: GET
 
-  transaction_pipeline:
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: GET
-
-  transaction_pipeline_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-      method: GET
-
   udp_proxy:
     read:
       path: /apps/core.eda.nokia.com/v1/udpproxies/{name}
@@ -318,48 +218,6 @@ data_sources:
       method: GET
 
 resources:
-  alarm_policy:
-    create:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
-      method: DELETE
-
-  branch:
-    create:
-      path: /apps/core.eda.nokia.com/v1/branches
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/branches/{name}
-      method: DELETE
-
-  cluster_provider:
-    create:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
-      method: DELETE
-
   cluster_role:
     create:
       path: /apps/core.eda.nokia.com/v1/clusterroles
@@ -458,20 +316,6 @@ resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
       method: DELETE
 
-  log_output:
-    create:
-      path: /apps/core.eda.nokia.com/v1/logoutputs
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/logoutputs/{name}
-      method: DELETE
-
   namespace:
     create:
       path: /apps/core.eda.nokia.com/v1/namespaces
@@ -500,20 +344,6 @@ resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
       method: DELETE
 
-  node_security_profile:
-    create:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
-      method: DELETE
-
   node_user:
     create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
@@ -528,20 +358,6 @@ resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
       method: DELETE
 
-  pipeline_definition:
-    create:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
-      method: DELETE
-
   role:
     create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
@@ -554,20 +370,6 @@ resources:
       method: PUT
     delete:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
-      method: DELETE
-
-  satellite_profile:
-    create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
       method: DELETE
 
   subnet_allocation_pool:
@@ -624,20 +426,6 @@ resources:
       method: PUT
     delete:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
-      method: DELETE
-
-  transaction_pipeline:
-    create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
       method: DELETE
 
   udp_proxy:
