@@ -138,6 +138,11 @@ func LicenseDataSourceSchema(ctx context.Context) schema.Schema {
 						Description:         "Date and time the license was issued.",
 						MarkdownDescription: "Date and time the license was issued.",
 					},
+					"start_date": schema.StringAttribute{
+						Computed:            true,
+						Description:         "Date and time the license starts",
+						MarkdownDescription: "Date and time the license starts",
+					},
 					"used": schema.BoolAttribute{
 						Computed:            true,
 						Description:         "Indicates if license has been used.",
@@ -2014,6 +2019,24 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 			fmt.Sprintf(`issued_date expected to be basetypes.StringValue, was: %T`, issuedDateAttribute))
 	}
 
+	startDateAttribute, ok := attributes["start_date"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`start_date is missing from object`)
+
+		return nil, diags
+	}
+
+	startDateVal, ok := startDateAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`start_date expected to be basetypes.StringValue, was: %T`, startDateAttribute))
+	}
+
 	usedAttribute, ok := attributes["used"]
 
 	if !ok {
@@ -2059,6 +2082,7 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 		ExpirationDate: expirationDateVal,
 		Expired:        expiredVal,
 		IssuedDate:     issuedDateVal,
+		StartDate:      startDateVal,
 		Used:           usedVal,
 		Valid:          validVal,
 		state:          attr.ValueStateKnown,
@@ -2200,6 +2224,24 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 			fmt.Sprintf(`issued_date expected to be basetypes.StringValue, was: %T`, issuedDateAttribute))
 	}
 
+	startDateAttribute, ok := attributes["start_date"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`start_date is missing from object`)
+
+		return NewStatusValueUnknown(), diags
+	}
+
+	startDateVal, ok := startDateAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`start_date expected to be basetypes.StringValue, was: %T`, startDateAttribute))
+	}
+
 	usedAttribute, ok := attributes["used"]
 
 	if !ok {
@@ -2245,6 +2287,7 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 		ExpirationDate: expirationDateVal,
 		Expired:        expiredVal,
 		IssuedDate:     issuedDateVal,
+		StartDate:      startDateVal,
 		Used:           usedVal,
 		Valid:          validVal,
 		state:          attr.ValueStateKnown,
@@ -2323,13 +2366,14 @@ type StatusValue struct {
 	ExpirationDate basetypes.StringValue `tfsdk:"expiration_date"`
 	Expired        basetypes.BoolValue   `tfsdk:"expired"`
 	IssuedDate     basetypes.StringValue `tfsdk:"issued_date"`
+	StartDate      basetypes.StringValue `tfsdk:"start_date"`
 	Used           basetypes.BoolValue   `tfsdk:"used"`
 	Valid          basetypes.BoolValue   `tfsdk:"valid"`
 	state          attr.ValueState
 }
 
 func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 6)
+	attrTypes := make(map[string]tftypes.Type, 7)
 
 	var val tftypes.Value
 	var err error
@@ -2338,6 +2382,7 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 	attrTypes["expiration_date"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["expired"] = basetypes.BoolType{}.TerraformType(ctx)
 	attrTypes["issued_date"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["start_date"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["used"] = basetypes.BoolType{}.TerraformType(ctx)
 	attrTypes["valid"] = basetypes.BoolType{}.TerraformType(ctx)
 
@@ -2345,7 +2390,7 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 6)
+		vals := make(map[string]tftypes.Value, 7)
 
 		val, err = v.Comment.ToTerraformValue(ctx)
 
@@ -2378,6 +2423,14 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 		}
 
 		vals["issued_date"] = val
+
+		val, err = v.StartDate.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["start_date"] = val
 
 		val, err = v.Used.ToTerraformValue(ctx)
 
@@ -2429,6 +2482,7 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 		"expiration_date": basetypes.StringType{},
 		"expired":         basetypes.BoolType{},
 		"issued_date":     basetypes.StringType{},
+		"start_date":      basetypes.StringType{},
 		"used":            basetypes.BoolType{},
 		"valid":           basetypes.BoolType{},
 	}
@@ -2448,6 +2502,7 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 			"expiration_date": v.ExpirationDate,
 			"expired":         v.Expired,
 			"issued_date":     v.IssuedDate,
+			"start_date":      v.StartDate,
 			"used":            v.Used,
 			"valid":           v.Valid,
 		})
@@ -2486,6 +2541,10 @@ func (v StatusValue) Equal(o attr.Value) bool {
 		return false
 	}
 
+	if !v.StartDate.Equal(other.StartDate) {
+		return false
+	}
+
 	if !v.Used.Equal(other.Used) {
 		return false
 	}
@@ -2511,6 +2570,7 @@ func (v StatusValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 		"expiration_date": basetypes.StringType{},
 		"expired":         basetypes.BoolType{},
 		"issued_date":     basetypes.StringType{},
+		"start_date":      basetypes.StringType{},
 		"used":            basetypes.BoolType{},
 		"valid":           basetypes.BoolType{},
 	}

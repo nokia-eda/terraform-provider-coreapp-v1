@@ -363,6 +363,7 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 											Validators: []validator.String{
 												stringvalidator.OneOf(
 													"59-BootfileUrl",
+													"56-NTPServers",
 												),
 											},
 										},
@@ -488,7 +489,6 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 								"sonic",
 								"ios-xr",
 								"nxos",
-								"linux",
 							),
 						},
 					},
