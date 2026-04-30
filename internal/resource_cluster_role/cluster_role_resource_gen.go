@@ -146,6 +146,7 @@ func ClusterRoleResourceSchema(ctx context.Context) schema.Schema {
 										stringvalidator.OneOf(
 											"none",
 											"read",
+											"readPropose",
 											"readWrite",
 										),
 									},

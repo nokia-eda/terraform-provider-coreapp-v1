@@ -19,7 +19,7 @@ description: |-
 
 - `fields` (String) a comma-separated list of resource fields to fetch/return.  If unspecified, all fields are fetched.  If empty, only key-fields are fetched.
 - `filter` (String) an EQL "where" expression that will be used to filter the set of resources returned.
-- `label_selector` (String) a label selector string to filter the results based on CR labels
+- `label_selector` (String) A label selector string to filter the results based on resource labels. If specified multiple times, the union of resources which satisfy a label-selector will be returned.
 - `labelselector` (String) Deprecated: a label selector string to filter the results based on CR labels
 
 ### Read-Only
@@ -53,6 +53,17 @@ Optional:
 If "atDestination", then no authentication happens in API server and any auth tokens are forwarded as is.
 If "inApiServer", then authentication happens within the API server and auth tokens are stripped prior to forwarding.
 - `root_url` (String) The proxy destination, including the protocol.
+- `signature_header_verification` (Attributes) SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header. (see [below for nested schema](#nestedatt--items--spec--signature_header_verification))
+
+<a id="nestedatt--items--spec--signature_header_verification"></a>
+### Nested Schema for `items.spec.signature_header_verification`
+
+Optional:
+
+- `algorithm` (String) Algorithm is the HMAC algorithm used to verify the signature.
+- `header` (String) Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).
+- `key_secret` (String) KeySecret is the name of the Kubernetes secret (in the pod namespace) whose "key" data entry holds the HMAC key.
+
 
 
 <a id="nestedatt--items--alarms"></a>

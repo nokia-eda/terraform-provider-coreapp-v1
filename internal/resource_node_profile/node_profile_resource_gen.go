@@ -489,7 +489,6 @@ func NodeProfileResourceSchema(ctx context.Context) schema.Schema {
 								"sonic",
 								"ios-xr",
 								"nxos",
-								"linux",
 							),
 						},
 					},

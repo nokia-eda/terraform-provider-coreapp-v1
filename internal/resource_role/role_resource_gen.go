@@ -150,6 +150,7 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 										stringvalidator.OneOf(
 											"none",
 											"read",
+											"readPropose",
 											"readWrite",
 										),
 									},

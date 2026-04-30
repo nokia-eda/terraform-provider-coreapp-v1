@@ -51,7 +51,7 @@ Required:
 
 - `node_profile` (String) Reference to a NodeProfile to use with this TopoNode.
 - `platform` (String) Platform type of this TopoNode, e.g. 7220 IXR-D3L.
-- `version` (String) Sets the software version of this TopoNode, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).
+- `version` (String) Software version of this TopoNode, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).
 
 Optional:
 
@@ -68,6 +68,8 @@ Most applications ignore TopoNodes that have not been onboarded yet.
 - `production_address` (Attributes) Production address of this TopoNode - this is the address the real, production instance of this TopoNode uses.
 If left blank, an address will be allocated from the management IP pool specified in the referenced NodeProfile.
 If this TopoNode is not bootstrapped by EDA this field must be provided. (see [below for nested schema](#nestedatt--spec--production_address))
+- `satellite_nodes` (Attributes List) List of satellite nodes associated with this TopoNode.
+Used to define the type and configuration of satellite nodes. (see [below for nested schema](#nestedatt--spec--satellite_nodes))
 - `serial_number` (String) Serial number of this TopoNode, optionally sent by a node in DHCP requests.
 Not required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.
 - `system_interface` (String) Deprecated: Name of the Interface resource representing the primary loopback on the TopoNode, this field will be removed in the future version.
@@ -117,6 +119,90 @@ Optional:
 - `ipv6` (String) The IPv6 production address
 
 
+<a id="nestedatt--spec--satellite_nodes"></a>
+### Nested Schema for `spec.satellite_nodes`
+
+Required:
+
+- `id` (String) ID of the satellite node.
+- `type` (String) Type of the satellite node.
+
+Optional:
+
+- `components` (Attributes List) Components for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--components))
+- `license` (String) ConfigMap containing a license for this satellite node.
+- `mac_address` (String) MAC Address of the satellite node.
+- `operating_system` (String) Operating system for this satellite node.
+- `platform` (String) Platform of the satellite node.
+- `port_template` (Attributes) Port template to be used for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template))
+- `satellite_profile` (String) Satellite node profile to be used for the satellite node.
+- `uplink_interfaces` (Attributes List) Uplink interfaces to be created for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--uplink_interfaces))
+- `version` (String) Software version for this satellite node.
+
+<a id="nestedatt--spec--satellite_nodes--components"></a>
+### Nested Schema for `spec.satellite_nodes.components`
+
+Required:
+
+- `kind` (String) The kind of Component, e.g. lineCard.
+- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
+
+Optional:
+
+- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
+e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
+
+
+<a id="nestedatt--spec--satellite_nodes--port_template"></a>
+### Nested Schema for `spec.satellite_nodes.port_template`
+
+Required:
+
+- `name` (String) The name of the SatellitePortTemplate.
+
+Optional:
+
+- `connectors` (Attributes List) List of connector components within the SatellitePortTemplate.
+Used to define the type and location of connectors. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template--connectors))
+- `uplinks` (Attributes List) Uplinks for the SatellitePortTemplate. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template--uplinks))
+
+<a id="nestedatt--spec--satellite_nodes--port_template--connectors"></a>
+### Nested Schema for `spec.satellite_nodes.port_template.connectors`
+
+Required:
+
+- `kind` (String) The kind of Component, e.g. lineCard.
+- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
+
+Optional:
+
+- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
+e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
+
+
+<a id="nestedatt--spec--satellite_nodes--port_template--uplinks"></a>
+### Nested Schema for `spec.satellite_nodes.port_template.uplinks`
+
+Required:
+
+- `name` (String) The name of the SatelliteUplink.
+
+Optional:
+
+- `downlinks` (List of String) Downlinks for the SatelliteUplink.
+
+
+
+<a id="nestedatt--spec--satellite_nodes--uplink_interfaces"></a>
+### Nested Schema for `spec.satellite_nodes.uplink_interfaces`
+
+Required:
+
+- `host_port` (String) HostPort interface of the satellite uplink.
+- `satellite` (String) Satellite interface of the satellite uplink.
+
+
+
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -149,7 +235,7 @@ Optional:
 "WaitingForInitialCfg"
    NPP is connected to the node but waiting for intial config to push
 "Committing"
-	  NPP is in progress of commiting
+	  NPP is in progress of committing
 "RetryingCommit"
    NPP lost sync to node and is re-pushing current config
 "Synced"
@@ -157,7 +243,7 @@ Optional:
 "Standby"
    NPP is running in standby mode. This state is only used on standby clusters with georedundancy.
 "NoIpAddress"
-   NPP is running but there is no IP address for node. This only happen in sim setups when
+   NPP is running but there is no IP address for node. This only happens in sim setups when
    CX has not created the simulated node, or the simulated pod failed to launch due to image error.
 - `npp_details` (String) NPP address and port for this TopoNode.
 - `npp_pod` (String) NPP pod name
