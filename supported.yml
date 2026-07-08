@@ -1,0 +1,330 @@
+datasources:
+  - model_name: app_group
+    oas_endpoint: /apps/core.eda.nokia.com
+    oas_schema: AppGroup
+  - model_name: resource_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1
+    oas_schema: ResourceList
+  - model_name: alarm_definition_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarmdefinitions
+    oas_schema: com.nokia.eda.core.v1.AlarmDefinitionList
+  - model_name: alarm_definition
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}
+    oas_schema: com.nokia.eda.core.v1.AlarmDefinition
+  - model_name: alarm_policy_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarmpolicies
+    oas_schema: com.nokia.eda.core.v1.AlarmPolicyList
+  - model_name: alarm_policy
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarmpolicies/{name}
+    oas_schema: com.nokia.eda.core.v1.AlarmPolicy
+  - model_name: alarm_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarms
+    oas_schema: com.nokia.eda.core.v1.AlarmList
+  - model_name: alarm
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarms/{name}
+    oas_schema: com.nokia.eda.core.v1.Alarm
+  - model_name: branch_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/branches
+    oas_schema: com.nokia.eda.core.v1.BranchList
+  - model_name: branch
+    oas_endpoint: /apps/core.eda.nokia.com/v1/branches/{name}
+    oas_schema: com.nokia.eda.core.v1.Branch
+  - model_name: cluster_provider_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clusterproviders
+    oas_schema: com.nokia.eda.core.v1.ClusterProviderList
+  - model_name: cluster_provider
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
+    oas_schema: com.nokia.eda.core.v1.ClusterProvider
+  - model_name: cluster_role_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clusterroles
+    oas_schema: com.nokia.eda.core.v1.ClusterRoleList
+  - model_name: cluster_role
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+    oas_schema: com.nokia.eda.core.v1.ClusterRole
+  - model_name: http_proxy_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/httpproxies
+    oas_schema: com.nokia.eda.core.v1.HttpProxyList
+  - model_name: http_proxy
+    oas_endpoint: /apps/core.eda.nokia.com/v1/httpproxies/{name}
+    oas_schema: com.nokia.eda.core.v1.HttpProxy
+  - model_name: license_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/licenses
+    oas_schema: com.nokia.eda.core.v1.LicenseList
+  - model_name: license
+    oas_endpoint: /apps/core.eda.nokia.com/v1/licenses/{name}
+    oas_schema: com.nokia.eda.core.v1.License
+  - model_name: log_output_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/logoutputs
+    oas_schema: com.nokia.eda.core.v1.LogOutputList
+  - model_name: log_output
+    oas_endpoint: /apps/core.eda.nokia.com/v1/logoutputs/{name}
+    oas_schema: com.nokia.eda.core.v1.LogOutput
+  - model_name: namespace_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces
+    oas_schema: com.nokia.eda.core.v1.NamespaceList
+  - model_name: deviation_action_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions
+    oas_schema: com.nokia.eda.core.v1.DeviationActionList
+  - model_name: deviation_action
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/{name}
+    oas_schema: com.nokia.eda.core.v1.DeviationAction
+  - model_name: deviation_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations
+    oas_schema: com.nokia.eda.core.v1.DeviationList
+  - model_name: deviation
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/{name}
+    oas_schema: com.nokia.eda.core.v1.Deviation
+  - model_name: edge_interface_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces
+    oas_schema: com.nokia.eda.core.v1.EdgeInterfaceList
+  - model_name: edge_interface
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/{name}
+    oas_schema: com.nokia.eda.core.v1.EdgeInterface
+  - model_name: index_allocation_pool_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools
+    oas_schema: com.nokia.eda.core.v1.IndexAllocationPoolList
+  - model_name: index_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/{name}
+    oas_schema: com.nokia.eda.core.v1.IndexAllocationPool
+  - model_name: ip_allocation_pool_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools
+    oas_schema: com.nokia.eda.core.v1.IPAllocationPoolList
+  - model_name: ip_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/{name}
+    oas_schema: com.nokia.eda.core.v1.IPAllocationPool
+  - model_name: ip_in_subnet_allocation_pool_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools
+    oas_schema: com.nokia.eda.core.v1.IPInSubnetAllocationPoolList
+  - model_name: ip_in_subnet_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/{name}
+    oas_schema: com.nokia.eda.core.v1.IPInSubnetAllocationPool
+  - model_name: node_profile_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles
+    oas_schema: com.nokia.eda.core.v1.NodeProfileList
+  - model_name: node_profile
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/{name}
+    oas_schema: com.nokia.eda.core.v1.NodeProfile
+  - model_name: node_user_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
+    oas_schema: com.nokia.eda.core.v1.NodeUserList
+  - model_name: node_user
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/{name}
+    oas_schema: com.nokia.eda.core.v1.NodeUser
+  - model_name: role_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
+    oas_schema: com.nokia.eda.core.v1.RoleList
+  - model_name: role
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/{name}
+    oas_schema: com.nokia.eda.core.v1.Role
+  - model_name: satellite_profile_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
+    oas_schema: com.nokia.eda.core.v1.SatelliteProfileList
+  - model_name: satellite_profile
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
+    oas_schema: com.nokia.eda.core.v1.SatelliteProfile
+  - model_name: subnet_allocation_pool_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
+    oas_schema: com.nokia.eda.core.v1.SubnetAllocationPoolList
+  - model_name: subnet_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
+    oas_schema: com.nokia.eda.core.v1.SubnetAllocationPool
+  - model_name: topo_breakout_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts
+    oas_schema: com.nokia.eda.core.v1.TopoBreakoutList
+  - model_name: topo_breakout
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/{name}
+    oas_schema: com.nokia.eda.core.v1.TopoBreakout
+  - model_name: topo_link_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks
+    oas_schema: com.nokia.eda.core.v1.TopoLinkList
+  - model_name: topo_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/{name}
+    oas_schema: com.nokia.eda.core.v1.TopoLink
+  - model_name: topo_node_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
+    oas_schema: com.nokia.eda.core.v1.TopoNodeList
+  - model_name: topo_node
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
+    oas_schema: com.nokia.eda.core.v1.TopoNode
+  - model_name: transaction_pipeline_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
+    oas_schema: com.nokia.eda.core.v1.TransactionPipelineList
+  - model_name: transaction_pipeline
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
+    oas_schema: com.nokia.eda.core.v1.TransactionPipeline
+  - model_name: namespace
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{name}
+    oas_schema: com.nokia.eda.core.v1.Namespace
+  - model_name: node_security_profile_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
+    oas_schema: com.nokia.eda.core.v1.NodeSecurityProfileList
+  - model_name: node_security_profile
+    oas_endpoint: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/{name}
+    oas_schema: com.nokia.eda.core.v1.NodeSecurityProfile
+  - model_name: pipeline_definition_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/pipelinedefinitions
+    oas_schema: com.nokia.eda.core.v1.PipelineDefinitionList
+  - model_name: pipeline_definition
+    oas_endpoint: /apps/core.eda.nokia.com/v1/pipelinedefinitions/{name}
+    oas_schema: com.nokia.eda.core.v1.PipelineDefinition
+  - model_name: udp_proxy_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/udpproxies
+    oas_schema: com.nokia.eda.core.v1.UdpProxyList
+  - model_name: udp_proxy
+    oas_endpoint: /apps/core.eda.nokia.com/v1/udpproxies/{name}
+    oas_schema: com.nokia.eda.core.v1.UdpProxy
+  - model_name: workflow_definition_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/workflowdefinitions
+    oas_schema: com.nokia.eda.core.v1.WorkflowDefinitionList
+  - model_name: workflow_definition
+    oas_endpoint: /apps/core.eda.nokia.com/v1/workflowdefinitions/{name}
+    oas_schema: com.nokia.eda.core.v1.WorkflowDefinition
+  - model_name: workflow_list
+    oas_endpoint: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows
+    oas_schema: com.nokia.eda.core.v1.WorkflowList
+  - model_name: workflow
+    oas_endpoint: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}
+    oas_schema: com.nokia.eda.core.v1.Workflow
+  - model_name: workflow_get_inputs_resp_elem
+    oas_endpoint: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows/{name}/_input
+    oas_schema: WorkflowGetInputsRespElem
+
+resources:
+  - model_name: alarm_policy
+    oas_endpoint: /apps/core.eda.nokia.com/v1/alarmpolicies
+    oas_schema: com.nokia.eda.core.v1.AlarmPolicy
+  - model_name: branch
+    oas_endpoint: /apps/core.eda.nokia.com/v1/branches
+    oas_schema: com.nokia.eda.core.v1.Branch
+  - model_name: cluster_provider
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clusterproviders
+    oas_schema: com.nokia.eda.core.v1.ClusterProvider
+  - model_name: cluster_role
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clusterroles
+    oas_schema: com.nokia.eda.core.v1.ClusterRole
+  - model_name: http_proxy
+    oas_endpoint: /apps/core.eda.nokia.com/v1/httpproxies
+    oas_schema: com.nokia.eda.core.v1.HttpProxy
+  - model_name: log_output
+    oas_endpoint: /apps/core.eda.nokia.com/v1/logoutputs
+    oas_schema: com.nokia.eda.core.v1.LogOutput
+  - model_name: namespace
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces
+    oas_schema: com.nokia.eda.core.v1.Namespace
+  - model_name: deviation_action
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions
+    oas_schema: com.nokia.eda.core.v1.DeviationAction
+  - model_name: edge_interface
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces
+    oas_schema: com.nokia.eda.core.v1.EdgeInterface
+  - model_name: index_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools
+    oas_schema: com.nokia.eda.core.v1.IndexAllocationPool
+  - model_name: ip_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools
+    oas_schema: com.nokia.eda.core.v1.IPAllocationPool
+  - model_name: ip_in_subnet_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools
+    oas_schema: com.nokia.eda.core.v1.IPInSubnetAllocationPool
+  - model_name: node_profile
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles
+    oas_schema: com.nokia.eda.core.v1.NodeProfile
+  - model_name: node_user
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers
+    oas_schema: com.nokia.eda.core.v1.NodeUser
+  - model_name: role
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles
+    oas_schema: com.nokia.eda.core.v1.Role
+  - model_name: satellite_profile
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
+    oas_schema: com.nokia.eda.core.v1.SatelliteProfile
+  - model_name: subnet_allocation_pool
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
+    oas_schema: com.nokia.eda.core.v1.SubnetAllocationPool
+  - model_name: topo_breakout
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts
+    oas_schema: com.nokia.eda.core.v1.TopoBreakout
+  - model_name: topo_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks
+    oas_schema: com.nokia.eda.core.v1.TopoLink
+  - model_name: topo_node
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
+    oas_schema: com.nokia.eda.core.v1.TopoNode
+  - model_name: transaction_pipeline
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
+    oas_schema: com.nokia.eda.core.v1.TransactionPipeline
+  - model_name: node_security_profile
+    oas_endpoint: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
+    oas_schema: com.nokia.eda.core.v1.NodeSecurityProfile
+  - model_name: pipeline_definition
+    oas_endpoint: /apps/core.eda.nokia.com/v1/pipelinedefinitions
+    oas_schema: com.nokia.eda.core.v1.PipelineDefinition
+  - model_name: udp_proxy
+    oas_endpoint: /apps/core.eda.nokia.com/v1/udpproxies
+    oas_schema: com.nokia.eda.core.v1.UdpProxy
+  - model_name: workflow_definition
+    oas_endpoint: /apps/core.eda.nokia.com/v1/workflowdefinitions
+    oas_schema: com.nokia.eda.core.v1.WorkflowDefinition
+  - model_name: workflow
+    oas_endpoint: /workflows/v1/core.eda.nokia.com/v1/namespaces/{namespace}/workflows
+    oas_schema: com.nokia.eda.core.v1.Workflow
+
+qualified:
+  datasources:
+    - oas_schema: IntentTargets
+      get: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}/_targets
+    - oas_schema: ResourceHistory
+      get: /apps/core.eda.nokia.com/v1/alarmdefinitions/{name}/_revs
+    - oas_schema: UIResult
+      get: /apps/core.eda.nokia.com/v1/_ui/{pathname}
+    - oas_schema: com.nokia.eda.core.v1.AlarmPolicy_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/alarmpolicies/_deleted
+    - oas_schema: com.nokia.eda.core.v1.Branch_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/branches/_deleted
+    - oas_schema: com.nokia.eda.core.v1.ClusterProvider_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/clusterproviders/_deleted
+    - oas_schema: com.nokia.eda.core.v1.ClusterRole_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/clusterroles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.DeviationAction_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/_deleted
+    - oas_schema: com.nokia.eda.core.v1.EdgeInterface_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/_deleted
+    - oas_schema: com.nokia.eda.core.v1.HttpProxy_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/httpproxies/_deleted
+    - oas_schema: com.nokia.eda.core.v1.IPAllocationPool_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipallocationpools/_deleted
+    - oas_schema: com.nokia.eda.core.v1.IPInSubnetAllocationPool_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/ipinsubnetallocationpools/_deleted
+    - oas_schema: com.nokia.eda.core.v1.IndexAllocationPool_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/indexallocationpools/_deleted
+    - oas_schema: com.nokia.eda.core.v1.LogOutput_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/logoutputs/_deleted
+    - oas_schema: com.nokia.eda.core.v1.Namespace_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/_deleted
+    - oas_schema: com.nokia.eda.core.v1.NodeProfile_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeprofiles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.NodeSecurityProfile_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/nodesecurityprofiles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.NodeUser_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/nodeusers/_deleted
+    - oas_schema: com.nokia.eda.core.v1.PipelineDefinition_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/pipelinedefinitions/_deleted
+    - oas_schema: com.nokia.eda.core.v1.Role_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.SatelliteProfile_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.SubnetAllocationPool_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/_deleted
+    - oas_schema: com.nokia.eda.core.v1.TopoBreakout_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topobreakouts/_deleted
+    - oas_schema: com.nokia.eda.core.v1.TopoLink_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/_deleted
+    - oas_schema: com.nokia.eda.core.v1.TopoNode_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/_deleted
+    - oas_schema: com.nokia.eda.core.v1.TransactionPipeline_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/_deleted
+    - oas_schema: com.nokia.eda.core.v1.UdpProxy_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/udpproxies/_deleted
+    - oas_schema: com.nokia.eda.core.v1.WorkflowDefinition_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/workflowdefinitions/_deleted
+  resources:
