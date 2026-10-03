@@ -132,6 +132,7 @@ func WorkflowResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "Input to this flow, adhering to the JSON schema defined in the referenced WorkflowDefinition.",
 						MarkdownDescription: "Input to this flow, adhering to the JSON schema defined in the referenced WorkflowDefinition.",
 					},

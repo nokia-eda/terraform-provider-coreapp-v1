@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) A License represents an application license providing functionality within EDA. A license providing the "base" feature must be provided/valid for transactions to be processed. (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,16 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) A License represents an application license providing functionality within EDA. A license providing the "base" feature must be provided/valid for transactions to be processed. (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) Status information for this license. (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `data` (String) The license key. This is a base64 encoded string.
-- `enabled` (Boolean) Indicates if this license is available for use.
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -81,6 +69,15 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `data` (String) The license key. This is a base64 encoded string.
+- `enabled` (Boolean) Indicates if this license is available for use.
 
 
 <a id="nestedatt--items--status"></a>

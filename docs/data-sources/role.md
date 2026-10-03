@@ -23,7 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) RoleSpec defines the desired state of Role (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -32,56 +31,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) RoleSpec defines the desired state of Role (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) RoleStatus defines the observed state of Role (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `description` (String) A description for the role.
-- `resource_rules` (Attributes List) The rules for access to kubernetes resources (see [below for nested schema](#nestedatt--spec--resource_rules))
-- `table_rules` (Attributes List) The rules for access to the database tables. (see [below for nested schema](#nestedatt--spec--table_rules))
-- `url_rules` (Attributes List) The rules for access to api-server proxied routes. (see [below for nested schema](#nestedatt--spec--url_rules))
-
-<a id="nestedatt--spec--resource_rules"></a>
-### Nested Schema for `spec.resource_rules`
-
-Optional:
-
-- `api_groups` (List of String) The API groups for the resources controlled by the rule.
-An API group consists of an apiGroup and a version, e.g. "apigroup/version".
-The API group can be a wildcard ("*"), in which case it will match any API group.
-- `permissions` (String) Permissions for resources specified by the rule.
-- `resources` (List of String) Names for the resources controlled by the rule.
-It can be a wildcard ("*"), in which case it will match any resource
-in the matching API groups.
-
-
-<a id="nestedatt--spec--table_rules"></a>
-### Nested Schema for `spec.table_rules`
-
-Optional:
-
-- `path` (String) EDB path to which this rule applies. It can end in ".*"
-in which case the final portion of the table path can be anything, if the
-prefix matches. It can end in ".**" in which case the table path can be
-anything if the prefix matches.
-- `permissions` (String) Permissions for the given EDB path.
-
-
-<a id="nestedatt--spec--url_rules"></a>
-### Nested Schema for `spec.url_rules`
-
-Optional:
-
-- `path` (String) The API server URL path to which this rule applies. It can end in "/*"
-in which case the final portion of the URL path can be anything, if the
-prefix matches. It can end in "/**" in which case the URL path can be
-anything if the prefix matches.
-- `permissions` (String) The permissions for the API server URL for the rule.
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -111,6 +62,56 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `core_access_items` (List of String) Core items to which this role gives access; arbitrary things/actions that do not match the "resource" or "table" paradigm.
+- `description` (String) A description for the role.
+- `resource_rules` (Attributes List) The rules for access to kubernetes resources (see [below for nested schema](#nestedatt--spec--resource_rules))
+- `table_rules` (Attributes List) The rules for access to the database tables. (see [below for nested schema](#nestedatt--spec--table_rules))
+- `url_rules` (Attributes List) The rules for access to api-server proxied routes. (see [below for nested schema](#nestedatt--spec--url_rules))
+
+<a id="nestedatt--spec--resource_rules"></a>
+### Nested Schema for `spec.resource_rules`
+
+Read-Only:
+
+- `api_groups` (List of String) The API groups for the resources controlled by the rule.
+Accepted forms: "*" (all groups), "group" (all versions), "group/*" (all versions), "group/version".
+The API group can be a wildcard ("*"), in which case it will match any API group.
+- `permissions` (String) Permissions for resources specified by the rule.
+- `resources` (List of String) Names for the resources controlled by the rule.
+It can be a wildcard ("*"), in which case it will match any resource
+in the matching API groups.
+
+
+<a id="nestedatt--spec--table_rules"></a>
+### Nested Schema for `spec.table_rules`
+
+Read-Only:
+
+- `path` (String) EDB path to which this rule applies. It can end in ".*"
+in which case the final portion of the table path can be anything, if the
+prefix matches. It can end in ".**" in which case the table path can be
+anything if the prefix matches.
+- `permissions` (String) Permissions for the given EDB path.
+
+
+<a id="nestedatt--spec--url_rules"></a>
+### Nested Schema for `spec.url_rules`
+
+Read-Only:
+
+- `path` (String) The API server URL path to which this rule applies. It can end in "/*"
+in which case the final portion of the URL path can be anything, if the
+prefix matches. It can end in "/**" in which case the URL path can be
+anything if the prefix matches.
+- `permissions` (String) The permissions for the API server URL for the rule.
+
 
 
 <a id="nestedatt--status"></a>

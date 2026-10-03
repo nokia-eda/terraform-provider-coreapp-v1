@@ -104,12 +104,12 @@ func SatelliteProfileListDataSourceSchema(ctx context.Context) schema.Schema {
 						"spec": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{
 								"container_image": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Container image to use when simulating Satellite Nodes referencing this SatelliteProfile, e.g. ghcr.io/nokia/sros:24.7.r1.",
 									MarkdownDescription: "Container image to use when simulating Satellite Nodes referencing this SatelliteProfile, e.g. ghcr.io/nokia/sros:24.7.r1.",
 								},
 								"image_pull_secret": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Secret used to authenticate to the container registry where the container image is hosted.",
 									MarkdownDescription: "Secret used to authenticate to the container registry where the container image is hosted.",
 								},
@@ -117,12 +117,12 @@ func SatelliteProfileListDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"image": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.",
 												MarkdownDescription: "URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.",
 											},
 											"image_md5": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.",
 												MarkdownDescription: "URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.",
 											},
@@ -133,42 +133,42 @@ func SatelliteProfileListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "URLs hosting software images for bootstrapping Satellite Nodes referencing this SatelliteProfile.",
 									MarkdownDescription: "URLs hosting software images for bootstrapping Satellite Nodes referencing this SatelliteProfile.",
 								},
 								"license": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "ConfigMap containing a license for Satellite Nodes referencing this SatelliteProfile.",
 									MarkdownDescription: "ConfigMap containing a license for Satellite Nodes referencing this SatelliteProfile.",
 								},
 								"operating_system": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Sets the operating system of this SatelliteProfile, e.g. sros.",
 									MarkdownDescription: "Sets the operating system of this SatelliteProfile, e.g. sros.",
 								},
 								"platform_path": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.type.",
 									MarkdownDescription: "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.type.",
 								},
 								"serial_number_path": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "JSPath to use for retrieving the serial number string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.serial-number.",
 									MarkdownDescription: "JSPath to use for retrieving the serial number string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.serial-number.",
 								},
 								"version": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Sets the software version of this SatelliteProfile, e.g. 24.7.r1 (for sros).",
 									MarkdownDescription: "Sets the software version of this SatelliteProfile, e.g. 24.7.r1 (for sros).",
 								},
 								"version_match": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Regular expression to match the node-retrieved version string to Satellite Node version, e.g. v0\\.0\\.0.*.",
 									MarkdownDescription: "Regular expression to match the node-retrieved version string to Satellite Node version, e.g. v0\\.0\\.0.*.",
 								},
 								"version_path": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .system.information.version.",
 									MarkdownDescription: "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .system.information.version.",
 								},
@@ -178,7 +178,7 @@ func SatelliteProfileListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional: true,
+							Computed: true,
 						},
 						"status": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{},

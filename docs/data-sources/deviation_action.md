@@ -23,8 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) DeviationAction allows manual and API-driven actions to be performed on Deviation resources.
-They are the only means to which and end user can accept or reject deviations, as Deviation resources themselves are read only. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -33,26 +31,9 @@ They are the only means to which and end user can accept or reject deviations, a
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) DeviationAction allows manual and API-driven actions to be performed on Deviation resources.
+They are the only means to which and end user can accept or reject deviations, as Deviation resources themselves are read only. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) DeviationActionStatus defines the observed state of DeviationAction (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `actions` (Attributes List) The set of actions to perform on the target. (see [below for nested schema](#nestedatt--spec--actions))
-- `node_endpoint` (String) The target on which this action is to be performed.
-
-<a id="nestedatt--spec--actions"></a>
-### Nested Schema for `spec.actions`
-
-Optional:
-
-- `action` (String) Action to perform on matching Deviations.
-- `path` (String) Path to match Deviation resources on this target. Only one action is allowed per path.
-- `recurse` (Boolean) Recursively accept/reject Deviations from the specified path.
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -82,6 +63,25 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `actions` (Attributes List) The set of actions to perform on the target. (see [below for nested schema](#nestedatt--spec--actions))
+- `node_endpoint` (String) The target on which this action is to be performed.
+
+<a id="nestedatt--spec--actions"></a>
+### Nested Schema for `spec.actions`
+
+Read-Only:
+
+- `action` (String) Action to perform on matching Deviations.
+- `path` (String) Path to match Deviation resources on this target. Only one action is allowed per path.
+- `recurse` (Boolean) Recursively accept/reject Deviations from the specified path.
+
 
 
 <a id="nestedatt--status"></a>

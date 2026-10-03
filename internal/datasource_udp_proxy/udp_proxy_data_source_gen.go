@@ -97,27 +97,27 @@ func UdpProxyDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"buffer_size": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The proxy will use a buffer of this size for all datagrams it receives and this must be sized\nto accommodate the largest datagrams expected",
 						MarkdownDescription: "The proxy will use a buffer of this size for all datagrams it receives and this must be sized\nto accommodate the largest datagrams expected",
 					},
 					"dest_host": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The destination hostname or IP address to forward the datagrams to",
 						MarkdownDescription: "The destination hostname or IP address to forward the datagrams to",
 					},
 					"dest_port": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The destination UDP port to forward the datagrams to",
 						MarkdownDescription: "The destination UDP port to forward the datagrams to",
 					},
 					"idle_timeout": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The proxy will listen for responses from the destination and forward it back to the source\nof the datagram until there is no traffic at all for at least the idle timeout in seconds",
 						MarkdownDescription: "The proxy will listen for responses from the destination and forward it back to the source\nof the datagram until there is no traffic at all for at least the idle timeout in seconds",
 					},
 					"proxy_port": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The UDP port on which to listen for datagrams and then proxy to the destination",
 						MarkdownDescription: "The UDP port on which to listen for datagrams and then proxy to the destination",
 					},
@@ -127,7 +127,7 @@ func UdpProxyDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "UdpProxySpec defines the desired state of UdpProxy",
 				MarkdownDescription: "UdpProxySpec defines the desired state of UdpProxy",
 			},

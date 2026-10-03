@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,59 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `forward` (Attributes) Fluentd Forward protocol output (see [below for nested schema](#nestedatt--spec--forward))
-- `syslog` (Attributes) Syslog output (see [below for nested schema](#nestedatt--spec--syslog))
-
-<a id="nestedatt--spec--forward"></a>
-### Nested Schema for `spec.forward`
-
-Optional:
-
-- `host` (String) Target host where Fluentbit or Fluentd are listening for Forward messages.
-- `match` (String) A pattern to match against the tags of incoming records.
-It's case sensitive and support the star (*) character as a wildcard.
-- `port` (Number) TCP Port of the target service.
-
-
-<a id="nestedatt--spec--syslog"></a>
-### Nested Schema for `spec.syslog`
-
-Optional:
-
-- `host` (String) Host domain or IP address of the remote Syslog server.
-- `match` (String) A pattern to match against the tags of incoming records.
-It's case sensitive and support the star (*) character as a wildcard.
-- `mode` (String) Transport protocol.
-- `port` (Number) TCP or UDP port of the remote Syslog server.
-- `syslog_appname_key` (String) Key name from the original record that contains the application name that generated the message.
-- `syslog_facility_key` (String) Key from the original record that contains the Syslog facility number.
-- `syslog_format` (String) Syslog protocol format.
-- `syslog_hostname_key` (String) Key name from the original record that contains the hostname that generated the message.
-- `syslog_maxsize` (Number) Maximum size allowed per message, in bytes.
-- `syslog_message_key` (String) Key name that contains the message to deliver.
-- `syslog_msgid_key` (String) Key name from the original record that contains the Message ID associated to the message.
-- `syslog_procid_key` (String) Key name from the original record that contains the Process ID that generated the message.
-- `syslog_sd_key` (String) Key name from the original record that contains the Structured Data (SD) content.
-- `syslog_severity_key` (String) Key from the original record that contains the Syslog severity number.
-- `tls` (Attributes) Syslog TLS (see [below for nested schema](#nestedatt--spec--syslog--tls))
-
-<a id="nestedatt--spec--syslog--tls"></a>
-### Nested Schema for `spec.syslog.tls`
-
-Optional:
-
-- `client_cert` (Boolean) Enable client certificate for mTLS
-- `skip_verify` (Boolean) Skip TLS verification
-
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -113,6 +61,58 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `forward` (Attributes) Fluentd Forward protocol output (see [below for nested schema](#nestedatt--spec--forward))
+- `syslog` (Attributes) Syslog output (see [below for nested schema](#nestedatt--spec--syslog))
+
+<a id="nestedatt--spec--forward"></a>
+### Nested Schema for `spec.forward`
+
+Read-Only:
+
+- `host` (String) Target host where Fluentbit or Fluentd are listening for Forward messages.
+- `match` (String) A pattern to match against the tags of incoming records.
+It's case sensitive and support the star (*) character as a wildcard.
+- `port` (Number) TCP Port of the target service.
+
+
+<a id="nestedatt--spec--syslog"></a>
+### Nested Schema for `spec.syslog`
+
+Read-Only:
+
+- `host` (String) Host domain or IP address of the remote Syslog server.
+- `match` (String) A pattern to match against the tags of incoming records.
+It's case sensitive and support the star (*) character as a wildcard.
+- `mode` (String) Transport protocol.
+- `port` (Number) TCP or UDP port of the remote Syslog server.
+- `syslog_appname_key` (String) Key name from the original record that contains the application name that generated the message.
+- `syslog_facility_key` (String) Key from the original record that contains the Syslog facility number.
+- `syslog_format` (String) Syslog protocol format.
+- `syslog_hostname_key` (String) Key name from the original record that contains the hostname that generated the message.
+- `syslog_maxsize` (Number) Maximum size allowed per message, in bytes.
+- `syslog_message_key` (String) Key name that contains the message to deliver.
+- `syslog_msgid_key` (String) Key name from the original record that contains the Message ID associated to the message.
+- `syslog_procid_key` (String) Key name from the original record that contains the Process ID that generated the message.
+- `syslog_sd_key` (String) Key name from the original record that contains the Structured Data (SD) content.
+- `syslog_severity_key` (String) Key from the original record that contains the Syslog severity number.
+- `tls` (Attributes) Syslog TLS (see [below for nested schema](#nestedatt--spec--syslog--tls))
+
+<a id="nestedatt--spec--syslog--tls"></a>
+### Nested Schema for `spec.syslog.tls`
+
+Read-Only:
+
+- `client_cert` (Boolean) Enable client certificate for mTLS
+- `skip_verify` (Boolean) Skip TLS verification
+
+
 
 
 <a id="nestedatt--status"></a>

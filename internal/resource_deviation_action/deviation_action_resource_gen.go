@@ -146,6 +146,7 @@ func DeviationActionResourceSchema(ctx context.Context) schema.Schema {
 								},
 								"recurse": schema.BoolAttribute{
 									Optional:            true,
+									Computed:            true,
 									Description:         "Recursively accept/reject Deviations from the specified path.",
 									MarkdownDescription: "Recursively accept/reject Deviations from the specified path.",
 								},

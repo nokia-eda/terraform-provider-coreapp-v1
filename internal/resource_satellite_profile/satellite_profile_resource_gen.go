@@ -126,11 +126,13 @@ func SatelliteProfileResourceSchema(ctx context.Context) schema.Schema {
 				Attributes: map[string]schema.Attribute{
 					"container_image": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Container image to use when simulating Satellite Nodes referencing this SatelliteProfile, e.g. ghcr.io/nokia/sros:24.7.r1.",
 						MarkdownDescription: "Container image to use when simulating Satellite Nodes referencing this SatelliteProfile, e.g. ghcr.io/nokia/sros:24.7.r1.",
 					},
 					"image_pull_secret": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Secret used to authenticate to the container registry where the container image is hosted.",
 						MarkdownDescription: "Secret used to authenticate to the container registry where the container image is hosted.",
 					},
@@ -144,6 +146,7 @@ func SatelliteProfileResourceSchema(ctx context.Context) schema.Schema {
 								},
 								"image_md5": schema.StringAttribute{
 									Optional:            true,
+									Computed:            true,
 									Description:         "URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.",
 									MarkdownDescription: "URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.",
 								},
@@ -155,11 +158,13 @@ func SatelliteProfileResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "URLs hosting software images for bootstrapping Satellite Nodes referencing this SatelliteProfile.",
 						MarkdownDescription: "URLs hosting software images for bootstrapping Satellite Nodes referencing this SatelliteProfile.",
 					},
 					"license": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "ConfigMap containing a license for Satellite Nodes referencing this SatelliteProfile.",
 						MarkdownDescription: "ConfigMap containing a license for Satellite Nodes referencing this SatelliteProfile.",
 					},
@@ -175,16 +180,20 @@ func SatelliteProfileResourceSchema(ctx context.Context) schema.Schema {
 								"sonic",
 								"ios-xr",
 								"nxos",
+								"junos",
+								"cumulus",
 							),
 						},
 					},
 					"platform_path": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.type.",
 						MarkdownDescription: "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.type.",
 					},
 					"serial_number_path": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "JSPath to use for retrieving the serial number string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.serial-number.",
 						MarkdownDescription: "JSPath to use for retrieving the serial number string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.serial-number.",
 					},
@@ -195,11 +204,13 @@ func SatelliteProfileResourceSchema(ctx context.Context) schema.Schema {
 					},
 					"version_match": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Regular expression to match the node-retrieved version string to Satellite Node version, e.g. v0\\.0\\.0.*.",
 						MarkdownDescription: "Regular expression to match the node-retrieved version string to Satellite Node version, e.g. v0\\.0\\.0.*.",
 					},
 					"version_path": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .system.information.version.",
 						MarkdownDescription: "JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .system.information.version.",
 					},

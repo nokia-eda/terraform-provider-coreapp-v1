@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) AlarmSpec defines the desired state of Alarm (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,39 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) AlarmSpec defines the desired state of Alarm (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) AlarmStatus defines the observed state of Alarm (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `additional_text` (String) AdditionalText adds extra context related to alarm
-- `cluster_specific` (Boolean) Specifies if the alarm is within cluster, such as pod issue, or external issue, such as with BGP session on node
-- `description` (String) Description of the alarm
-- `group` (String) The group of the resouce the alarm is associated with, for example core.eda.nokia.com
-- `js_path` (List of String) Provide a JSON path to the resource or object that the alarm is associated with, for example .node{.name=='leaf-1-1'}.srl{.version=='24.7.1'}.interface{.name=='ethernet-1-11'
-- `kind` (String) The kind of the resource the alarm is associated with, for example TopoNode
-- `name` (String) Name of the alarm, this is typically the alarm Kind followed by a unique identifier such as InterfaceDown-leaf-1-1-ethernet-1-11
-- `parent_alarm` (List of String) ParentAlarm is the name of the parent alarm, if any, for example LinecardDown-leaf-1-1-Linecard1
-- `probable_cause` (String) ProbableCause is the probable cause of the alarm
-- `remedial_action` (String) RemedialAction is the proposed remedial action for the alarm
-- `resource` (String) The name of the resouce the alarm is associated with, for example leaf-1-1
-- `severity` (String) Severity for this alarm
-- `source_group` (String) The group of the resource that raise the alarm, for example core.eda.nokia.com
-- `source_kind` (String) The kind of the resource that raised the alarm, for example InterfaceState
-- `source_resource` (String) The resource that raised the alarm, for example
-- `targets_affected` (Attributes List) (see [below for nested schema](#nestedatt--spec--targets_affected))
-- `type` (String) Type of the alarm, for example InterfaceDown
-
-<a id="nestedatt--spec--targets_affected"></a>
-### Nested Schema for `spec.targets_affected`
-
-Optional:
-
-- `name` (String)
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -93,6 +61,38 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `additional_text` (String) AdditionalText adds extra context related to alarm
+- `cluster_specific` (Boolean) Specifies if the alarm is within cluster, such as pod issue, or external issue, such as with BGP session on node
+- `description` (String) Description of the alarm
+- `group` (String) The group of the resouce the alarm is associated with, for example core.eda.nokia.com
+- `js_path` (List of String) Provide a JSON path to the resource or object that the alarm is associated with, for example .node{.name=='leaf-1-1'}.srl{.version=='24.7.1'}.interface{.name=='ethernet-1-11'
+- `kind` (String) The kind of the resource the alarm is associated with, for example TopoNode
+- `name` (String) Name of the alarm, this is typically the alarm Kind followed by a unique identifier such as InterfaceDown-leaf-1-1-ethernet-1-11
+- `parent_alarm` (List of String) ParentAlarm is the name of the parent alarm, if any, for example LinecardDown-leaf-1-1-Linecard1
+- `probable_cause` (String) ProbableCause is the probable cause of the alarm
+- `remedial_action` (String) RemedialAction is the proposed remedial action for the alarm
+- `resource` (String) The name of the resouce the alarm is associated with, for example leaf-1-1
+- `severity` (String) Severity for this alarm
+- `source_group` (String) The group of the resource that raise the alarm, for example core.eda.nokia.com
+- `source_kind` (String) The kind of the resource that raised the alarm, for example InterfaceState
+- `source_resource` (String) The resource that raised the alarm, for example
+- `targets_affected` (Attributes List) (see [below for nested schema](#nestedatt--spec--targets_affected))
+- `type` (String) Type of the alarm, for example InterfaceDown
+
+<a id="nestedatt--spec--targets_affected"></a>
+### Nested Schema for `spec.targets_affected`
+
+Read-Only:
+
+- `name` (String)
+
 
 
 <a id="nestedatt--status"></a>

@@ -56,6 +56,7 @@ Required:
 Optional:
 
 - `ssh_public_keys` (List of String) SSH public keys to deploy for the user.
+- `type` (String) Determines whether the user is authenticated locally on the node or remotely through RADIUS or TACACS+. When set to Remote, no configuration is pushed to the node for this user.
 - `username` (String) Name of this user. If not provided, the name of the resource will be used.
 
 <a id="nestedatt--spec--group_bindings"></a>

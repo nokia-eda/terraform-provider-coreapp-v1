@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,21 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `address` (String) Address is the external address where branches on this cluster provider will be accessible
-If not specified will default to load balencer ip address
-- `kubeconfig_secret` (String) KubeconfigSecret is the name of the secret containing the kubeconfig for connecting to this cluster
-- `no_virtual_cluster` (Boolean) NoVirtualCluster will run branch directly on remote kubernetes with no virtual api server.
-Only applicable when KubeconfigSecret is set and only one
-branch can be run on Kubernetes cluster as no k8s virtualization.
-- `start_port_range` (Number) StartPortRange is the starting port number for allocating ports to services on this cluster
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -86,6 +69,20 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `address` (String) Address is the external address where branches on this cluster provider will be accessible
+If not specified will default to load balencer ip address
+- `kubeconfig_secret` (String) KubeconfigSecret is the name of the secret containing the kubeconfig for connecting to this cluster
+- `no_virtual_cluster` (Boolean) NoVirtualCluster will run branch directly on remote kubernetes with no virtual api server.
+Only applicable when KubeconfigSecret is set and only one
+branch can be run on Kubernetes cluster as no k8s virtualization.
+- `start_port_range` (Number) StartPortRange is the starting port number for allocating ports to services on this cluster
 
 
 <a id="nestedatt--items--status"></a>

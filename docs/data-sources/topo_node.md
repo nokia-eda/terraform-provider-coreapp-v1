@@ -23,7 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) A managed network element is represented via a TopoNode resource, describing characteristics of a specific element in the topology. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -32,146 +31,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) A managed network element is represented via a TopoNode resource, describing characteristics of a specific element in the topology. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) TopoNodeStatus defines the observed state of TopoNode (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `component` (Attributes List) List of components within the TopoNode.
-Used to define the type and location of linecards, fabrics (SFM), media adapter cards (MDA) and control cards (CPM). (see [below for nested schema](#nestedatt--spec--component))
-- `license` (String) Reference to a ConfigMap containing a license for the TopoNode. Overrides the license set in the referenced NodeProfile, if present.
-- `mac_address` (String) MAC address to associate with this TopoNode.
-Typically the chassis MAC address, optionally sent by a node in DHCP requests.
-Not required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.
-- `node_profile` (String) Reference to a NodeProfile to use with this TopoNode.
-- `npp` (Attributes) Options relating to NPP interactions with the node. (see [below for nested schema](#nestedatt--spec--npp))
-- `on_boarded` (Boolean) Indicates if this TopoNode has been bootstrapped or is reachable via configured credentials. Set by BootstrapServer when it completes onboarding functions for a given TopoNode.
-Most applications ignore TopoNodes that have not been onboarded yet.
-- `operating_system` (String) Operating system running on this TopoNode, e.g. srl.
-- `platform` (String) Platform type of this TopoNode, e.g. 7220 IXR-D3L.
-- `production_address` (Attributes) Production address of this TopoNode - this is the address the real, production instance of this TopoNode uses.
-If left blank, an address will be allocated from the management IP pool specified in the referenced NodeProfile.
-If this TopoNode is not bootstrapped by EDA this field must be provided. (see [below for nested schema](#nestedatt--spec--production_address))
-- `satellite_nodes` (Attributes List) List of satellite nodes associated with this TopoNode.
-Used to define the type and configuration of satellite nodes. (see [below for nested schema](#nestedatt--spec--satellite_nodes))
-- `serial_number` (String) Serial number of this TopoNode, optionally sent by a node in DHCP requests.
-Not required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.
-- `system_interface` (String) Deprecated: Name of the Interface resource representing the primary loopback on the TopoNode, this field will be removed in the future version.
-- `version` (String) Software version of this TopoNode, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).
-
-<a id="nestedatt--spec--component"></a>
-### Nested Schema for `spec.component`
-
-Optional:
-
-- `kind` (String) The kind of Component, e.g. lineCard.
-- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
-e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
-- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
-
-
-<a id="nestedatt--spec--npp"></a>
-### Nested Schema for `spec.npp`
-
-Optional:
-
-- `mode` (String) The mode in which this TopoNode is functioning.
-"normal" (the default)
-   indicates that NPP is expecting an endpoint to exist, and will accept and confirm changes only if the endpoint
-   accepts them.
-"maintenance"
-   indicates that no changes will be accepted for the TopoNode, irrespective if the endpoint is up and reachable.
-   The exception is if an upgrade is occuring, in which case changes will be accepted.
-"null"
-	  indicates that changes will be accepted from CRs and no NPP will be spun up. NPP validation will not occur.
-   This may be useful in playground mode to avoid spinning up of 1000s of NPPs.
-"emulate"
-   indicates that changes will be accepted at the NPP level, without pushing them to a endpoint. NPP validation
-   still occurs.  If no IP address is present, we also run in emulate mode.
-"monitor"
-   indicates that state will be collectd but config will not be pushed to a endpoint. NPP validation still occurs.
-
-
-<a id="nestedatt--spec--production_address"></a>
-### Nested Schema for `spec.production_address`
-
-Optional:
-
-- `ipv4` (String) The IPv4 production address
-- `ipv6` (String) The IPv6 production address
-
-
-<a id="nestedatt--spec--satellite_nodes"></a>
-### Nested Schema for `spec.satellite_nodes`
-
-Optional:
-
-- `components` (Attributes List) Components for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--components))
-- `id` (String) ID of the satellite node.
-- `license` (String) ConfigMap containing a license for this satellite node.
-- `mac_address` (String) MAC Address of the satellite node.
-- `operating_system` (String) Operating system for this satellite node.
-- `platform` (String) Platform of the satellite node.
-- `port_template` (Attributes) Port template to be used for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template))
-- `satellite_profile` (String) Satellite node profile to be used for the satellite node.
-- `type` (String) Type of the satellite node.
-- `uplink_interfaces` (Attributes List) Uplink interfaces to be created for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--uplink_interfaces))
-- `version` (String) Software version for this satellite node.
-
-<a id="nestedatt--spec--satellite_nodes--components"></a>
-### Nested Schema for `spec.satellite_nodes.components`
-
-Optional:
-
-- `kind` (String) The kind of Component, e.g. lineCard.
-- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
-e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
-- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
-
-
-<a id="nestedatt--spec--satellite_nodes--port_template"></a>
-### Nested Schema for `spec.satellite_nodes.port_template`
-
-Optional:
-
-- `connectors` (Attributes List) List of connector components within the SatellitePortTemplate.
-Used to define the type and location of connectors. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template--connectors))
-- `name` (String) The name of the SatellitePortTemplate.
-- `uplinks` (Attributes List) Uplinks for the SatellitePortTemplate. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template--uplinks))
-
-<a id="nestedatt--spec--satellite_nodes--port_template--connectors"></a>
-### Nested Schema for `spec.satellite_nodes.port_template.connectors`
-
-Optional:
-
-- `kind` (String) The kind of Component, e.g. lineCard.
-- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
-e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
-- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
-
-
-<a id="nestedatt--spec--satellite_nodes--port_template--uplinks"></a>
-### Nested Schema for `spec.satellite_nodes.port_template.uplinks`
-
-Optional:
-
-- `downlinks` (List of String) Downlinks for the SatelliteUplink.
-- `name` (String) The name of the SatelliteUplink.
-
-
-
-<a id="nestedatt--spec--satellite_nodes--uplink_interfaces"></a>
-### Nested Schema for `spec.satellite_nodes.uplink_interfaces`
-
-Optional:
-
-- `host_port` (String) HostPort interface of the satellite uplink.
-- `satellite` (String) Satellite interface of the satellite uplink.
-
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -203,6 +64,145 @@ Read-Only:
 - `namespace` (String)
 
 
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `component` (Attributes List) List of components within the TopoNode.
+Used to define the type and location of linecards, fabrics (SFM), media adapter cards (MDA) and control cards (CPM). (see [below for nested schema](#nestedatt--spec--component))
+- `license` (String) Reference to a ConfigMap containing a license for the TopoNode. Overrides the license set in the referenced NodeProfile, if present.
+- `mac_address` (String) MAC address to associate with this TopoNode.
+Typically the chassis MAC address, optionally sent by a node in DHCP requests.
+Not required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.
+- `node_profile` (String) Reference to a NodeProfile to use with this TopoNode.
+- `npp` (Attributes) Options relating to NPP interactions with the node. (see [below for nested schema](#nestedatt--spec--npp))
+- `on_boarded` (Boolean) Indicates if this TopoNode has been bootstrapped or is reachable via configured credentials. Set by BootstrapServer when it completes onboarding functions for a given TopoNode.
+Most applications ignore TopoNodes that have not been onboarded yet.
+- `operating_system` (String) Operating system running on this TopoNode, e.g. srl.
+- `platform` (String) Platform type of this TopoNode, e.g. 7220 IXR-D3L.
+- `production_address` (Attributes) Production address of this TopoNode - this is the address the real, production instance of this TopoNode uses.
+If left blank, an address will be allocated from the management IP pool specified in the referenced NodeProfile.
+If this TopoNode is not bootstrapped by EDA this field must be provided. (see [below for nested schema](#nestedatt--spec--production_address))
+- `satellite_nodes` (Attributes List) List of satellite nodes associated with this TopoNode.
+Used to define the type and configuration of satellite nodes. (see [below for nested schema](#nestedatt--spec--satellite_nodes))
+- `serial_number` (String) Serial number of this TopoNode, optionally sent by a node in DHCP requests.
+Not required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.
+- `system_interface` (String) Deprecated: Name of the Interface resource representing the primary loopback on the TopoNode, this field will be removed in the future version.
+- `version` (String) Software version of this TopoNode, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).
+
+<a id="nestedatt--spec--component"></a>
+### Nested Schema for `spec.component`
+
+Read-Only:
+
+- `kind` (String) The kind of Component, e.g. lineCard.
+- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
+e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
+- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
+
+
+<a id="nestedatt--spec--npp"></a>
+### Nested Schema for `spec.npp`
+
+Read-Only:
+
+- `mode` (String) The mode in which this TopoNode is functioning.
+"normal" (the default)
+   indicates that NPP is expecting an endpoint to exist, and will accept and confirm changes only if the endpoint
+   accepts them.
+"maintenance"
+   indicates that no changes will be accepted for the TopoNode, irrespective if the endpoint is up and reachable.
+   The exception is if an upgrade is occuring, in which case changes will be accepted.
+"null"
+	  indicates that changes will be accepted from CRs and no NPP will be spun up. NPP validation will not occur.
+   This may be useful in playground mode to avoid spinning up of 1000s of NPPs.
+"emulate"
+   indicates that changes will be accepted at the NPP level, without pushing them to a endpoint. NPP validation
+   still occurs.  If no IP address is present, we also run in emulate mode.
+"monitor"
+   indicates that state will be collectd but config will not be pushed to a endpoint. NPP validation still occurs.
+
+
+<a id="nestedatt--spec--production_address"></a>
+### Nested Schema for `spec.production_address`
+
+Read-Only:
+
+- `ipv4` (String) The IPv4 production address
+- `ipv6` (String) The IPv6 production address
+
+
+<a id="nestedatt--spec--satellite_nodes"></a>
+### Nested Schema for `spec.satellite_nodes`
+
+Read-Only:
+
+- `components` (Attributes List) Components for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--components))
+- `id` (String) ID of the satellite node.
+- `license` (String) ConfigMap containing a license for this satellite node.
+- `mac_address` (String) MAC Address of the satellite node.
+- `operating_system` (String) Operating system for this satellite node.
+- `platform` (String) Platform of the satellite node.
+- `port_template` (Attributes) Port template to be used for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template))
+- `satellite_profile` (String) Satellite node profile to be used for the satellite node.
+- `type` (String) Type of the satellite node.
+- `uplink_interfaces` (Attributes List) Uplink interfaces to be created for the satellite node. (see [below for nested schema](#nestedatt--spec--satellite_nodes--uplink_interfaces))
+- `version` (String) Software version for this satellite node.
+
+<a id="nestedatt--spec--satellite_nodes--components"></a>
+### Nested Schema for `spec.satellite_nodes.components`
+
+Read-Only:
+
+- `kind` (String) The kind of Component, e.g. lineCard.
+- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
+e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
+- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
+
+
+<a id="nestedatt--spec--satellite_nodes--port_template"></a>
+### Nested Schema for `spec.satellite_nodes.port_template`
+
+Read-Only:
+
+- `connectors` (Attributes List) List of connector components within the SatellitePortTemplate.
+Used to define the type and location of connectors. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template--connectors))
+- `name` (String) The name of the SatellitePortTemplate.
+- `uplinks` (Attributes List) Uplinks for the SatellitePortTemplate. (see [below for nested schema](#nestedatt--spec--satellite_nodes--port_template--uplinks))
+
+<a id="nestedatt--spec--satellite_nodes--port_template--connectors"></a>
+### Nested Schema for `spec.satellite_nodes.port_template.connectors`
+
+Read-Only:
+
+- `kind` (String) The kind of Component, e.g. lineCard.
+- `slot` (String) The slot this Component resides in, unset for Components that do not have a slot or ID.
+e.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.
+- `type` (String) Denotes the type of hardware being provisioned, e.g. xcm-x20.
+
+
+<a id="nestedatt--spec--satellite_nodes--port_template--uplinks"></a>
+### Nested Schema for `spec.satellite_nodes.port_template.uplinks`
+
+Read-Only:
+
+- `downlinks` (List of String) Downlinks for the SatelliteUplink.
+- `name` (String) The name of the SatelliteUplink.
+
+
+
+<a id="nestedatt--spec--satellite_nodes--uplink_interfaces"></a>
+### Nested Schema for `spec.satellite_nodes.uplink_interfaces`
+
+Read-Only:
+
+- `host_port` (String) HostPort interface of the satellite uplink.
+- `satellite` (String) Satellite interface of the satellite uplink.
+
+
+
+
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`
 
@@ -225,6 +225,7 @@ Read-Only:
 "NoIpAddress"
    NPP is running but there is no IP address for node. This only happens in sim setups when
    CX has not created the simulated node, or the simulated pod failed to launch due to image error.
+- `node_state_last_change` (String) Indicates when this node last changed state.
 - `npp_details` (String) NPP address and port for this TopoNode.
 - `npp_pod` (String) NPP pod name
 - `npp_state` (String) The current state of the connection between ConfigEngine and NPP.

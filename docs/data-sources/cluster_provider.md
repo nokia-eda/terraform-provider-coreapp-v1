@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,21 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `address` (String) Address is the external address where branches on this cluster provider will be accessible
-If not specified will default to load balencer ip address
-- `kubeconfig_secret` (String) KubeconfigSecret is the name of the secret containing the kubeconfig for connecting to this cluster
-- `no_virtual_cluster` (Boolean) NoVirtualCluster will run branch directly on remote kubernetes with no virtual api server.
-Only applicable when KubeconfigSecret is set and only one
-branch can be run on Kubernetes cluster as no k8s virtualization.
-- `start_port_range` (Number) StartPortRange is the starting port number for allocating ports to services on this cluster
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -75,6 +61,20 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `address` (String) Address is the external address where branches on this cluster provider will be accessible
+If not specified will default to load balencer ip address
+- `kubeconfig_secret` (String) KubeconfigSecret is the name of the secret containing the kubeconfig for connecting to this cluster
+- `no_virtual_cluster` (Boolean) NoVirtualCluster will run branch directly on remote kubernetes with no virtual api server.
+Only applicable when KubeconfigSecret is set and only one
+branch can be run on Kubernetes cluster as no k8s virtualization.
+- `start_port_range` (Number) StartPortRange is the starting port number for allocating ports to services on this cluster
 
 
 <a id="nestedatt--status"></a>

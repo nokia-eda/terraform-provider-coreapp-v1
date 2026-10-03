@@ -29,6 +29,18 @@ datasources:
   - model_name: branch
     oas_endpoint: /apps/core.eda.nokia.com/v1/branches/{name}
     oas_schema: com.nokia.eda.core.v1.Branch
+  - model_name: client_provider_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clientproviders
+    oas_schema: com.nokia.eda.core.v1.ClientProviderList
+  - model_name: client_provider
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clientproviders/{name}
+    oas_schema: com.nokia.eda.core.v1.ClientProvider
+  - model_name: client_table_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clienttables
+    oas_schema: com.nokia.eda.core.v1.ClientTableList
+  - model_name: client_table
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clienttables/{name}
+    oas_schema: com.nokia.eda.core.v1.ClientTable
   - model_name: cluster_provider_list
     oas_endpoint: /apps/core.eda.nokia.com/v1/clusterproviders
     oas_schema: com.nokia.eda.core.v1.ClusterProviderList
@@ -41,6 +53,18 @@ datasources:
   - model_name: cluster_role
     oas_endpoint: /apps/core.eda.nokia.com/v1/clusterroles/{name}
     oas_schema: com.nokia.eda.core.v1.ClusterRole
+  - model_name: cluster_sim_link_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clustersimlinks
+    oas_schema: com.nokia.eda.core.v1.ClusterSimLinkList
+  - model_name: cluster_sim_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clustersimlinks/{name}
+    oas_schema: com.nokia.eda.core.v1.ClusterSimLink
+  - model_name: cluster_topo_link_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clustertopolinks
+    oas_schema: com.nokia.eda.core.v1.ClusterTopoLinkList
+  - model_name: cluster_topo_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clustertopolinks/{name}
+    oas_schema: com.nokia.eda.core.v1.ClusterTopoLink
   - model_name: http_proxy_list
     oas_endpoint: /apps/core.eda.nokia.com/v1/httpproxies
     oas_schema: com.nokia.eda.core.v1.HttpProxyList
@@ -122,6 +146,18 @@ datasources:
   - model_name: satellite_profile
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
     oas_schema: com.nokia.eda.core.v1.SatelliteProfile
+  - model_name: sim_link_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks
+    oas_schema: com.nokia.eda.core.v1.SimLinkList
+  - model_name: sim_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/{name}
+    oas_schema: com.nokia.eda.core.v1.SimLink
+  - model_name: sim_node_list
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes
+    oas_schema: com.nokia.eda.core.v1.SimNodeList
+  - model_name: sim_node
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes/{name}
+    oas_schema: com.nokia.eda.core.v1.SimNode
   - model_name: subnet_allocation_pool_list
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
     oas_schema: com.nokia.eda.core.v1.SubnetAllocationPoolList
@@ -146,12 +182,6 @@ datasources:
   - model_name: topo_node
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
     oas_schema: com.nokia.eda.core.v1.TopoNode
-  - model_name: transaction_pipeline_list
-    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-    oas_schema: com.nokia.eda.core.v1.TransactionPipelineList
-  - model_name: transaction_pipeline
-    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-    oas_schema: com.nokia.eda.core.v1.TransactionPipeline
   - model_name: namespace
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{name}
     oas_schema: com.nokia.eda.core.v1.Namespace
@@ -196,12 +226,24 @@ resources:
   - model_name: branch
     oas_endpoint: /apps/core.eda.nokia.com/v1/branches
     oas_schema: com.nokia.eda.core.v1.Branch
+  - model_name: client_provider
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clientproviders
+    oas_schema: com.nokia.eda.core.v1.ClientProvider
+  - model_name: client_table
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clienttables
+    oas_schema: com.nokia.eda.core.v1.ClientTable
   - model_name: cluster_provider
     oas_endpoint: /apps/core.eda.nokia.com/v1/clusterproviders
     oas_schema: com.nokia.eda.core.v1.ClusterProvider
   - model_name: cluster_role
     oas_endpoint: /apps/core.eda.nokia.com/v1/clusterroles
     oas_schema: com.nokia.eda.core.v1.ClusterRole
+  - model_name: cluster_sim_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clustersimlinks
+    oas_schema: com.nokia.eda.core.v1.ClusterSimLink
+  - model_name: cluster_topo_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/clustertopolinks
+    oas_schema: com.nokia.eda.core.v1.ClusterTopoLink
   - model_name: http_proxy
     oas_endpoint: /apps/core.eda.nokia.com/v1/httpproxies
     oas_schema: com.nokia.eda.core.v1.HttpProxy
@@ -214,6 +256,9 @@ resources:
   - model_name: deviation_action
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions
     oas_schema: com.nokia.eda.core.v1.DeviationAction
+  - model_name: deviation
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations
+    oas_schema: com.nokia.eda.core.v1.Deviation
   - model_name: edge_interface
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces
     oas_schema: com.nokia.eda.core.v1.EdgeInterface
@@ -238,6 +283,12 @@ resources:
   - model_name: satellite_profile
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
     oas_schema: com.nokia.eda.core.v1.SatelliteProfile
+  - model_name: sim_link
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks
+    oas_schema: com.nokia.eda.core.v1.SimLink
+  - model_name: sim_node
+    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes
+    oas_schema: com.nokia.eda.core.v1.SimNode
   - model_name: subnet_allocation_pool
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
     oas_schema: com.nokia.eda.core.v1.SubnetAllocationPool
@@ -250,9 +301,6 @@ resources:
   - model_name: topo_node
     oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
     oas_schema: com.nokia.eda.core.v1.TopoNode
-  - model_name: transaction_pipeline
-    oas_endpoint: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-    oas_schema: com.nokia.eda.core.v1.TransactionPipeline
   - model_name: node_security_profile
     oas_endpoint: /apps/core.eda.nokia.com/v1/nodesecurityprofiles
     oas_schema: com.nokia.eda.core.v1.NodeSecurityProfile
@@ -281,12 +329,22 @@ qualified:
       get: /apps/core.eda.nokia.com/v1/alarmpolicies/_deleted
     - oas_schema: com.nokia.eda.core.v1.Branch_DeletedResources
       get: /apps/core.eda.nokia.com/v1/branches/_deleted
+    - oas_schema: com.nokia.eda.core.v1.ClientProvider_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/clientproviders/_deleted
+    - oas_schema: com.nokia.eda.core.v1.ClientTable_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/clienttables/_deleted
     - oas_schema: com.nokia.eda.core.v1.ClusterProvider_DeletedResources
       get: /apps/core.eda.nokia.com/v1/clusterproviders/_deleted
     - oas_schema: com.nokia.eda.core.v1.ClusterRole_DeletedResources
       get: /apps/core.eda.nokia.com/v1/clusterroles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.ClusterSimLink_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/clustersimlinks/_deleted
+    - oas_schema: com.nokia.eda.core.v1.ClusterTopoLink_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/clustertopolinks/_deleted
     - oas_schema: com.nokia.eda.core.v1.DeviationAction_DeletedResources
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviationactions/_deleted
+    - oas_schema: com.nokia.eda.core.v1.Deviation_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/_deleted
     - oas_schema: com.nokia.eda.core.v1.EdgeInterface_DeletedResources
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/edgeinterfaces/_deleted
     - oas_schema: com.nokia.eda.core.v1.HttpProxy_DeletedResources
@@ -313,6 +371,10 @@ qualified:
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/roles/_deleted
     - oas_schema: com.nokia.eda.core.v1.SatelliteProfile_DeletedResources
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/_deleted
+    - oas_schema: com.nokia.eda.core.v1.SimLink_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/_deleted
+    - oas_schema: com.nokia.eda.core.v1.SimNode_DeletedResources
+      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes/_deleted
     - oas_schema: com.nokia.eda.core.v1.SubnetAllocationPool_DeletedResources
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/_deleted
     - oas_schema: com.nokia.eda.core.v1.TopoBreakout_DeletedResources
@@ -321,8 +383,6 @@ qualified:
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/topolinks/_deleted
     - oas_schema: com.nokia.eda.core.v1.TopoNode_DeletedResources
       get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/_deleted
-    - oas_schema: com.nokia.eda.core.v1.TransactionPipeline_DeletedResources
-      get: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/_deleted
     - oas_schema: com.nokia.eda.core.v1.UdpProxy_DeletedResources
       get: /apps/core.eda.nokia.com/v1/udpproxies/_deleted
     - oas_schema: com.nokia.eda.core.v1.WorkflowDefinition_DeletedResources

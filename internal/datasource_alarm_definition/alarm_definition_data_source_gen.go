@@ -97,37 +97,37 @@ func AlarmDefinitionDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"cluster_specific": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Specifies if the alarm is within the EDA cluster, such as a pod issue",
 						MarkdownDescription: "Specifies if the alarm is within the EDA cluster, such as a pod issue",
 					},
 					"description": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Description of the alarm",
 						MarkdownDescription: "Description of the alarm",
 					},
 					"group": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The API Group of the resouce the alarm is raised against.\nIf unset, the alarm may be raised against multiple resource definitions",
 						MarkdownDescription: "The API Group of the resouce the alarm is raised against.\nIf unset, the alarm may be raised against multiple resource definitions",
 					},
 					"kind": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The resouce kind the alarm is raised against.\nIf unset, the alarm may be raised against multiple resource definitions",
 						MarkdownDescription: "The resouce kind the alarm is raised against.\nIf unset, the alarm may be raised against multiple resource definitions",
 					},
 					"severity": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Default alarm severity. If unset, severity is variable.",
 						MarkdownDescription: "Default alarm severity. If unset, severity is variable.",
 					},
 					"source_group": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The API group of the alarm source. This identifies the application which raises the alarm.",
 						MarkdownDescription: "The API group of the alarm source. This identifies the application which raises the alarm.",
 					},
 					"type": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Type of the alarm",
 						MarkdownDescription: "Type of the alarm",
 					},
@@ -137,7 +137,7 @@ func AlarmDefinitionDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "AlarmDefinitionSpec defines the desired state of Alarm",
 				MarkdownDescription: "AlarmDefinitionSpec defines the desired state of Alarm",
 			},

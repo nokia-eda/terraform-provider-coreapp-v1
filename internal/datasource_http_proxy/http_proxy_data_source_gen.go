@@ -97,29 +97,29 @@ func HttpProxyDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"auth_type": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Determines where authentication happens.\nIf \"atDestination\", then no authentication happens in API server and any auth tokens are forwarded as is.\nIf \"inApiServer\", then authentication happens within the API server and auth tokens are stripped prior to forwarding.",
 						MarkdownDescription: "Determines where authentication happens.\nIf \"atDestination\", then no authentication happens in API server and any auth tokens are forwarded as is.\nIf \"inApiServer\", then authentication happens within the API server and auth tokens are stripped prior to forwarding.",
 					},
 					"root_url": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The proxy destination, including the protocol.",
 						MarkdownDescription: "The proxy destination, including the protocol.",
 					},
 					"signature_header_verification": schema.SingleNestedAttribute{
 						Attributes: map[string]schema.Attribute{
 							"algorithm": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "Algorithm is the HMAC algorithm used to verify the signature.",
 								MarkdownDescription: "Algorithm is the HMAC algorithm used to verify the signature.",
 							},
 							"header": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).",
 								MarkdownDescription: "Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).",
 							},
 							"key_secret": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "KeySecret is the name of the Kubernetes secret (in the pod namespace) whose \"key\" data entry holds the HMAC key.",
 								MarkdownDescription: "KeySecret is the name of the Kubernetes secret (in the pod namespace) whose \"key\" data entry holds the HMAC key.",
 							},
@@ -129,7 +129,7 @@ func HttpProxyDataSourceSchema(ctx context.Context) schema.Schema {
 								AttrTypes: SignatureHeaderVerificationValue{}.AttributeTypes(ctx),
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header.",
 						MarkdownDescription: "SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header.",
 					},
@@ -139,7 +139,7 @@ func HttpProxyDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "HttpProxySpec defines the desired state of HttpProxy",
 				MarkdownDescription: "HttpProxySpec defines the desired state of HttpProxy",
 			},

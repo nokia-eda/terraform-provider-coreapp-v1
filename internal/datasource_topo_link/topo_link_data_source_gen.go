@@ -107,17 +107,17 @@ func TopoLinkDataSourceSchema(ctx context.Context) schema.Schema {
 								"local": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"interface": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Normalized name of the interface/port, e.g. ethernet-1-1.",
 											MarkdownDescription: "Normalized name of the interface/port, e.g. ethernet-1-1.",
 										},
 										"interface_resource": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Reference to a Interface.",
 											MarkdownDescription: "Reference to a Interface.",
 										},
 										"node": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Reference to a TopoNode.",
 											MarkdownDescription: "Reference to a TopoNode.",
 										},
@@ -127,24 +127,24 @@ func TopoLinkDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: LocalValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Local, or \"A\" endpoint of the link.",
 									MarkdownDescription: "Local, or \"A\" endpoint of the link.",
 								},
 								"remote": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"interface": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Normalized name of the interface/port, e.g. ethernet-1-1.",
 											MarkdownDescription: "Normalized name of the interface/port, e.g. ethernet-1-1.",
 										},
 										"interface_resource": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Reference to a Interface.",
 											MarkdownDescription: "Reference to a Interface.",
 										},
 										"node": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Reference to a TopoNode.",
 											MarkdownDescription: "Reference to a TopoNode.",
 										},
@@ -154,17 +154,17 @@ func TopoLinkDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: RemoteValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Remote, or \"B\" endpoint of the link.",
 									MarkdownDescription: "Remote, or \"B\" endpoint of the link.",
 								},
 								"speed": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Speed of the link.",
 									MarkdownDescription: "Speed of the link.",
 								},
 								"type": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Specify the type of link.\nIf type is set to edge, topology information for the remote device can be set; when doing so the Remote Node can be set as the hostname of the remote device and Remote Interface as the remote interface name in the device specific format, e.g. eth0.",
 									MarkdownDescription: "Specify the type of link.\nIf type is set to edge, topology information for the remote device can be set; when doing so the Remote Node can be set as the hostname of the remote device and Remote Interface as the remote interface name in the device specific format, e.g. eth0.",
 								},
@@ -175,7 +175,7 @@ func TopoLinkDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "Define the set of physical links making up this TopoLink.",
 						MarkdownDescription: "Define the set of physical links making up this TopoLink.",
 					},
@@ -185,7 +185,7 @@ func TopoLinkDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "TopoLink represents a logical link between two TopoNodes. It may include more than one physical link, being used to represent a LAG or multihomed link.\nTo create a point to point link with a single interface on both sides use a single link property.\nTo create a point to point link with a LAG configured on both side, use two links with matching nodes.\nA multihomed LAG is created by using two or more links where the A side and/or B side can be different.\nCreating a link with only A specified will create an edge interface.",
 				MarkdownDescription: "TopoLink represents a logical link between two TopoNodes. It may include more than one physical link, being used to represent a LAG or multihomed link.\nTo create a point to point link with a single interface on both sides use a single link property.\nTo create a point to point link with a LAG configured on both side, use two links with matching nodes.\nA multihomed LAG is created by using two or more links where the A side and/or B side can be different.\nCreating a link with only A specified will create an edge interface.",
 			},

@@ -47,6 +47,26 @@ data_sources:
       path: /apps/core.eda.nokia.com/v1/branches
       method: GET
 
+  client_provider:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clientproviders/{name}
+      method: GET
+
+  client_provider_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clientproviders
+      method: GET
+
+  client_table:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clienttables/{name}
+      method: GET
+
+  client_table_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clienttables
+      method: GET
+
   cluster_provider:
     read:
       path: /apps/core.eda.nokia.com/v1/clusterproviders/{name}
@@ -65,6 +85,26 @@ data_sources:
   cluster_role_list:
     read:
       path: /apps/core.eda.nokia.com/v1/clusterroles
+      method: GET
+
+  cluster_sim_link:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clustersimlinks/{name}
+      method: GET
+
+  cluster_sim_link_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clustersimlinks
+      method: GET
+
+  cluster_topo_link:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clustertopolinks/{name}
+      method: GET
+
+  cluster_topo_link_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/clustertopolinks
       method: GET
 
   deviation:
@@ -232,6 +272,26 @@ data_sources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles
       method: GET
 
+  sim_link:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/{name}
+      method: GET
+
+  sim_link_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks
+      method: GET
+
+  sim_node:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes/{name}
+      method: GET
+
+  sim_node_list:
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes
+      method: GET
+
   subnet_allocation_pool:
     read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools/{name}
@@ -270,16 +330,6 @@ data_sources:
   topo_node_list:
     read:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes
-      method: GET
-
-  transaction_pipeline:
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: GET
-
-  transaction_pipeline_list:
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
       method: GET
 
   udp_proxy:
@@ -346,6 +396,34 @@ resources:
       path: /apps/core.eda.nokia.com/v1/branches/{name}
       method: DELETE
 
+  client_provider:
+    create:
+      path: /apps/core.eda.nokia.com/v1/clientproviders
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/clientproviders/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/clientproviders/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/clientproviders/{name}
+      method: DELETE
+
+  client_table:
+    create:
+      path: /apps/core.eda.nokia.com/v1/clienttables
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/clienttables/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/clienttables/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/clienttables/{name}
+      method: DELETE
+
   cluster_provider:
     create:
       path: /apps/core.eda.nokia.com/v1/clusterproviders
@@ -372,6 +450,48 @@ resources:
       method: PUT
     delete:
       path: /apps/core.eda.nokia.com/v1/clusterroles/{name}
+      method: DELETE
+
+  cluster_sim_link:
+    create:
+      path: /apps/core.eda.nokia.com/v1/clustersimlinks
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/clustersimlinks/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/clustersimlinks/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/clustersimlinks/{name}
+      method: DELETE
+
+  cluster_topo_link:
+    create:
+      path: /apps/core.eda.nokia.com/v1/clustertopolinks
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/clustertopolinks/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/clustertopolinks/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/clustertopolinks/{name}
+      method: DELETE
+
+  deviation:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/deviations/{name}
       method: DELETE
 
   deviation_action:
@@ -570,6 +690,34 @@ resources:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/satelliteprofiles/{name}
       method: DELETE
 
+  sim_link:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/{name}
+      method: DELETE
+
+  sim_node:
+    create:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes
+      method: POST
+    read:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes/{name}
+      method: GET
+    update:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes/{name}
+      method: PUT
+    delete:
+      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/simnodes/{name}
+      method: DELETE
+
   subnet_allocation_pool:
     create:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/subnetallocationpools
@@ -624,20 +772,6 @@ resources:
       method: PUT
     delete:
       path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/toponodes/{name}
-      method: DELETE
-
-  transaction_pipeline:
-    create:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines
-      method: POST
-    read:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: GET
-    update:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
-      method: PUT
-    delete:
-      path: /apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}
       method: DELETE
 
   udp_proxy:

@@ -35,11 +35,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) IndexAllocationPool is a generic allocation pool supporting allocation of indexes from a set of segments.
-It supports allocating things like VLANs, subinterface indexes, autonomous system numbers, or any other integer-based index. (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -47,46 +42,9 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) IndexAllocationPool is a generic allocation pool supporting allocation of indexes from a set of segments.
+It supports allocating things like VLANs, subinterface indexes, autonomous system numbers, or any other integer-based index. (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) IndexAllocationPoolStatus defines the observed state of IndexAllocationPool (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `publish_allocations` (Boolean) If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.
-- `segments` (Attributes List) List of segments containing indexes to allocate. (see [below for nested schema](#nestedatt--items--spec--segments))
-
-<a id="nestedatt--items--spec--segments"></a>
-### Nested Schema for `items.spec.segments`
-
-Optional:
-
-- `allocations` (Attributes List) List of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--items--spec--segments--allocations))
-- `reservations` (Attributes List) Range of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--items--spec--segments--reservations))
-- `size` (Number) Number of elements in the segment.
-- `start` (Number) Starting value of the segment.
-
-<a id="nestedatt--items--spec--segments--allocations"></a>
-### Nested Schema for `items.spec.segments.allocations`
-
-Optional:
-
-- `name` (String) Name of this allocation.
-- `pool_instance` (String) Pool instance, if empty applies to all instances.
-- `value` (Number) Index to reserve.
-
-
-<a id="nestedatt--items--spec--segments--reservations"></a>
-### Nested Schema for `items.spec.segments.reservations`
-
-Optional:
-
-- `end` (Number) Value to reserve to.
-- `start` (Number) Value to start reserving.
-
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -116,6 +74,45 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `publish_allocations` (Boolean) If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.
+- `segments` (Attributes List) List of segments containing indexes to allocate. (see [below for nested schema](#nestedatt--items--spec--segments))
+
+<a id="nestedatt--items--spec--segments"></a>
+### Nested Schema for `items.spec.segments`
+
+Read-Only:
+
+- `allocations` (Attributes List) List of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--items--spec--segments--allocations))
+- `reservations` (Attributes List) Range of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--items--spec--segments--reservations))
+- `size` (Number) Number of elements in the segment.
+- `start` (Number) Starting value of the segment.
+
+<a id="nestedatt--items--spec--segments--allocations"></a>
+### Nested Schema for `items.spec.segments.allocations`
+
+Read-Only:
+
+- `name` (String) Name of this allocation.
+- `pool_instance` (String) Pool instance, if empty applies to all instances.
+- `value` (Number) Index to reserve.
+
+
+<a id="nestedatt--items--spec--segments--reservations"></a>
+### Nested Schema for `items.spec.segments.reservations`
+
+Read-Only:
+
+- `end` (Number) Value to reserve to.
+- `start` (Number) Value to start reserving.
+
+
 
 
 <a id="nestedatt--items--status"></a>

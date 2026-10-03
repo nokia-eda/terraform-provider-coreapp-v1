@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) UdpProxySpec defines the desired state of UdpProxy (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,21 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) UdpProxySpec defines the desired state of UdpProxy (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) UdpProxyStatus defines the observed state of UdpProxy (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `buffer_size` (Number) The proxy will use a buffer of this size for all datagrams it receives and this must be sized
-to accommodate the largest datagrams expected
-- `dest_host` (String) The destination hostname or IP address to forward the datagrams to
-- `dest_port` (Number) The destination UDP port to forward the datagrams to
-- `idle_timeout` (Number) The proxy will listen for responses from the destination and forward it back to the source
-of the datagram until there is no traffic at all for at least the idle timeout in seconds
-- `proxy_port` (Number) The UDP port on which to listen for datagrams and then proxy to the destination
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -75,6 +61,20 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `buffer_size` (Number) The proxy will use a buffer of this size for all datagrams it receives and this must be sized
+to accommodate the largest datagrams expected
+- `dest_host` (String) The destination hostname or IP address to forward the datagrams to
+- `dest_port` (Number) The destination UDP port to forward the datagrams to
+- `idle_timeout` (Number) The proxy will listen for responses from the destination and forward it back to the source
+of the datagram until there is no traffic at all for at least the idle timeout in seconds
+- `proxy_port` (Number) The UDP port on which to listen for datagrams and then proxy to the destination
 
 
 <a id="nestedatt--status"></a>

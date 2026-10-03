@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) A License represents an application license providing functionality within EDA. A license providing the "base" feature must be provided/valid for transactions to be processed. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,16 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) A License represents an application license providing functionality within EDA. A license providing the "base" feature must be provided/valid for transactions to be processed. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) Status information for this license. (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `data` (String) The license key. This is a base64 encoded string.
-- `enabled` (Boolean) Indicates if this license is available for use.
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -70,6 +61,15 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `data` (String) The license key. This is a base64 encoded string.
+- `enabled` (Boolean) Indicates if this license is available for use.
 
 
 <a id="nestedatt--status"></a>

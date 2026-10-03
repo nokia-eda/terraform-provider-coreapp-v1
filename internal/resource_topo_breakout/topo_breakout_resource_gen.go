@@ -136,6 +136,7 @@ func TopoBreakoutResourceSchema(ctx context.Context) schema.Schema {
 					"interface": schema.ListAttribute{
 						ElementType:         types.StringType,
 						Optional:            true,
+						Computed:            true,
 						Description:         "A list of normalized parent interface/port",
 						MarkdownDescription: "A list of normalized parent interface/port",
 					},

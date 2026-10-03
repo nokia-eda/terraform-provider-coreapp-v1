@@ -104,12 +104,12 @@ func EdgeInterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 						"spec": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{
 								"bridge_domain": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Reference to a Bridge Domain",
 									MarkdownDescription: "Reference to a Bridge Domain",
 								},
 								"encap_type": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Indicates if the EdgeInterface uses VLAN tagging",
 									MarkdownDescription: "Indicates if the EdgeInterface uses VLAN tagging",
 								},
@@ -117,12 +117,12 @@ func EdgeInterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"ip_prefix": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Address and mask to use",
 												MarkdownDescription: "Address and mask to use",
 											},
 											"primary": schema.BoolAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Indicates which address to use as primary for broadcast",
 												MarkdownDescription: "Indicates which address to use as primary for broadcast",
 											},
@@ -133,7 +133,7 @@ func EdgeInterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of gateway IPv4 addresses in ip/mask form - e.g. 192.168.0.1/24",
 									MarkdownDescription: "List of gateway IPv4 addresses in ip/mask form - e.g. 192.168.0.1/24",
 								},
@@ -141,12 +141,12 @@ func EdgeInterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"ip_prefix": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Address and mask to use",
 												MarkdownDescription: "Address and mask to use",
 											},
 											"primary": schema.BoolAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Indicates which address to use as primary for broadcast",
 												MarkdownDescription: "Indicates which address to use as primary for broadcast",
 											},
@@ -157,22 +157,22 @@ func EdgeInterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of gateway IPv6 addresses in ip/mask form - e.g. fc00::1/120",
 									MarkdownDescription: "List of gateway IPv6 addresses in ip/mask form - e.g. fc00::1/120",
 								},
 								"interface_resource": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Reference to an interface",
 									MarkdownDescription: "Reference to an interface",
 								},
 								"router": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Reference to a Router",
 									MarkdownDescription: "Reference to a Router",
 								},
 								"vlan_id": schema.Int64Attribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Single value between 0-4094 supported",
 									MarkdownDescription: "Single value between 0-4094 supported",
 								},
@@ -182,7 +182,7 @@ func EdgeInterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "EdgeInterfaceSpec defines the desired state of EdgeInterface",
 							MarkdownDescription: "EdgeInterfaceSpec defines the desired state of EdgeInterface",
 						},

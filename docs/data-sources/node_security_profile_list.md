@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) NodeSecurityProfileSpec defines the desired state of NodeSecurityProfile (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,57 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) NodeSecurityProfileSpec defines the desired state of NodeSecurityProfile (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `namespace` (String) Namespace of toponodes to be used to apply this security profile to.
-- `node_selector` (List of String) Selector to use when selecting TopoNodes to apply this security profile to.
-- `nodes` (List of String) TopoNodes to apply this security profile to.
-- `tls` (Attributes) Set of TLS related attributes (see [below for nested schema](#nestedatt--items--spec--tls))
-
-<a id="nestedatt--items--spec--tls"></a>
-### Nested Schema for `items.spec.tls`
-
-Optional:
-
-- `csr_params` (Attributes) A set of certificate signing request parameters used when asking for a CSR from the toponode. (see [below for nested schema](#nestedatt--items--spec--tls--csr_params))
-- `issuer_ref` (String) Reference to a CertManager issuer that must be used to sign nodes certificates.
-- `skip_verify` (Boolean) Skip certificate verification.
-- `trust_bundle` (String) Reference to configMap that contains a CA certificate that is used to verify the node certificate
-when certificates are not managed by EDA.
-
-<a id="nestedatt--items--spec--tls--csr_params"></a>
-### Nested Schema for `items.spec.tls.csr_params`
-
-Optional:
-
-- `certificate_validity` (String) CertificateValidity defines the duration for which the certificate is considered valid after issuance.
-- `city` (String) City denotes the city where the organization is based.
-- `common_name` (String) CommonName specifies the common name field of the CSR, typically representing the domain name.
-- `country` (String) Country indicates the country in which the organization is legally registered.
-- `csr_suite` (String) The CSRSuite value used when asking for a CSR from the toponode
-- `org` (String) Org is the name of the organization requesting the CSR.
-- `org_unit` (String) OrgUnit specifies the organizational unit (like department or division) within the organization.
-- `san` (Attributes) Subject Alternative Names contains additional hostnames or IP addresses covered by the CSR. (see [below for nested schema](#nestedatt--items--spec--tls--csr_params--san))
-- `state` (String) State represents the state or province where the organization is located.
-
-<a id="nestedatt--items--spec--tls--csr_params--san"></a>
-### Nested Schema for `items.spec.tls.csr_params.san`
-
-Optional:
-
-- `dns` (List of String) Dns contains a list of DNS names that can be used to access the server.
-- `emails` (List of String) Emails consists of email addresses that should be associated with the certificate.
-- `ips` (List of String) Ips includes IP addresses that the certificate should validate.
-- `uris` (List of String) Uris lists specific URIs that the certificate will authenticate.
-
-
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -122,6 +69,56 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `namespace` (String) Namespace of toponodes to be used to apply this security profile to.
+- `node_selector` (List of String) Selector to use when selecting TopoNodes to apply this security profile to.
+- `nodes` (List of String) TopoNodes to apply this security profile to.
+- `tls` (Attributes) Set of TLS related attributes (see [below for nested schema](#nestedatt--items--spec--tls))
+
+<a id="nestedatt--items--spec--tls"></a>
+### Nested Schema for `items.spec.tls`
+
+Read-Only:
+
+- `csr_params` (Attributes) A set of certificate signing request parameters used when asking for a CSR from the toponode. (see [below for nested schema](#nestedatt--items--spec--tls--csr_params))
+- `issuer_ref` (String) Reference to a CertManager issuer that must be used to sign nodes certificates.
+- `skip_verify` (Boolean) Skip certificate verification.
+- `trust_bundle` (String) Reference to configMap that contains a CA certificate that is used to verify the node certificate
+when certificates are not managed by EDA.
+
+<a id="nestedatt--items--spec--tls--csr_params"></a>
+### Nested Schema for `items.spec.tls.csr_params`
+
+Read-Only:
+
+- `certificate_validity` (String) CertificateValidity defines the duration for which the certificate is considered valid after issuance.
+- `city` (String) City denotes the city where the organization is based.
+- `common_name` (String) CommonName specifies the common name field of the CSR, typically representing the domain name.
+- `country` (String) Country indicates the country in which the organization is legally registered.
+- `csr_suite` (String) The CSRSuite value used when asking for a CSR from the toponode
+- `org` (String) Org is the name of the organization requesting the CSR.
+- `org_unit` (String) OrgUnit specifies the organizational unit (like department or division) within the organization.
+- `san` (Attributes) Subject Alternative Names contains additional hostnames or IP addresses covered by the CSR. (see [below for nested schema](#nestedatt--items--spec--tls--csr_params--san))
+- `state` (String) State represents the state or province where the organization is located.
+
+<a id="nestedatt--items--spec--tls--csr_params--san"></a>
+### Nested Schema for `items.spec.tls.csr_params.san`
+
+Read-Only:
+
+- `dns` (List of String) Dns contains a list of DNS names that can be used to access the server.
+- `emails` (List of String) Emails consists of email addresses that should be associated with the certificate.
+- `ips` (List of String) Ips includes IP addresses that the certificate should validate.
+- `uris` (List of String) Uris lists specific URIs that the certificate will authenticate.
+
+
+
 
 
 <a id="nestedatt--items--status"></a>

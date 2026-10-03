@@ -105,17 +105,17 @@ func DeviationActionDataSourceSchema(ctx context.Context) schema.Schema {
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Action to perform on matching Deviations.",
 									MarkdownDescription: "Action to perform on matching Deviations.",
 								},
 								"path": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Path to match Deviation resources on this target. Only one action is allowed per path.",
 									MarkdownDescription: "Path to match Deviation resources on this target. Only one action is allowed per path.",
 								},
 								"recurse": schema.BoolAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Recursively accept/reject Deviations from the specified path.",
 									MarkdownDescription: "Recursively accept/reject Deviations from the specified path.",
 								},
@@ -126,12 +126,12 @@ func DeviationActionDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "The set of actions to perform on the target.",
 						MarkdownDescription: "The set of actions to perform on the target.",
 					},
 					"node_endpoint": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The target on which this action is to be performed.",
 						MarkdownDescription: "The target on which this action is to be performed.",
 					},
@@ -141,7 +141,7 @@ func DeviationActionDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "DeviationAction allows manual and API-driven actions to be performed on Deviation resources.\nThey are the only means to which and end user can accept or reject deviations, as Deviation resources themselves are read only.",
 				MarkdownDescription: "DeviationAction allows manual and API-driven actions to be performed on Deviation resources.\nThey are the only means to which and end user can accept or reject deviations, as Deviation resources themselves are read only.",
 			},

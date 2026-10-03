@@ -104,24 +104,24 @@ func TopoBreakoutListDataSourceSchema(ctx context.Context) schema.Schema {
 						"spec": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{
 								"channels": schema.Int64Attribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "The number of breakout channels to create",
 									MarkdownDescription: "The number of breakout channels to create",
 								},
 								"interface": schema.ListAttribute{
 									ElementType:         types.StringType,
-									Optional:            true,
+									Computed:            true,
 									Description:         "A list of normalized parent interface/port",
 									MarkdownDescription: "A list of normalized parent interface/port",
 								},
 								"node": schema.ListAttribute{
 									ElementType:         types.StringType,
-									Optional:            true,
+									Computed:            true,
 									Description:         "Reference to a list of TopoNodes where the parent interfaces are to be broken out",
 									MarkdownDescription: "Reference to a list of TopoNodes where the parent interfaces are to be broken out",
 								},
 								"speed": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "The speed of each breakout channel",
 									MarkdownDescription: "The speed of each breakout channel",
 								},
@@ -131,7 +131,7 @@ func TopoBreakoutListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "TopoBreakoutSpec defines the desired state of TopoBreakout",
 							MarkdownDescription: "TopoBreakoutSpec defines the desired state of TopoBreakout",
 						},

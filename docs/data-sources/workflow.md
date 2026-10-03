@@ -20,10 +20,6 @@ description: |-
 - `name` (String) name of the Workflow
 - `namespace` (String) the namespace scope in which to operate
 
-### Optional
-
-- `spec` (Attributes) WorkflowSpec defines the desired state of Flow (see [below for nested schema](#nestedatt--spec))
-
 ### Read-Only
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--alarms))
@@ -31,20 +27,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) WorkflowSpec defines the desired state of Flow (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) WorkflowStatus defines the observed state of Flow (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `input` (Attributes) Input to this flow, adhering to the JSON schema defined in the referenced WorkflowDefinition. (see [below for nested schema](#nestedatt--spec--input))
-- `type` (String) Select the WorkflowDefinition to execute.
-
-<a id="nestedatt--spec--input"></a>
-### Nested Schema for `spec.input`
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -74,6 +58,19 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `input` (Attributes) Input to this flow, adhering to the JSON schema defined in the referenced WorkflowDefinition. (see [below for nested schema](#nestedatt--spec--input))
+- `type` (String) Select the WorkflowDefinition to execute.
+
+<a id="nestedatt--spec--input"></a>
+### Nested Schema for `spec.input`
+
 
 
 <a id="nestedatt--status"></a>

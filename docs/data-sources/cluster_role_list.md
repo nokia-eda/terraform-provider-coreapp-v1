@@ -31,11 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) ClusterRole defines a set of permissions to access EDA resources.
-ClusterRoles and users are bound via groups, selecting a set of users and a set of ClusterRoles to bind. (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -43,56 +38,9 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) ClusterRole defines a set of permissions to access EDA resources.
+ClusterRoles and users are bound via groups, selecting a set of users and a set of ClusterRoles to bind. (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) RoleStatus defines the observed state of Role (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `description` (String) A description for the role.
-- `resource_rules` (Attributes List) Rules for access to resources. (see [below for nested schema](#nestedatt--items--spec--resource_rules))
-- `table_rules` (Attributes List) Rules for access to EDB tables, including via EQL. (see [below for nested schema](#nestedatt--items--spec--table_rules))
-- `url_rules` (Attributes List) Rules for access to APIServer proxied routes. (see [below for nested schema](#nestedatt--items--spec--url_rules))
-
-<a id="nestedatt--items--spec--resource_rules"></a>
-### Nested Schema for `items.spec.resource_rules`
-
-Optional:
-
-- `api_groups` (List of String) The API groups for the resources controlled by the rule.
-An API group consists of an apiGroup and a version, e.g. "apigroup/version".
-The API group can be a wildcard ("*"), in which case it will match any API group.
-- `permissions` (String) Permissions for resources specified by the rule.
-- `resources` (List of String) Names for the resources controlled by the rule.
-It can be a wildcard ("*"), in which case it will match any resource
-in the matching API groups.
-
-
-<a id="nestedatt--items--spec--table_rules"></a>
-### Nested Schema for `items.spec.table_rules`
-
-Optional:
-
-- `path` (String) EDB path to which this rule applies. It can end in ".*"
-in which case the final portion of the table path can be anything, if the
-prefix matches. It can end in ".**" in which case the table path can be
-anything if the prefix matches.
-- `permissions` (String) Permissions for the given EDB path.
-
-
-<a id="nestedatt--items--spec--url_rules"></a>
-### Nested Schema for `items.spec.url_rules`
-
-Optional:
-
-- `path` (String) The API server URL path to which this rule applies. It can end in "/*"
-in which case the final portion of the URL path can be anything, if the
-prefix matches. It can end in "/**" in which case the URL path can be
-anything if the prefix matches.
-- `permissions` (String) The permissions for the API server URL for the rule.
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -122,6 +70,59 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `core_access_items` (List of String) Core items to which this role gives access; arbitrary things/actions that do not match the "resource" or "table" paradigm.
+Each item must have a 'resource/subResource/verb structure', where /subResource is optional (depends on the resource).
+The leading or trailing part part may be wildcarded with '*'.  A wildcard is recursive; i.e. if a subResource is a wildcard, the verb is wildcarded.
+A simple '*' provides access to all of these items.
+- `description` (String) A description for the role.
+- `resource_rules` (Attributes List) Rules for access to resources. (see [below for nested schema](#nestedatt--items--spec--resource_rules))
+- `table_rules` (Attributes List) Rules for access to EDB tables, including via EQL. (see [below for nested schema](#nestedatt--items--spec--table_rules))
+- `url_rules` (Attributes List) Rules for access to APIServer proxied routes. (see [below for nested schema](#nestedatt--items--spec--url_rules))
+
+<a id="nestedatt--items--spec--resource_rules"></a>
+### Nested Schema for `items.spec.resource_rules`
+
+Read-Only:
+
+- `api_groups` (List of String) The API groups for the resources controlled by the rule.
+Accepted forms: "*" (all groups), "group" (all versions), "group/*" (all versions), "group/version".
+The API group can be a wildcard ("*"), in which case it will match any API group.
+- `permissions` (String) Permissions for resources specified by the rule.
+- `resources` (List of String) Names for the resources controlled by the rule.
+It can be a wildcard ("*"), in which case it will match any resource
+in the matching API groups.
+
+
+<a id="nestedatt--items--spec--table_rules"></a>
+### Nested Schema for `items.spec.table_rules`
+
+Read-Only:
+
+- `path` (String) EDB path to which this rule applies. It can end in ".*"
+in which case the final portion of the table path can be anything, if the
+prefix matches. It can end in ".**" in which case the table path can be
+anything if the prefix matches.
+- `permissions` (String) Permissions for the given EDB path.
+
+
+<a id="nestedatt--items--spec--url_rules"></a>
+### Nested Schema for `items.spec.url_rules`
+
+Read-Only:
+
+- `path` (String) The API server URL path to which this rule applies. It can end in "/*"
+in which case the final portion of the URL path can be anything, if the
+prefix matches. It can end in "/**" in which case the URL path can be
+anything if the prefix matches.
+- `permissions` (String) The permissions for the API server URL for the rule.
+
 
 
 <a id="nestedatt--items--status"></a>

@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) AlarmPolicy defines rules to modify the default properties of raised alarms (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,63 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) AlarmPolicy defines rules to modify the default properties of raised alarms (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) AlarmPolicyStatus defines the status of AlarmPolicy (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `action` (Attributes) Action to apply to matched alarms (see [below for nested schema](#nestedatt--items--spec--action))
-- `match` (Attributes) Match criteria for alarms (see [below for nested schema](#nestedatt--items--spec--match))
-
-<a id="nestedatt--items--spec--action"></a>
-### Nested Schema for `items.spec.action`
-
-Optional:
-
-- `action` (String) Action to apply to matched alarms
-- `override_severity` (String) Severity to apply when using ChangeSeverity action
-
-
-<a id="nestedatt--items--spec--match"></a>
-### Nested Schema for `items.spec.match`
-
-Optional:
-
-- `alarm_resource` (Attributes) Apply policy to alarms raised against a resource kind or a specific resource instance (see [below for nested schema](#nestedatt--items--spec--match--alarm_resource))
-- `alarm_type` (Attributes) Apply policy to alarms of a specific type (see [below for nested schema](#nestedatt--items--spec--match--alarm_type))
-- `namespace` (String) Apply policy to alarms in a specific namespace. If unset, policy matches all namespaces.
-- `targets_affected` (Attributes) Apply policy to alarms affecting specific targets (see [below for nested schema](#nestedatt--items--spec--match--targets_affected))
-
-<a id="nestedatt--items--spec--match--alarm_resource"></a>
-### Nested Schema for `items.spec.match.alarm_resource`
-
-Optional:
-
-- `group` (String) The group of the resource the alarm is raised against, for example core.eda.nokia.com
-- `kind` (String) The kind of the resource that the alarm is rasied against, for example Interface
-- `names` (List of String) List of resource names that alarm is rasied against, for example leaf-1-ethernet-1-1
-
-
-<a id="nestedatt--items--spec--match--alarm_type"></a>
-### Nested Schema for `items.spec.match.alarm_type`
-
-Optional:
-
-- `source_group` (String) The group of the resource that raises the alarm, for example core.eda.nokia.com
-- `type` (String) Type of the alarm, for example InterfaceDown
-
-
-<a id="nestedatt--items--spec--match--targets_affected"></a>
-### Nested Schema for `items.spec.match.targets_affected`
-
-Optional:
-
-- `nodes` (List of String) List of affected nodes to match the alarm policy
-
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -128,6 +69,62 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `action` (Attributes) Action to apply to matched alarms (see [below for nested schema](#nestedatt--items--spec--action))
+- `match` (Attributes) Match criteria for alarms (see [below for nested schema](#nestedatt--items--spec--match))
+
+<a id="nestedatt--items--spec--action"></a>
+### Nested Schema for `items.spec.action`
+
+Read-Only:
+
+- `action` (String) Action to apply to matched alarms
+- `override_severity` (String) Severity to apply when using ChangeSeverity action
+
+
+<a id="nestedatt--items--spec--match"></a>
+### Nested Schema for `items.spec.match`
+
+Read-Only:
+
+- `alarm_resource` (Attributes) Apply policy to alarms raised against a resource kind or a specific resource instance (see [below for nested schema](#nestedatt--items--spec--match--alarm_resource))
+- `alarm_type` (Attributes) Apply policy to alarms of a specific type (see [below for nested schema](#nestedatt--items--spec--match--alarm_type))
+- `namespace` (String) Apply policy to alarms in a specific namespace. If unset, policy matches all namespaces.
+- `targets_affected` (Attributes) Apply policy to alarms affecting specific targets (see [below for nested schema](#nestedatt--items--spec--match--targets_affected))
+
+<a id="nestedatt--items--spec--match--alarm_resource"></a>
+### Nested Schema for `items.spec.match.alarm_resource`
+
+Read-Only:
+
+- `group` (String) The resource group that the alarm is raised against
+- `kind` (String) The resource kind that the alarm is rasied against
+- `names` (List of String) List of resource names that alarm is rasied against, for example leaf-1-ethernet-1-1
+
+
+<a id="nestedatt--items--spec--match--alarm_type"></a>
+### Nested Schema for `items.spec.match.alarm_type`
+
+Read-Only:
+
+- `source_group` (String) The resource group which raises the alarm
+- `type` (String) Type of the alarm, for example InterfaceDown
+
+
+<a id="nestedatt--items--spec--match--targets_affected"></a>
+### Nested Schema for `items.spec.match.targets_affected`
+
+Read-Only:
+
+- `nodes` (List of String) List of affected nodes to match the alarm policy
+
+
 
 
 <a id="nestedatt--items--status"></a>

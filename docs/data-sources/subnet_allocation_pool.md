@@ -23,10 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) SubnetAllocationPool is a generic subnet allocation pool supporting allocation of IPv4 and/or IPv6 child subnets from a list of parent subnet segments.
-It allocates a subnet of the configured length from the provided parent subnet.
-For example a pool could return 10.1.0.8/29 when a segment is defined as subnet 10.1.0.0/16 with subnet length 29.
-Consult application documentation to know which pool type to use for a given use case. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -35,46 +31,11 @@ Consult application documentation to know which pool type to use for a given use
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) SubnetAllocationPool is a generic subnet allocation pool supporting allocation of IPv4 and/or IPv6 child subnets from a list of parent subnet segments.
+It allocates a subnet of the configured length from the provided parent subnet.
+For example a pool could return 10.1.0.8/29 when a segment is defined as subnet 10.1.0.0/16 with subnet length 29.
+Consult application documentation to know which pool type to use for a given use case. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) SubnetAllocationPoolStatus defines the observed state of SubnetAllocationPool (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `publish_allocations` (Boolean) If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.
-- `segments` (Attributes List) List of segments containing subnets to allocate. (see [below for nested schema](#nestedatt--spec--segments))
-
-<a id="nestedatt--spec--segments"></a>
-### Nested Schema for `spec.segments`
-
-Optional:
-
-- `allocations` (Attributes List) List of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--allocations))
-- `reservations` (Attributes List) List of ranges to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--reservations))
-- `subnet` (String) IPv4 or IPv6 subnet to allocate subnets from, e.g. 10.1.0.0/16.
-- `subnet_length` (Number) The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
-
-<a id="nestedatt--spec--segments--allocations"></a>
-### Nested Schema for `spec.segments.allocations`
-
-Optional:
-
-- `name` (String) Name of this allocation.
-- `pool_instance` (String) Pool instance, if empty applies to all instances.
-- `value` (String) Allocation to reserve.
-
-
-<a id="nestedatt--spec--segments--reservations"></a>
-### Nested Schema for `spec.segments.reservations`
-
-Optional:
-
-- `end` (String) Value to reserve to.
-- `start` (String) Value to start reserving.
-
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -104,6 +65,45 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `publish_allocations` (Boolean) If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.
+- `segments` (Attributes List) List of segments containing subnets to allocate. (see [below for nested schema](#nestedatt--spec--segments))
+
+<a id="nestedatt--spec--segments"></a>
+### Nested Schema for `spec.segments`
+
+Read-Only:
+
+- `allocations` (Attributes List) List of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--allocations))
+- `reservations` (Attributes List) List of ranges to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--reservations))
+- `subnet` (String) IPv4 or IPv6 subnet to allocate subnets from, e.g. 10.1.0.0/16.
+- `subnet_length` (Number) The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
+
+<a id="nestedatt--spec--segments--allocations"></a>
+### Nested Schema for `spec.segments.allocations`
+
+Read-Only:
+
+- `name` (String) Name of this allocation.
+- `pool_instance` (String) Pool instance, if empty applies to all instances.
+- `value` (String) Allocation to reserve.
+
+
+<a id="nestedatt--spec--segments--reservations"></a>
+### Nested Schema for `spec.segments.reservations`
+
+Read-Only:
+
+- `end` (String) Value to reserve to.
+- `start` (String) Value to start reserving.
+
+
 
 
 <a id="nestedatt--status"></a>

@@ -106,17 +106,17 @@ func LogOutputListDataSourceSchema(ctx context.Context) schema.Schema {
 								"forward": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"host": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Target host where Fluentbit or Fluentd are listening for Forward messages.",
 											MarkdownDescription: "Target host where Fluentbit or Fluentd are listening for Forward messages.",
 										},
 										"match": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "A pattern to match against the tags of incoming records.\nIt's case sensitive and support the star (*) character as a wildcard.",
 											MarkdownDescription: "A pattern to match against the tags of incoming records.\nIt's case sensitive and support the star (*) character as a wildcard.",
 										},
 										"port": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "TCP Port of the target service.",
 											MarkdownDescription: "TCP Port of the target service.",
 										},
@@ -126,91 +126,91 @@ func LogOutputListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: ForwardValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Fluentd Forward protocol output",
 									MarkdownDescription: "Fluentd Forward protocol output",
 								},
 								"syslog": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"host": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Host domain or IP address of the remote Syslog server.",
 											MarkdownDescription: "Host domain or IP address of the remote Syslog server.",
 										},
 										"match": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "A pattern to match against the tags of incoming records.\nIt's case sensitive and support the star (*) character as a wildcard.",
 											MarkdownDescription: "A pattern to match against the tags of incoming records.\nIt's case sensitive and support the star (*) character as a wildcard.",
 										},
 										"mode": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Transport protocol.",
 											MarkdownDescription: "Transport protocol.",
 										},
 										"port": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "TCP or UDP port of the remote Syslog server.",
 											MarkdownDescription: "TCP or UDP port of the remote Syslog server.",
 										},
 										"syslog_appname_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key name from the original record that contains the application name that generated the message.",
 											MarkdownDescription: "Key name from the original record that contains the application name that generated the message.",
 										},
 										"syslog_facility_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key from the original record that contains the Syslog facility number.",
 											MarkdownDescription: "Key from the original record that contains the Syslog facility number.",
 										},
 										"syslog_format": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Syslog protocol format.",
 											MarkdownDescription: "Syslog protocol format.",
 										},
 										"syslog_hostname_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key name from the original record that contains the hostname that generated the message.",
 											MarkdownDescription: "Key name from the original record that contains the hostname that generated the message.",
 										},
 										"syslog_maxsize": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Maximum size allowed per message, in bytes.",
 											MarkdownDescription: "Maximum size allowed per message, in bytes.",
 										},
 										"syslog_message_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key name that contains the message to deliver.",
 											MarkdownDescription: "Key name that contains the message to deliver.",
 										},
 										"syslog_msgid_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key name from the original record that contains the Message ID associated to the message.",
 											MarkdownDescription: "Key name from the original record that contains the Message ID associated to the message.",
 										},
 										"syslog_procid_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key name from the original record that contains the Process ID that generated the message.",
 											MarkdownDescription: "Key name from the original record that contains the Process ID that generated the message.",
 										},
 										"syslog_sd_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key name from the original record that contains the Structured Data (SD) content.",
 											MarkdownDescription: "Key name from the original record that contains the Structured Data (SD) content.",
 										},
 										"syslog_severity_key": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Key from the original record that contains the Syslog severity number.",
 											MarkdownDescription: "Key from the original record that contains the Syslog severity number.",
 										},
 										"tls": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"client_cert": schema.BoolAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Enable client certificate for mTLS",
 													MarkdownDescription: "Enable client certificate for mTLS",
 												},
 												"skip_verify": schema.BoolAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Skip TLS verification",
 													MarkdownDescription: "Skip TLS verification",
 												},
@@ -220,7 +220,7 @@ func LogOutputListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: TlsValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Syslog TLS",
 											MarkdownDescription: "Syslog TLS",
 										},
@@ -230,7 +230,7 @@ func LogOutputListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: SyslogValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Syslog output",
 									MarkdownDescription: "Syslog output",
 								},
@@ -240,7 +240,7 @@ func LogOutputListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional: true,
+							Computed: true,
 						},
 						"status": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{},

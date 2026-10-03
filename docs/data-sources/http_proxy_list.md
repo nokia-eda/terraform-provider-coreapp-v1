@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) HttpProxySpec defines the desired state of HttpProxy (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,29 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) HttpProxySpec defines the desired state of HttpProxy (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) HttpProxyStatus defines the observed state of HttpProxy (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `auth_type` (String) Determines where authentication happens.
-If "atDestination", then no authentication happens in API server and any auth tokens are forwarded as is.
-If "inApiServer", then authentication happens within the API server and auth tokens are stripped prior to forwarding.
-- `root_url` (String) The proxy destination, including the protocol.
-- `signature_header_verification` (Attributes) SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header. (see [below for nested schema](#nestedatt--items--spec--signature_header_verification))
-
-<a id="nestedatt--items--spec--signature_header_verification"></a>
-### Nested Schema for `items.spec.signature_header_verification`
-
-Optional:
-
-- `algorithm` (String) Algorithm is the HMAC algorithm used to verify the signature.
-- `header` (String) Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).
-- `key_secret` (String) KeySecret is the name of the Kubernetes secret (in the pod namespace) whose "key" data entry holds the HMAC key.
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -94,6 +69,28 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `auth_type` (String) Determines where authentication happens.
+If "atDestination", then no authentication happens in API server and any auth tokens are forwarded as is.
+If "inApiServer", then authentication happens within the API server and auth tokens are stripped prior to forwarding.
+- `root_url` (String) The proxy destination, including the protocol.
+- `signature_header_verification` (Attributes) SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header. (see [below for nested schema](#nestedatt--items--spec--signature_header_verification))
+
+<a id="nestedatt--items--spec--signature_header_verification"></a>
+### Nested Schema for `items.spec.signature_header_verification`
+
+Read-Only:
+
+- `algorithm` (String) Algorithm is the HMAC algorithm used to verify the signature.
+- `header` (String) Header is the HTTP header name that must carry the HMAC value (e.g. X-Webhook-Signature).
+- `key_secret` (String) KeySecret is the name of the Kubernetes secret (in the pod namespace) whose "key" data entry holds the HMAC key.
+
 
 
 <a id="nestedatt--items--status"></a>

@@ -132,6 +132,7 @@ func TopoLinkResourceSchema(ctx context.Context) schema.Schema {
 									Attributes: map[string]schema.Attribute{
 										"interface": schema.StringAttribute{
 											Optional:            true,
+											Computed:            true,
 											Description:         "Normalized name of the interface/port, e.g. ethernet-1-1.",
 											MarkdownDescription: "Normalized name of the interface/port, e.g. ethernet-1-1.",
 										},
@@ -159,6 +160,7 @@ func TopoLinkResourceSchema(ctx context.Context) schema.Schema {
 									Attributes: map[string]schema.Attribute{
 										"interface": schema.StringAttribute{
 											Optional:            true,
+											Computed:            true,
 											Description:         "Normalized name of the interface/port, e.g. ethernet-1-1.",
 											MarkdownDescription: "Normalized name of the interface/port, e.g. ethernet-1-1.",
 										},
@@ -179,15 +181,18 @@ func TopoLinkResourceSchema(ctx context.Context) schema.Schema {
 										},
 									},
 									Optional:            true,
+									Computed:            true,
 									Description:         "Remote, or \"B\" endpoint of the link.",
 									MarkdownDescription: "Remote, or \"B\" endpoint of the link.",
 								},
 								"speed": schema.StringAttribute{
 									Optional:            true,
+									Computed:            true,
 									Description:         "Speed of the link.",
 									MarkdownDescription: "Speed of the link.",
 									Validators: []validator.String{
 										stringvalidator.OneOf(
+											"1.6T",
 											"800G",
 											"400G",
 											"200G",

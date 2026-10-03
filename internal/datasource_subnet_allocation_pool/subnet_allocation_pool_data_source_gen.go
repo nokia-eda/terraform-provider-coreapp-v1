@@ -102,7 +102,7 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"publish_allocations": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 						MarkdownDescription: "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 					},
@@ -113,17 +113,17 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Name of this allocation.",
 												MarkdownDescription: "Name of this allocation.",
 											},
 											"pool_instance": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Pool instance, if empty applies to all instances.",
 												MarkdownDescription: "Pool instance, if empty applies to all instances.",
 											},
 											"value": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Allocation to reserve.",
 												MarkdownDescription: "Allocation to reserve.",
 											},
@@ -134,7 +134,7 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of reservations to exclude from allocations from this segment.",
 									MarkdownDescription: "List of reservations to exclude from allocations from this segment.",
 								},
@@ -142,12 +142,12 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"end": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Value to reserve to.",
 												MarkdownDescription: "Value to reserve to.",
 											},
 											"start": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Value to start reserving.",
 												MarkdownDescription: "Value to start reserving.",
 											},
@@ -158,17 +158,17 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of ranges to exclude from allocations from this segment.",
 									MarkdownDescription: "List of ranges to exclude from allocations from this segment.",
 								},
 								"subnet": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "IPv4 or IPv6 subnet to allocate subnets from, e.g. 10.1.0.0/16.",
 									MarkdownDescription: "IPv4 or IPv6 subnet to allocate subnets from, e.g. 10.1.0.0/16.",
 								},
 								"subnet_length": schema.Int64Attribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).",
 									MarkdownDescription: "The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).",
 								},
@@ -179,7 +179,7 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "List of segments containing subnets to allocate.",
 						MarkdownDescription: "List of segments containing subnets to allocate.",
 					},
@@ -189,7 +189,7 @@ func SubnetAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "SubnetAllocationPool is a generic subnet allocation pool supporting allocation of IPv4 and/or IPv6 child subnets from a list of parent subnet segments.\nIt allocates a subnet of the configured length from the provided parent subnet.\nFor example a pool could return 10.1.0.8/29 when a segment is defined as subnet 10.1.0.0/16 with subnet length 29.\nConsult application documentation to know which pool type to use for a given use case.",
 				MarkdownDescription: "SubnetAllocationPool is a generic subnet allocation pool supporting allocation of IPv4 and/or IPv6 child subnets from a list of parent subnet segments.\nIt allocates a subnet of the configured length from the provided parent subnet.\nFor example a pool could return 10.1.0.8/29 when a segment is defined as subnet 10.1.0.0/16 with subnet length 29.\nConsult application documentation to know which pool type to use for a given use case.",
 			},

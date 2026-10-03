@@ -125,8 +125,16 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
+					"core_access_items": schema.ListAttribute{
+						ElementType:         types.StringType,
+						Optional:            true,
+						Computed:            true,
+						Description:         "Core items to which this role gives access; arbitrary things/actions that do not match the \"resource\" or \"table\" paradigm.",
+						MarkdownDescription: "Core items to which this role gives access; arbitrary things/actions that do not match the \"resource\" or \"table\" paradigm.",
+					},
 					"description": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "A description for the role.",
 						MarkdownDescription: "A description for the role.",
 					},
@@ -136,8 +144,8 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 								"api_groups": schema.ListAttribute{
 									ElementType:         types.StringType,
 									Required:            true,
-									Description:         "The API groups for the resources controlled by the rule.\nAn API group consists of an apiGroup and a version, e.g. \"apigroup/version\".\nThe API group can be a wildcard (\"*\"), in which case it will match any API group.",
-									MarkdownDescription: "The API groups for the resources controlled by the rule.\nAn API group consists of an apiGroup and a version, e.g. \"apigroup/version\".\nThe API group can be a wildcard (\"*\"), in which case it will match any API group.",
+									Description:         "The API groups for the resources controlled by the rule.\nAccepted forms: \"*\" (all groups), \"group\" (all versions), \"group/*\" (all versions), \"group/version\".\nThe API group can be a wildcard (\"*\"), in which case it will match any API group.",
+									MarkdownDescription: "The API groups for the resources controlled by the rule.\nAccepted forms: \"*\" (all groups), \"group\" (all versions), \"group/*\" (all versions), \"group/version\".\nThe API group can be a wildcard (\"*\"), in which case it will match any API group.",
 									Validators: []validator.List{
 										listvalidator.SizeAtLeast(1),
 									},
@@ -172,6 +180,7 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "The rules for access to kubernetes resources",
 						MarkdownDescription: "The rules for access to kubernetes resources",
 					},
@@ -195,6 +204,7 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 										stringvalidator.OneOf(
 											"none",
 											"read",
+											"readWrite",
 										),
 									},
 								},
@@ -206,6 +216,7 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "The rules for access to the database tables.",
 						MarkdownDescription: "The rules for access to the database tables.",
 					},
@@ -241,6 +252,7 @@ func RoleResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "The rules for access to api-server proxied routes.",
 						MarkdownDescription: "The rules for access to api-server proxied routes.",
 					},
@@ -1671,6 +1683,24 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 
 	attributes := in.Attributes()
 
+	coreAccessItemsAttribute, ok := attributes["core_access_items"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`core_access_items is missing from object`)
+
+		return nil, diags
+	}
+
+	coreAccessItemsVal, ok := coreAccessItemsAttribute.(basetypes.ListValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`core_access_items expected to be basetypes.ListValue, was: %T`, coreAccessItemsAttribute))
+	}
+
 	descriptionAttribute, ok := attributes["description"]
 
 	if !ok {
@@ -1748,11 +1778,12 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 	}
 
 	return SpecValue{
-		Description:   descriptionVal,
-		ResourceRules: resourceRulesVal,
-		TableRules:    tableRulesVal,
-		UrlRules:      urlRulesVal,
-		state:         attr.ValueStateKnown,
+		CoreAccessItems: coreAccessItemsVal,
+		Description:     descriptionVal,
+		ResourceRules:   resourceRulesVal,
+		TableRules:      tableRulesVal,
+		UrlRules:        urlRulesVal,
+		state:           attr.ValueStateKnown,
 	}, diags
 }
 
@@ -1819,6 +1850,24 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 		return NewSpecValueUnknown(), diags
 	}
 
+	coreAccessItemsAttribute, ok := attributes["core_access_items"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`core_access_items is missing from object`)
+
+		return NewSpecValueUnknown(), diags
+	}
+
+	coreAccessItemsVal, ok := coreAccessItemsAttribute.(basetypes.ListValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`core_access_items expected to be basetypes.ListValue, was: %T`, coreAccessItemsAttribute))
+	}
+
 	descriptionAttribute, ok := attributes["description"]
 
 	if !ok {
@@ -1896,11 +1945,12 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 	}
 
 	return SpecValue{
-		Description:   descriptionVal,
-		ResourceRules: resourceRulesVal,
-		TableRules:    tableRulesVal,
-		UrlRules:      urlRulesVal,
-		state:         attr.ValueStateKnown,
+		CoreAccessItems: coreAccessItemsVal,
+		Description:     descriptionVal,
+		ResourceRules:   resourceRulesVal,
+		TableRules:      tableRulesVal,
+		UrlRules:        urlRulesVal,
+		state:           attr.ValueStateKnown,
 	}, diags
 }
 
@@ -1972,19 +2022,23 @@ func (t SpecType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = SpecValue{}
 
 type SpecValue struct {
-	Description   basetypes.StringValue `tfsdk:"description"`
-	ResourceRules basetypes.ListValue   `tfsdk:"resource_rules"`
-	TableRules    basetypes.ListValue   `tfsdk:"table_rules"`
-	UrlRules      basetypes.ListValue   `tfsdk:"url_rules"`
-	state         attr.ValueState
+	CoreAccessItems basetypes.ListValue   `tfsdk:"core_access_items"`
+	Description     basetypes.StringValue `tfsdk:"description"`
+	ResourceRules   basetypes.ListValue   `tfsdk:"resource_rules"`
+	TableRules      basetypes.ListValue   `tfsdk:"table_rules"`
+	UrlRules        basetypes.ListValue   `tfsdk:"url_rules"`
+	state           attr.ValueState
 }
 
 func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 4)
+	attrTypes := make(map[string]tftypes.Type, 5)
 
 	var val tftypes.Value
 	var err error
 
+	attrTypes["core_access_items"] = basetypes.ListType{
+		ElemType: types.StringType,
+	}.TerraformType(ctx)
 	attrTypes["description"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["resource_rules"] = basetypes.ListType{
 		ElemType: ResourceRulesValue{}.Type(ctx),
@@ -2000,7 +2054,15 @@ func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 4)
+		vals := make(map[string]tftypes.Value, 5)
+
+		val, err = v.CoreAccessItems.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["core_access_items"] = val
 
 		val, err = v.Description.ToTerraformValue(ctx)
 
@@ -2150,7 +2212,40 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 		)
 	}
 
+	var coreAccessItemsVal basetypes.ListValue
+	switch {
+	case v.CoreAccessItems.IsUnknown():
+		coreAccessItemsVal = types.ListUnknown(types.StringType)
+	case v.CoreAccessItems.IsNull():
+		coreAccessItemsVal = types.ListNull(types.StringType)
+	default:
+		var d diag.Diagnostics
+		coreAccessItemsVal, d = types.ListValue(types.StringType, v.CoreAccessItems.Elements())
+		diags.Append(d...)
+	}
+
+	if diags.HasError() {
+		return types.ObjectUnknown(map[string]attr.Type{
+			"core_access_items": basetypes.ListType{
+				ElemType: types.StringType,
+			},
+			"description": basetypes.StringType{},
+			"resource_rules": basetypes.ListType{
+				ElemType: ResourceRulesValue{}.Type(ctx),
+			},
+			"table_rules": basetypes.ListType{
+				ElemType: TableRulesValue{}.Type(ctx),
+			},
+			"url_rules": basetypes.ListType{
+				ElemType: UrlRulesValue{}.Type(ctx),
+			},
+		}), diags
+	}
+
 	attributeTypes := map[string]attr.Type{
+		"core_access_items": basetypes.ListType{
+			ElemType: types.StringType,
+		},
 		"description": basetypes.StringType{},
 		"resource_rules": basetypes.ListType{
 			ElemType: ResourceRulesValue{}.Type(ctx),
@@ -2174,10 +2269,11 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"description":    v.Description,
-			"resource_rules": resourceRules,
-			"table_rules":    tableRules,
-			"url_rules":      urlRules,
+			"core_access_items": coreAccessItemsVal,
+			"description":       v.Description,
+			"resource_rules":    resourceRules,
+			"table_rules":       tableRules,
+			"url_rules":         urlRules,
 		})
 
 	return objVal, diags
@@ -2196,6 +2292,10 @@ func (v SpecValue) Equal(o attr.Value) bool {
 
 	if v.state != attr.ValueStateKnown {
 		return true
+	}
+
+	if !v.CoreAccessItems.Equal(other.CoreAccessItems) {
+		return false
 	}
 
 	if !v.Description.Equal(other.Description) {
@@ -2227,6 +2327,9 @@ func (v SpecValue) Type(ctx context.Context) attr.Type {
 
 func (v SpecValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
+		"core_access_items": basetypes.ListType{
+			ElemType: types.StringType,
+		},
 		"description": basetypes.StringType{},
 		"resource_rules": basetypes.ListType{
 			ElemType: ResourceRulesValue{}.Type(ctx),

@@ -49,6 +49,7 @@ Optional:
 
 Optional:
 
+- `core_access_items` (List of String) Core items to which this role gives access; arbitrary things/actions that do not match the "resource" or "table" paradigm.
 - `description` (String) A description for the role.
 - `resource_rules` (Attributes List) The rules for access to kubernetes resources (see [below for nested schema](#nestedatt--spec--resource_rules))
 - `table_rules` (Attributes List) The rules for access to the database tables. (see [below for nested schema](#nestedatt--spec--table_rules))
@@ -60,7 +61,7 @@ Optional:
 Required:
 
 - `api_groups` (List of String) The API groups for the resources controlled by the rule.
-An API group consists of an apiGroup and a version, e.g. "apigroup/version".
+Accepted forms: "*" (all groups), "group" (all versions), "group/*" (all versions), "group/version".
 The API group can be a wildcard ("*"), in which case it will match any API group.
 - `permissions` (String) Permissions for resources specified by the rule.
 - `resources` (List of String) Names for the resources controlled by the rule.

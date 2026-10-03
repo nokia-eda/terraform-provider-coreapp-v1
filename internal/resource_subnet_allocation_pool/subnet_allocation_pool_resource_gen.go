@@ -128,6 +128,7 @@ func SubnetAllocationPoolResourceSchema(ctx context.Context) schema.Schema {
 				Attributes: map[string]schema.Attribute{
 					"publish_allocations": schema.BoolAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 						MarkdownDescription: "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 					},
@@ -144,6 +145,7 @@ func SubnetAllocationPoolResourceSchema(ctx context.Context) schema.Schema {
 											},
 											"pool_instance": schema.StringAttribute{
 												Optional:            true,
+												Computed:            true,
 												Description:         "Pool instance, if empty applies to all instances.",
 												MarkdownDescription: "Pool instance, if empty applies to all instances.",
 											},
@@ -160,6 +162,7 @@ func SubnetAllocationPoolResourceSchema(ctx context.Context) schema.Schema {
 										},
 									},
 									Optional:            true,
+									Computed:            true,
 									Description:         "List of reservations to exclude from allocations from this segment.",
 									MarkdownDescription: "List of reservations to exclude from allocations from this segment.",
 								},
@@ -184,6 +187,7 @@ func SubnetAllocationPoolResourceSchema(ctx context.Context) schema.Schema {
 										},
 									},
 									Optional:            true,
+									Computed:            true,
 									Description:         "List of ranges to exclude from allocations from this segment.",
 									MarkdownDescription: "List of ranges to exclude from allocations from this segment.",
 								},

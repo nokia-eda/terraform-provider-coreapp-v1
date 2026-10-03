@@ -106,19 +106,19 @@ func NodeUserDataSourceSchema(ctx context.Context) schema.Schema {
 							Attributes: map[string]schema.Attribute{
 								"groups": schema.ListAttribute{
 									ElementType:         types.StringType,
-									Optional:            true,
+									Computed:            true,
 									Description:         "Assigned groups for this user.",
 									MarkdownDescription: "Assigned groups for this user.",
 								},
 								"node_selector": schema.ListAttribute{
 									ElementType:         types.StringType,
-									Optional:            true,
+									Computed:            true,
 									Description:         "Selector to use when selecting TopoNodes to deploy this user to.",
 									MarkdownDescription: "Selector to use when selecting TopoNodes to deploy this user to.",
 								},
 								"nodes": schema.ListAttribute{
 									ElementType:         types.StringType,
-									Optional:            true,
+									Computed:            true,
 									Description:         " TopoNodes to deploy this user to.",
 									MarkdownDescription: " TopoNodes to deploy this user to.",
 								},
@@ -129,24 +129,29 @@ func NodeUserDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "Matching of this user to node-specific permissions via groups.",
 						MarkdownDescription: "Matching of this user to node-specific permissions via groups.",
 					},
 					"password": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Sensitive:           true,
 						Description:         "Password for this user.",
 						MarkdownDescription: "Password for this user.",
 					},
 					"ssh_public_keys": schema.ListAttribute{
 						ElementType:         types.StringType,
-						Optional:            true,
+						Computed:            true,
 						Description:         "SSH public keys to deploy for the user.",
 						MarkdownDescription: "SSH public keys to deploy for the user.",
 					},
+					"type": schema.StringAttribute{
+						Computed:            true,
+						Description:         "Determines whether the user is authenticated locally on the node or remotely through RADIUS or TACACS+. When set to Remote, no configuration is pushed to the node for this user.",
+						MarkdownDescription: "Determines whether the user is authenticated locally on the node or remotely through RADIUS or TACACS+. When set to Remote, no configuration is pushed to the node for this user.",
+					},
 					"username": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Name of this user. If not provided, the name of the resource will be used.",
 						MarkdownDescription: "Name of this user. If not provided, the name of the resource will be used.",
 					},
@@ -156,7 +161,7 @@ func NodeUserDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "The NodeUser resource represents a user that can be deployed to a set of TopoNodes. It supports managing the user's password, SSH keys, and group bindings.\nAdditionally a NodeUser is referenced by a NodeProfile to indicate how NPP should connect to TopoNodes.",
 				MarkdownDescription: "The NodeUser resource represents a user that can be deployed to a set of TopoNodes. It supports managing the user's password, SSH keys, and group bindings.\nAdditionally a NodeUser is referenced by a NodeProfile to indicate how NPP should connect to TopoNodes.",
 			},
@@ -1657,6 +1662,24 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 			fmt.Sprintf(`ssh_public_keys expected to be basetypes.ListValue, was: %T`, sshPublicKeysAttribute))
 	}
 
+	typeAttribute, ok := attributes["type"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`type is missing from object`)
+
+		return nil, diags
+	}
+
+	typeVal, ok := typeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`type expected to be basetypes.StringValue, was: %T`, typeAttribute))
+	}
+
 	usernameAttribute, ok := attributes["username"]
 
 	if !ok {
@@ -1683,6 +1706,7 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 		GroupBindings: groupBindingsVal,
 		Password:      passwordVal,
 		SshPublicKeys: sshPublicKeysVal,
+		SpecType:      typeVal,
 		Username:      usernameVal,
 		state:         attr.ValueStateKnown,
 	}, diags
@@ -1805,6 +1829,24 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 			fmt.Sprintf(`ssh_public_keys expected to be basetypes.ListValue, was: %T`, sshPublicKeysAttribute))
 	}
 
+	typeAttribute, ok := attributes["type"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`type is missing from object`)
+
+		return NewSpecValueUnknown(), diags
+	}
+
+	typeVal, ok := typeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`type expected to be basetypes.StringValue, was: %T`, typeAttribute))
+	}
+
 	usernameAttribute, ok := attributes["username"]
 
 	if !ok {
@@ -1831,6 +1873,7 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 		GroupBindings: groupBindingsVal,
 		Password:      passwordVal,
 		SshPublicKeys: sshPublicKeysVal,
+		SpecType:      typeVal,
 		Username:      usernameVal,
 		state:         attr.ValueStateKnown,
 	}, diags
@@ -1907,12 +1950,13 @@ type SpecValue struct {
 	GroupBindings basetypes.ListValue   `tfsdk:"group_bindings"`
 	Password      basetypes.StringValue `tfsdk:"password"`
 	SshPublicKeys basetypes.ListValue   `tfsdk:"ssh_public_keys"`
+	SpecType      basetypes.StringValue `tfsdk:"type"`
 	Username      basetypes.StringValue `tfsdk:"username"`
 	state         attr.ValueState
 }
 
 func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 4)
+	attrTypes := make(map[string]tftypes.Type, 5)
 
 	var val tftypes.Value
 	var err error
@@ -1924,13 +1968,14 @@ func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 	attrTypes["ssh_public_keys"] = basetypes.ListType{
 		ElemType: types.StringType,
 	}.TerraformType(ctx)
+	attrTypes["type"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["username"] = basetypes.StringType{}.TerraformType(ctx)
 
 	objectType := tftypes.Object{AttributeTypes: attrTypes}
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 4)
+		vals := make(map[string]tftypes.Value, 5)
 
 		val, err = v.GroupBindings.ToTerraformValue(ctx)
 
@@ -1955,6 +2000,14 @@ func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 		}
 
 		vals["ssh_public_keys"] = val
+
+		val, err = v.SpecType.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["type"] = val
 
 		val, err = v.Username.ToTerraformValue(ctx)
 
@@ -2043,6 +2096,7 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 			"ssh_public_keys": basetypes.ListType{
 				ElemType: types.StringType,
 			},
+			"type":     basetypes.StringType{},
 			"username": basetypes.StringType{},
 		}), diags
 	}
@@ -2055,6 +2109,7 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 		"ssh_public_keys": basetypes.ListType{
 			ElemType: types.StringType,
 		},
+		"type":     basetypes.StringType{},
 		"username": basetypes.StringType{},
 	}
 
@@ -2072,6 +2127,7 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 			"group_bindings":  groupBindings,
 			"password":        v.Password,
 			"ssh_public_keys": sshPublicKeysVal,
+			"type":            v.SpecType,
 			"username":        v.Username,
 		})
 
@@ -2105,6 +2161,10 @@ func (v SpecValue) Equal(o attr.Value) bool {
 		return false
 	}
 
+	if !v.SpecType.Equal(other.SpecType) {
+		return false
+	}
+
 	if !v.Username.Equal(other.Username) {
 		return false
 	}
@@ -2129,6 +2189,7 @@ func (v SpecValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 		"ssh_public_keys": basetypes.ListType{
 			ElemType: types.StringType,
 		},
+		"type":     basetypes.StringType{},
 		"username": basetypes.StringType{},
 	}
 }

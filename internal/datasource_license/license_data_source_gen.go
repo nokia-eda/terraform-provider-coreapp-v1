@@ -97,12 +97,12 @@ func LicenseDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"data": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The license key. This is a base64 encoded string.",
 						MarkdownDescription: "The license key. This is a base64 encoded string.",
 					},
 					"enabled": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Indicates if this license is available for use.",
 						MarkdownDescription: "Indicates if this license is available for use.",
 					},
@@ -112,7 +112,7 @@ func LicenseDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "A License represents an application license providing functionality within EDA. A license providing the \"base\" feature must be provided/valid for transactions to be processed.",
 				MarkdownDescription: "A License represents an application license providing functionality within EDA. A license providing the \"base\" feature must be provided/valid for transactions to be processed.",
 			},

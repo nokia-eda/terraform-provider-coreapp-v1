@@ -124,6 +124,7 @@ func NamespaceResourceSchema(ctx context.Context) schema.Schema {
 						Attributes: map[string]schema.Attribute{
 							"from_namespace": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.",
 								MarkdownDescription: "The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.",
 							},
@@ -134,11 +135,13 @@ func NamespaceResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty.",
 						MarkdownDescription: "Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty.",
 					},
 					"description": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "An optional description of the use of the namespace.",
 						MarkdownDescription: "An optional description of the use of the namespace.",
 					},

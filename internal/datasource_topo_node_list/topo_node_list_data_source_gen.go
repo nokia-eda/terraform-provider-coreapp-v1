@@ -107,17 +107,17 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "The kind of Component, e.g. lineCard.",
 												MarkdownDescription: "The kind of Component, e.g. lineCard.",
 											},
 											"slot": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "The slot this Component resides in, unset for Components that do not have a slot or ID.\ne.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.",
 												MarkdownDescription: "The slot this Component resides in, unset for Components that do not have a slot or ID.\ne.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.",
 											},
 											"type": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Denotes the type of hardware being provisioned, e.g. xcm-x20.",
 												MarkdownDescription: "Denotes the type of hardware being provisioned, e.g. xcm-x20.",
 											},
@@ -128,29 +128,29 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of components within the TopoNode.\nUsed to define the type and location of linecards, fabrics (SFM), media adapter cards (MDA) and control cards (CPM).",
 									MarkdownDescription: "List of components within the TopoNode.\nUsed to define the type and location of linecards, fabrics (SFM), media adapter cards (MDA) and control cards (CPM).",
 								},
 								"license": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Reference to a ConfigMap containing a license for the TopoNode. Overrides the license set in the referenced NodeProfile, if present.",
 									MarkdownDescription: "Reference to a ConfigMap containing a license for the TopoNode. Overrides the license set in the referenced NodeProfile, if present.",
 								},
 								"mac_address": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "MAC address to associate with this TopoNode.\nTypically the chassis MAC address, optionally sent by a node in DHCP requests.\nNot required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.",
 									MarkdownDescription: "MAC address to associate with this TopoNode.\nTypically the chassis MAC address, optionally sent by a node in DHCP requests.\nNot required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.",
 								},
 								"node_profile": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Reference to a NodeProfile to use with this TopoNode.",
 									MarkdownDescription: "Reference to a NodeProfile to use with this TopoNode.",
 								},
 								"npp": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"mode": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The mode in which this TopoNode is functioning.\n\"normal\" (the default)\n   indicates that NPP is expecting an endpoint to exist, and will accept and confirm changes only if the endpoint\n   accepts them.\n\"maintenance\"\n   indicates that no changes will be accepted for the TopoNode, irrespective if the endpoint is up and reachable.\n   The exception is if an upgrade is occuring, in which case changes will be accepted.\n\"null\"\n\t  indicates that changes will be accepted from CRs and no NPP will be spun up. NPP validation will not occur.\n   This may be useful in playground mode to avoid spinning up of 1000s of NPPs.\n\"emulate\"\n   indicates that changes will be accepted at the NPP level, without pushing them to a endpoint. NPP validation\n   still occurs.  If no IP address is present, we also run in emulate mode.\n\"monitor\"\n   indicates that state will be collectd but config will not be pushed to a endpoint. NPP validation still occurs.",
 											MarkdownDescription: "The mode in which this TopoNode is functioning.\n\"normal\" (the default)\n   indicates that NPP is expecting an endpoint to exist, and will accept and confirm changes only if the endpoint\n   accepts them.\n\"maintenance\"\n   indicates that no changes will be accepted for the TopoNode, irrespective if the endpoint is up and reachable.\n   The exception is if an upgrade is occuring, in which case changes will be accepted.\n\"null\"\n\t  indicates that changes will be accepted from CRs and no NPP will be spun up. NPP validation will not occur.\n   This may be useful in playground mode to avoid spinning up of 1000s of NPPs.\n\"emulate\"\n   indicates that changes will be accepted at the NPP level, without pushing them to a endpoint. NPP validation\n   still occurs.  If no IP address is present, we also run in emulate mode.\n\"monitor\"\n   indicates that state will be collectd but config will not be pushed to a endpoint. NPP validation still occurs.",
 										},
@@ -160,34 +160,34 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: NppValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Options relating to NPP interactions with the node.",
 									MarkdownDescription: "Options relating to NPP interactions with the node.",
 								},
 								"on_boarded": schema.BoolAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Indicates if this TopoNode has been bootstrapped or is reachable via configured credentials. Set by BootstrapServer when it completes onboarding functions for a given TopoNode.\nMost applications ignore TopoNodes that have not been onboarded yet.",
 									MarkdownDescription: "Indicates if this TopoNode has been bootstrapped or is reachable via configured credentials. Set by BootstrapServer when it completes onboarding functions for a given TopoNode.\nMost applications ignore TopoNodes that have not been onboarded yet.",
 								},
 								"operating_system": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Operating system running on this TopoNode, e.g. srl.",
 									MarkdownDescription: "Operating system running on this TopoNode, e.g. srl.",
 								},
 								"platform": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Platform type of this TopoNode, e.g. 7220 IXR-D3L.",
 									MarkdownDescription: "Platform type of this TopoNode, e.g. 7220 IXR-D3L.",
 								},
 								"production_address": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"ipv4": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The IPv4 production address",
 											MarkdownDescription: "The IPv4 production address",
 										},
 										"ipv6": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The IPv6 production address",
 											MarkdownDescription: "The IPv6 production address",
 										},
@@ -197,7 +197,7 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: ProductionAddressValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Production address of this TopoNode - this is the address the real, production instance of this TopoNode uses.\nIf left blank, an address will be allocated from the management IP pool specified in the referenced NodeProfile.\nIf this TopoNode is not bootstrapped by EDA this field must be provided.",
 									MarkdownDescription: "Production address of this TopoNode - this is the address the real, production instance of this TopoNode uses.\nIf left blank, an address will be allocated from the management IP pool specified in the referenced NodeProfile.\nIf this TopoNode is not bootstrapped by EDA this field must be provided.",
 								},
@@ -208,17 +208,17 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "The kind of Component, e.g. lineCard.",
 															MarkdownDescription: "The kind of Component, e.g. lineCard.",
 														},
 														"slot": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "The slot this Component resides in, unset for Components that do not have a slot or ID.\ne.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.",
 															MarkdownDescription: "The slot this Component resides in, unset for Components that do not have a slot or ID.\ne.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.",
 														},
 														"type": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Denotes the type of hardware being provisioned, e.g. xcm-x20.",
 															MarkdownDescription: "Denotes the type of hardware being provisioned, e.g. xcm-x20.",
 														},
@@ -229,32 +229,32 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 														},
 													},
 												},
-												Optional:            true,
+												Computed:            true,
 												Description:         "Components for the satellite node.",
 												MarkdownDescription: "Components for the satellite node.",
 											},
 											"id": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "ID of the satellite node.",
 												MarkdownDescription: "ID of the satellite node.",
 											},
 											"license": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "ConfigMap containing a license for this satellite node.",
 												MarkdownDescription: "ConfigMap containing a license for this satellite node.",
 											},
 											"mac_address": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         " MAC Address of the satellite node.",
 												MarkdownDescription: " MAC Address of the satellite node.",
 											},
 											"operating_system": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Operating system for this satellite node.",
 												MarkdownDescription: "Operating system for this satellite node.",
 											},
 											"platform": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Platform of the satellite node.",
 												MarkdownDescription: "Platform of the satellite node.",
 											},
@@ -264,17 +264,17 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 														NestedObject: schema.NestedAttributeObject{
 															Attributes: map[string]schema.Attribute{
 																"kind": schema.StringAttribute{
-																	Optional:            true,
+																	Computed:            true,
 																	Description:         "The kind of Component, e.g. lineCard.",
 																	MarkdownDescription: "The kind of Component, e.g. lineCard.",
 																},
 																"slot": schema.StringAttribute{
-																	Optional:            true,
+																	Computed:            true,
 																	Description:         "The slot this Component resides in, unset for Components that do not have a slot or ID.\ne.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.",
 																	MarkdownDescription: "The slot this Component resides in, unset for Components that do not have a slot or ID.\ne.g. 1 would denote the linecard slot 1, 1/1 would denote linecard slot 1 mda slot 1.",
 																},
 																"type": schema.StringAttribute{
-																	Optional:            true,
+																	Computed:            true,
 																	Description:         "Denotes the type of hardware being provisioned, e.g. xcm-x20.",
 																	MarkdownDescription: "Denotes the type of hardware being provisioned, e.g. xcm-x20.",
 																},
@@ -285,12 +285,12 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 																},
 															},
 														},
-														Optional:            true,
+														Computed:            true,
 														Description:         "List of connector components within the SatellitePortTemplate.\nUsed to define the type and location of connectors.",
 														MarkdownDescription: "List of connector components within the SatellitePortTemplate.\nUsed to define the type and location of connectors.",
 													},
 													"name": schema.StringAttribute{
-														Optional:            true,
+														Computed:            true,
 														Description:         "The name of the SatellitePortTemplate.",
 														MarkdownDescription: "The name of the SatellitePortTemplate.",
 													},
@@ -299,12 +299,12 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 															Attributes: map[string]schema.Attribute{
 																"downlinks": schema.ListAttribute{
 																	ElementType:         types.StringType,
-																	Optional:            true,
+																	Computed:            true,
 																	Description:         "Downlinks for the SatelliteUplink.",
 																	MarkdownDescription: "Downlinks for the SatelliteUplink.",
 																},
 																"name": schema.StringAttribute{
-																	Optional:            true,
+																	Computed:            true,
 																	Description:         "The name of the SatelliteUplink.",
 																	MarkdownDescription: "The name of the SatelliteUplink.",
 																},
@@ -315,7 +315,7 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 																},
 															},
 														},
-														Optional:            true,
+														Computed:            true,
 														Description:         "Uplinks for the SatellitePortTemplate.",
 														MarkdownDescription: "Uplinks for the SatellitePortTemplate.",
 													},
@@ -325,17 +325,17 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 														AttrTypes: PortTemplateValue{}.AttributeTypes(ctx),
 													},
 												},
-												Optional:            true,
+												Computed:            true,
 												Description:         "Port template to be used for the satellite node.",
 												MarkdownDescription: "Port template to be used for the satellite node.",
 											},
 											"satellite_profile": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Satellite node profile to be used for the satellite node.",
 												MarkdownDescription: "Satellite node profile to be used for the satellite node.",
 											},
 											"type": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Type of the satellite node.",
 												MarkdownDescription: "Type of the satellite node.",
 											},
@@ -343,12 +343,12 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"host_port": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "HostPort interface of the satellite uplink.",
 															MarkdownDescription: "HostPort interface of the satellite uplink.",
 														},
 														"satellite": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Satellite interface of the satellite uplink.",
 															MarkdownDescription: "Satellite interface of the satellite uplink.",
 														},
@@ -359,12 +359,12 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 														},
 													},
 												},
-												Optional:            true,
+												Computed:            true,
 												Description:         "Uplink interfaces to be created for the satellite node.",
 												MarkdownDescription: "Uplink interfaces to be created for the satellite node.",
 											},
 											"version": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Software version for this satellite node.",
 												MarkdownDescription: "Software version for this satellite node.",
 											},
@@ -375,22 +375,22 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of satellite nodes associated with this TopoNode.\nUsed to define the type and configuration of satellite nodes.",
 									MarkdownDescription: "List of satellite nodes associated with this TopoNode.\nUsed to define the type and configuration of satellite nodes.",
 								},
 								"serial_number": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Serial number of this TopoNode, optionally sent by a node in DHCP requests.\nNot required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.",
 									MarkdownDescription: "Serial number of this TopoNode, optionally sent by a node in DHCP requests.\nNot required when a TopoNode is not being bootstrapped by EDA, or is simulated through CX.",
 								},
 								"system_interface": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Deprecated: Name of the Interface resource representing the primary loopback on the TopoNode, this field will be removed in the future version.",
 									MarkdownDescription: "Deprecated: Name of the Interface resource representing the primary loopback on the TopoNode, this field will be removed in the future version.",
 								},
 								"version": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Software version of this TopoNode, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).",
 									MarkdownDescription: "Software version of this TopoNode, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).",
 								},
@@ -400,7 +400,7 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "A managed network element is represented via a TopoNode resource, describing characteristics of a specific element in the topology.",
 							MarkdownDescription: "A managed network element is represented via a TopoNode resource, describing characteristics of a specific element in the topology.",
 						},
@@ -415,6 +415,11 @@ func TopoNodeListDataSourceSchema(ctx context.Context) schema.Schema {
 									Computed:            true,
 									Description:         "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of committing\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happens in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error.",
 									MarkdownDescription: "The current state of the connection between NPP and the node.\n\"TryingToConnect\"\n   NPP is attempting to connect and establish connectivity to the node\n\"WaitingForInitialCfg\"\n   NPP is connected to the node but waiting for intial config to push\n\"Committing\"\n\t  NPP is in progress of committing\n\"RetryingCommit\"\n   NPP lost sync to node and is re-pushing current config\n\"Synced\"\n   NPP is in fully synced state\n\"Standby\"\n   NPP is running in standby mode. This state is only used on standby clusters with georedundancy.\n\"NoIpAddress\"\n   NPP is running but there is no IP address for node. This only happens in sim setups when\n   CX has not created the simulated node, or the simulated pod failed to launch due to image error.",
+								},
+								"node_state_last_change": schema.StringAttribute{
+									Computed:            true,
+									Description:         "Indicates when this node last changed state.",
+									MarkdownDescription: "Indicates when this node last changed state.",
 								},
 								"npp_details": schema.StringAttribute{
 									Computed:            true,
@@ -8092,6 +8097,24 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 			fmt.Sprintf(`node_state expected to be basetypes.StringValue, was: %T`, nodeStateAttribute))
 	}
 
+	nodeStateLastChangeAttribute, ok := attributes["node_state_last_change"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`node_state_last_change is missing from object`)
+
+		return nil, diags
+	}
+
+	nodeStateLastChangeVal, ok := nodeStateLastChangeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`node_state_last_change expected to be basetypes.StringValue, was: %T`, nodeStateLastChangeAttribute))
+	}
+
 	nppDetailsAttribute, ok := attributes["npp_details"]
 
 	if !ok {
@@ -8223,16 +8246,17 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 	}
 
 	return StatusValue{
-		NodeDetails:     nodeDetailsVal,
-		NodeState:       nodeStateVal,
-		NppDetails:      nppDetailsVal,
-		NppPod:          nppPodVal,
-		NppState:        nppStateVal,
-		OperatingSystem: operatingSystemVal,
-		Platform:        platformVal,
-		Simulate:        simulateVal,
-		Version:         versionVal,
-		state:           attr.ValueStateKnown,
+		NodeDetails:         nodeDetailsVal,
+		NodeState:           nodeStateVal,
+		NodeStateLastChange: nodeStateLastChangeVal,
+		NppDetails:          nppDetailsVal,
+		NppPod:              nppPodVal,
+		NppState:            nppStateVal,
+		OperatingSystem:     operatingSystemVal,
+		Platform:            platformVal,
+		Simulate:            simulateVal,
+		Version:             versionVal,
+		state:               attr.ValueStateKnown,
 	}, diags
 }
 
@@ -8335,6 +8359,24 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 			fmt.Sprintf(`node_state expected to be basetypes.StringValue, was: %T`, nodeStateAttribute))
 	}
 
+	nodeStateLastChangeAttribute, ok := attributes["node_state_last_change"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`node_state_last_change is missing from object`)
+
+		return NewStatusValueUnknown(), diags
+	}
+
+	nodeStateLastChangeVal, ok := nodeStateLastChangeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`node_state_last_change expected to be basetypes.StringValue, was: %T`, nodeStateLastChangeAttribute))
+	}
+
 	nppDetailsAttribute, ok := attributes["npp_details"]
 
 	if !ok {
@@ -8466,16 +8508,17 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 	}
 
 	return StatusValue{
-		NodeDetails:     nodeDetailsVal,
-		NodeState:       nodeStateVal,
-		NppDetails:      nppDetailsVal,
-		NppPod:          nppPodVal,
-		NppState:        nppStateVal,
-		OperatingSystem: operatingSystemVal,
-		Platform:        platformVal,
-		Simulate:        simulateVal,
-		Version:         versionVal,
-		state:           attr.ValueStateKnown,
+		NodeDetails:         nodeDetailsVal,
+		NodeState:           nodeStateVal,
+		NodeStateLastChange: nodeStateLastChangeVal,
+		NppDetails:          nppDetailsVal,
+		NppPod:              nppPodVal,
+		NppState:            nppStateVal,
+		OperatingSystem:     operatingSystemVal,
+		Platform:            platformVal,
+		Simulate:            simulateVal,
+		Version:             versionVal,
+		state:               attr.ValueStateKnown,
 	}, diags
 }
 
@@ -8547,26 +8590,28 @@ func (t StatusType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = StatusValue{}
 
 type StatusValue struct {
-	NodeDetails     basetypes.StringValue `tfsdk:"node_details"`
-	NodeState       basetypes.StringValue `tfsdk:"node_state"`
-	NppDetails      basetypes.StringValue `tfsdk:"npp_details"`
-	NppPod          basetypes.StringValue `tfsdk:"npp_pod"`
-	NppState        basetypes.StringValue `tfsdk:"npp_state"`
-	OperatingSystem basetypes.StringValue `tfsdk:"operating_system"`
-	Platform        basetypes.StringValue `tfsdk:"platform"`
-	Simulate        basetypes.BoolValue   `tfsdk:"simulate"`
-	Version         basetypes.StringValue `tfsdk:"version"`
-	state           attr.ValueState
+	NodeDetails         basetypes.StringValue `tfsdk:"node_details"`
+	NodeState           basetypes.StringValue `tfsdk:"node_state"`
+	NodeStateLastChange basetypes.StringValue `tfsdk:"node_state_last_change"`
+	NppDetails          basetypes.StringValue `tfsdk:"npp_details"`
+	NppPod              basetypes.StringValue `tfsdk:"npp_pod"`
+	NppState            basetypes.StringValue `tfsdk:"npp_state"`
+	OperatingSystem     basetypes.StringValue `tfsdk:"operating_system"`
+	Platform            basetypes.StringValue `tfsdk:"platform"`
+	Simulate            basetypes.BoolValue   `tfsdk:"simulate"`
+	Version             basetypes.StringValue `tfsdk:"version"`
+	state               attr.ValueState
 }
 
 func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 9)
+	attrTypes := make(map[string]tftypes.Type, 10)
 
 	var val tftypes.Value
 	var err error
 
 	attrTypes["node_details"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["node_state"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["node_state_last_change"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["npp_details"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["npp_pod"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["npp_state"] = basetypes.StringType{}.TerraformType(ctx)
@@ -8579,7 +8624,7 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 9)
+		vals := make(map[string]tftypes.Value, 10)
 
 		val, err = v.NodeDetails.ToTerraformValue(ctx)
 
@@ -8596,6 +8641,14 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 		}
 
 		vals["node_state"] = val
+
+		val, err = v.NodeStateLastChange.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["node_state_last_change"] = val
 
 		val, err = v.NppDetails.ToTerraformValue(ctx)
 
@@ -8683,15 +8736,16 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 	var diags diag.Diagnostics
 
 	attributeTypes := map[string]attr.Type{
-		"node_details":     basetypes.StringType{},
-		"node_state":       basetypes.StringType{},
-		"npp_details":      basetypes.StringType{},
-		"npp_pod":          basetypes.StringType{},
-		"npp_state":        basetypes.StringType{},
-		"operating_system": basetypes.StringType{},
-		"platform":         basetypes.StringType{},
-		"simulate":         basetypes.BoolType{},
-		"version":          basetypes.StringType{},
+		"node_details":           basetypes.StringType{},
+		"node_state":             basetypes.StringType{},
+		"node_state_last_change": basetypes.StringType{},
+		"npp_details":            basetypes.StringType{},
+		"npp_pod":                basetypes.StringType{},
+		"npp_state":              basetypes.StringType{},
+		"operating_system":       basetypes.StringType{},
+		"platform":               basetypes.StringType{},
+		"simulate":               basetypes.BoolType{},
+		"version":                basetypes.StringType{},
 	}
 
 	if v.IsNull() {
@@ -8705,15 +8759,16 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"node_details":     v.NodeDetails,
-			"node_state":       v.NodeState,
-			"npp_details":      v.NppDetails,
-			"npp_pod":          v.NppPod,
-			"npp_state":        v.NppState,
-			"operating_system": v.OperatingSystem,
-			"platform":         v.Platform,
-			"simulate":         v.Simulate,
-			"version":          v.Version,
+			"node_details":           v.NodeDetails,
+			"node_state":             v.NodeState,
+			"node_state_last_change": v.NodeStateLastChange,
+			"npp_details":            v.NppDetails,
+			"npp_pod":                v.NppPod,
+			"npp_state":              v.NppState,
+			"operating_system":       v.OperatingSystem,
+			"platform":               v.Platform,
+			"simulate":               v.Simulate,
+			"version":                v.Version,
 		})
 
 	return objVal, diags
@@ -8739,6 +8794,10 @@ func (v StatusValue) Equal(o attr.Value) bool {
 	}
 
 	if !v.NodeState.Equal(other.NodeState) {
+		return false
+	}
+
+	if !v.NodeStateLastChange.Equal(other.NodeStateLastChange) {
 		return false
 	}
 
@@ -8783,14 +8842,15 @@ func (v StatusValue) Type(ctx context.Context) attr.Type {
 
 func (v StatusValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
-		"node_details":     basetypes.StringType{},
-		"node_state":       basetypes.StringType{},
-		"npp_details":      basetypes.StringType{},
-		"npp_pod":          basetypes.StringType{},
-		"npp_state":        basetypes.StringType{},
-		"operating_system": basetypes.StringType{},
-		"platform":         basetypes.StringType{},
-		"simulate":         basetypes.BoolType{},
-		"version":          basetypes.StringType{},
+		"node_details":           basetypes.StringType{},
+		"node_state":             basetypes.StringType{},
+		"node_state_last_change": basetypes.StringType{},
+		"npp_details":            basetypes.StringType{},
+		"npp_pod":                basetypes.StringType{},
+		"npp_state":              basetypes.StringType{},
+		"operating_system":       basetypes.StringType{},
+		"platform":               basetypes.StringType{},
+		"simulate":               basetypes.BoolType{},
+		"version":                basetypes.StringType{},
 	}
 }

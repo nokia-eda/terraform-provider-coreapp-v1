@@ -35,14 +35,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) TopoLink represents a logical link between two TopoNodes. It may include more than one physical link, being used to represent a LAG or multihomed link.
-To create a point to point link with a single interface on both sides use a single link property.
-To create a point to point link with a LAG configured on both side, use two links with matching nodes.
-A multihomed LAG is created by using two or more links where the A side and/or B side can be different.
-Creating a link with only A specified will create an edge interface. (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -50,47 +42,12 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) TopoLink represents a logical link between two TopoNodes. It may include more than one physical link, being used to represent a LAG or multihomed link.
+To create a point to point link with a single interface on both sides use a single link property.
+To create a point to point link with a LAG configured on both side, use two links with matching nodes.
+A multihomed LAG is created by using two or more links where the A side and/or B side can be different.
+Creating a link with only A specified will create an edge interface. (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) TopoLinkStatus defines the observed state of TopoLink (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `links` (Attributes List) Define the set of physical links making up this TopoLink. (see [below for nested schema](#nestedatt--items--spec--links))
-
-<a id="nestedatt--items--spec--links"></a>
-### Nested Schema for `items.spec.links`
-
-Optional:
-
-- `local` (Attributes) Local, or "A" endpoint of the link. (see [below for nested schema](#nestedatt--items--spec--links--local))
-- `remote` (Attributes) Remote, or "B" endpoint of the link. (see [below for nested schema](#nestedatt--items--spec--links--remote))
-- `speed` (String) Speed of the link.
-- `type` (String) Specify the type of link.
-If type is set to edge, topology information for the remote device can be set; when doing so the Remote Node can be set as the hostname of the remote device and Remote Interface as the remote interface name in the device specific format, e.g. eth0.
-
-<a id="nestedatt--items--spec--links--local"></a>
-### Nested Schema for `items.spec.links.local`
-
-Optional:
-
-- `interface` (String) Normalized name of the interface/port, e.g. ethernet-1-1.
-- `interface_resource` (String) Reference to a Interface.
-- `node` (String) Reference to a TopoNode.
-
-
-<a id="nestedatt--items--spec--links--remote"></a>
-### Nested Schema for `items.spec.links.remote`
-
-Optional:
-
-- `interface` (String) Normalized name of the interface/port, e.g. ethernet-1-1.
-- `interface_resource` (String) Reference to a Interface.
-- `node` (String) Reference to a TopoNode.
-
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -120,6 +77,46 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `links` (Attributes List) Define the set of physical links making up this TopoLink. (see [below for nested schema](#nestedatt--items--spec--links))
+
+<a id="nestedatt--items--spec--links"></a>
+### Nested Schema for `items.spec.links`
+
+Read-Only:
+
+- `local` (Attributes) Local, or "A" endpoint of the link. (see [below for nested schema](#nestedatt--items--spec--links--local))
+- `remote` (Attributes) Remote, or "B" endpoint of the link. (see [below for nested schema](#nestedatt--items--spec--links--remote))
+- `speed` (String) Speed of the link.
+- `type` (String) Specify the type of link.
+If type is set to edge, topology information for the remote device can be set; when doing so the Remote Node can be set as the hostname of the remote device and Remote Interface as the remote interface name in the device specific format, e.g. eth0.
+
+<a id="nestedatt--items--spec--links--local"></a>
+### Nested Schema for `items.spec.links.local`
+
+Read-Only:
+
+- `interface` (String) Normalized name of the interface/port, e.g. ethernet-1-1.
+- `interface_resource` (String) Reference to a Interface.
+- `node` (String) Reference to a TopoNode.
+
+
+<a id="nestedatt--items--spec--links--remote"></a>
+### Nested Schema for `items.spec.links.remote`
+
+Read-Only:
+
+- `interface` (String) Normalized name of the interface/port, e.g. ethernet-1-1.
+- `interface_resource` (String) Reference to a Interface.
+- `node` (String) Reference to a TopoNode.
+
+
 
 
 <a id="nestedatt--items--status"></a>

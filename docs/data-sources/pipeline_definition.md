@@ -22,8 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) PipelineDefinitionSpec defines the trigger conditions, env variables, jobs, and target (main or digital-twin) where the PipelineDefinition is
-applicable for. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -32,193 +30,9 @@ applicable for. (see [below for nested schema](#nestedatt--spec))
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
-- `status` (Attributes) (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `env` (Map of String) Env is a map of environment variables available to all jobs, unless overridden at job or step level
-Variables in the env map cannot be defined in terms of other variables in the map.
-- `jobs` (Attributes Map) Jobs is a map of jobs to run as part of the pipeline
-Jobs run in parallel by default, use 'needs' for dependencies (see [below for nested schema](#nestedatt--spec--jobs))
-- `name` (String) Description of the pipeline, displayed in the UI.
-- `target` (List of String) Target specifies which cluster(s) to run the pipeline on
-Defaults to "main" if not specified
-- `triggers` (Attributes) On defines the events that triggers the pipeline, like a commit for a resource, or on another pipeline call (workflow_dispatch),
-or manual trigger (workflow_call) (see [below for nested schema](#nestedatt--spec--triggers))
-
-<a id="nestedatt--spec--jobs"></a>
-### Nested Schema for `spec.jobs`
-
-Optional:
-
-- `compare_with` (String) CompareWith specifies a previous job key with same WorkflowGVK, to compare results with.
-- `container` (Attributes) Container specifies a custom container for the job.
-Mutually exclusive with RunsIn. (see [below for nested schema](#nestedatt--spec--jobs--container))
-- `env` (Map of String) Env defines job-level environment variables
-- `if` (String) If is a conditional expression
-Job only runs if this evaluates to true
-- `name` (String) Name of the job, defaults to job key
-- `needs` (List of String) Needs specifies job dependencies
-- `outputs` (Map of String) Outputs defines job outputs (name: expression)
-- `runs_in` (String) RunsIn specifies the image to run the job's steps in.
-Mutually exclusive with Container.
-- `steps` (Attributes List) Steps defines the steps to run in this job (see [below for nested schema](#nestedatt--spec--jobs--steps))
-- `timeout_minutes` (Number) TimeoutMinutes sets the job timeout
-- `uses` (String) Uses references a reusable workflow
-Format: path/to/workflow.yaml
-- `with` (Attributes Map) With provides inputs to a reusable workflow or for workflow GVK job provides the spec for the workflow (see [below for nested schema](#nestedatt--spec--jobs--with))
-- `workflow` (Attributes) Job runs a eda workflow of the specified GVK, spec for the workflow is defined in the 'with' section (see [below for nested schema](#nestedatt--spec--jobs--workflow))
-
-<a id="nestedatt--spec--jobs--container"></a>
-### Nested Schema for `spec.jobs.container`
-
-Optional:
-
-- `credentials` (Attributes) Credentials for private container registry (see [below for nested schema](#nestedatt--spec--jobs--container--credentials))
-- `env` (Map of String) Env defines container-level environment variables
-- `image` (String) Image is the container image to use
-- `options` (String) Options for additional container configuration
-- `ports` (List of Number) Ports to expose from the container
-- `volumes` (List of String) Volumes to mount in the container
-
-<a id="nestedatt--spec--jobs--container--credentials"></a>
-### Nested Schema for `spec.jobs.container.credentials`
-
-Optional:
-
-- `password` (String) Password for registry authentication
-- `username` (String) Username for registry authentication
-
-
-
-<a id="nestedatt--spec--jobs--steps"></a>
-### Nested Schema for `spec.jobs.steps`
-
-Optional:
-
-- `continue_on_error` (Boolean) ContinueOnError allows workflow to continue if step fails
-- `env` (Map of String) Env defines step-level environment variables
-- `id` (String) ID is a unique identifier for the step, this is must if the step produces outputs and those
-outputs are referenced later in other jobs/steps
-- `if` (String) If is a conditional expression
-Step only runs if this evaluates to true
-- `name` (String) Name of the step (for display)
-- `run` (String) Run contains the command to execute
-- `timeout_minutes` (Number) TimeoutMinutes sets the step timeout
-- `uses` (String) Uses references a reusable workflow or pipeline
-Format: owner/repo@version
-- `with` (Attributes Map) With provides inputs to the action (see [below for nested schema](#nestedatt--spec--jobs--steps--with))
-
-<a id="nestedatt--spec--jobs--steps--with"></a>
-### Nested Schema for `spec.jobs.steps.with`
-
-
-
-<a id="nestedatt--spec--jobs--with"></a>
-### Nested Schema for `spec.jobs.with`
-
-
-<a id="nestedatt--spec--jobs--workflow"></a>
-### Nested Schema for `spec.jobs.workflow`
-
-Optional:
-
-- `group` (String)
-- `kind` (String)
-- `version` (String)
-
-
-
-<a id="nestedatt--spec--triggers"></a>
-### Nested Schema for `spec.triggers`
-
-Optional:
-
-- `events` (Attributes) TriggerEvents defines the events that trigger the pipeline
-Examples: Create, Update, Delete (see [below for nested schema](#nestedatt--spec--triggers--events))
-- `workflow_call` (Attributes) WorkflowCall defines this as a reusable workflow
-Specifies inputs, outputs, and secrets (see [below for nested schema](#nestedatt--spec--triggers--workflow_call))
-
-<a id="nestedatt--spec--triggers--events"></a>
-### Nested Schema for `spec.triggers.events`
-
-Optional:
-
-- `resource_trigger` (Attributes List) ResourceTrigger filters events by resource GVK or fields
-Only events affecting these groups and fields in them will trigger the pipeline (see [below for nested schema](#nestedatt--spec--triggers--events--resource_trigger))
-
-<a id="nestedatt--spec--triggers--events--resource_trigger"></a>
-### Nested Schema for `spec.triggers.events.resource_trigger`
-
-Optional:
-
-- `fields` (List of String) fields in above GVK that trigger the pipeline when they are
-modified, e.g., "spec.version", etc.
-- `gvk` (Attributes) (see [below for nested schema](#nestedatt--spec--triggers--events--resource_trigger--gvk))
-- `labels` (List of String) Labels filters events by labels
-Only events with these labels will trigger the pipeline
-- `type` (List of String) Type of event (Create, Update, Delete, *)
-
-<a id="nestedatt--spec--triggers--events--resource_trigger--gvk"></a>
-### Nested Schema for `spec.triggers.events.resource_trigger.gvk`
-
-Optional:
-
-- `group` (String)
-- `kind` (String)
-- `version` (String)
-
-
-
-
-<a id="nestedatt--spec--triggers--workflow_call"></a>
-### Nested Schema for `spec.triggers.workflow_call`
-
-Optional:
-
-- `inputs` (Attributes Map) Inputs defines input parameters for the workflow (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--inputs))
-- `outputs` (Attributes Map) Outputs defines outputs from the workflow (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--outputs))
-- `secrets` (Attributes Map) Secrets defines required secrets for the workflow (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--secrets))
-
-<a id="nestedatt--spec--triggers--workflow_call--inputs"></a>
-### Nested Schema for `spec.triggers.workflow_call.inputs`
-
-Optional:
-
-- `default` (Attributes) Default value if caller does not provide one (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--inputs--default))
-- `description` (String) Description of the input parameter
-- `input_type` (String) Type of the input (String, Number, Boolean)
-- `required` (Boolean) Required indicates if this input is mandatory
-
-<a id="nestedatt--spec--triggers--workflow_call--inputs--default"></a>
-### Nested Schema for `spec.triggers.workflow_call.inputs.default`
-
-
-
-<a id="nestedatt--spec--triggers--workflow_call--outputs"></a>
-### Nested Schema for `spec.triggers.workflow_call.outputs`
-
-Optional:
-
-- `description` (String) Description of the output
-- `output_type` (String) Type of the output (String, Number, Boolean)
-- `output_value` (String) Value is an expression like ${{ jobs.*.outputs.* }}
-
-
-<a id="nestedatt--spec--triggers--workflow_call--secrets"></a>
-### Nested Schema for `spec.triggers.workflow_call.secrets`
-
-Optional:
-
-- `description` (String) Description of the secret
-- `required` (Boolean) Required indicates if this secret is mandatory
-
-
-
-
+- `spec` (Attributes) Describes a pipeline: what triggers it, the environment variables it
+exposes, and the jobs it runs. (see [below for nested schema](#nestedatt--spec))
+- `status` (Attributes) The result of validating the pipeline definition. (see [below for nested schema](#nestedatt--status))
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -250,11 +64,265 @@ Read-Only:
 - `namespace` (String)
 
 
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `description` (String) A short description of what the pipeline does.
+- `enabled` (Boolean) Whether this PipelineDefinition is validated and available for root, manual,
+and reusable execution. Disabled definitions are stored without body validation
+and cannot be invoked until enabled.
+- `env` (Attributes List) Environment variables available to every job, unless overridden at the job or
+step level. Entries cannot reference other entries in this map. (see [below for nested schema](#nestedatt--spec--env))
+- `jobs` (Attributes List) The jobs that make up the pipeline.
+Jobs run in parallel unless ordered with dependencies. (see [below for nested schema](#nestedatt--spec--jobs))
+- `transaction` (Attributes) Inputs to extract from the transaction that triggered this pipeline. (see [below for nested schema](#nestedatt--spec--transaction))
+- `triggers` (Attributes) What starts the pipeline: resource events, or invocation as a reusable
+workflow by another pipeline. (see [below for nested schema](#nestedatt--spec--triggers))
+
+<a id="nestedatt--spec--env"></a>
+### Nested Schema for `spec.env`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
+
+<a id="nestedatt--spec--jobs"></a>
+### Nested Schema for `spec.jobs`
+
+Read-Only:
+
+- `allow_failure` (Boolean) Let the pipeline continue even if this job fails.
+- `compare_with` (String) The key of an earlier job running the same workflow, to compare results against.
+- `container` (Attributes) A custom container to run the job in.
+Mutually exclusive with Runs In. (see [below for nested schema](#nestedatt--spec--jobs--container))
+- `description` (String) A short description of the job.
+- `env` (Attributes List) Environment variables for this job, overriding pipeline-level values. (see [below for nested schema](#nestedatt--spec--jobs--env))
+- `if` (String) A conditional expression; the job runs only if it evaluates to true.
+- `name` (String) Unique identifier for the job. Needs, compareWith and expressions refer to this name.
+- `needs` (List of String) Keys of jobs that must complete before this one starts.
+- `outputs` (Attributes List) Outputs the job publishes, as a map of name to expression. (see [below for nested schema](#nestedatt--spec--jobs--outputs))
+- `runs_in` (String) The built-in image to run the job's steps in.
+Mutually exclusive with Container.
+- `steps` (Attributes List) The steps to run in this job, in order. (see [below for nested schema](#nestedatt--spec--jobs--steps))
+- `timeout_minutes` (Number) How many minutes the job may run before it is cancelled.
+- `uses` (String) A reusable workflow to invoke, in the form path/to/workflow.yaml.
+- `with` (Attributes List) Inputs passed to the reusable workflow, or the spec of the Workflow to run. (see [below for nested schema](#nestedatt--spec--jobs--with))
+- `workflow` (Attributes) Runs an EDA workflow of this group, version and kind; the workflow's spec is given in With. (see [below for nested schema](#nestedatt--spec--jobs--workflow))
+
+<a id="nestedatt--spec--jobs--container"></a>
+### Nested Schema for `spec.jobs.container`
+
+Read-Only:
+
+- `env` (Attributes List) Environment variables set in the container. (see [below for nested schema](#nestedatt--spec--jobs--container--env))
+- `image` (String) The container image to run.
+- `options` (String) Additional container configuration options.
+- `ports` (List of Number) Ports to expose from the container.
+- `volumes` (List of String) Volumes to mount in the container.
+
+<a id="nestedatt--spec--jobs--container--env"></a>
+### Nested Schema for `spec.jobs.container.env`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--spec--jobs--env"></a>
+### Nested Schema for `spec.jobs.env`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
+
+<a id="nestedatt--spec--jobs--outputs"></a>
+### Nested Schema for `spec.jobs.outputs`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
+
+<a id="nestedatt--spec--jobs--steps"></a>
+### Nested Schema for `spec.jobs.steps`
+
+Read-Only:
+
+- `allow_failure` (Boolean) Continue with later steps even if this one fails.
+- `env` (Attributes List) Environment variables for this step, overriding job-level values. (see [below for nested schema](#nestedatt--spec--jobs--steps--env))
+- `id` (String) A unique identifier for the step; required if its outputs are
+referenced by later steps or jobs.
+- `if` (String) A conditional expression; the step runs only if it evaluates to true.
+- `name` (String) Name of the step.
+- `run` (String) The command to execute.
+- `timeout_minutes` (Number) How many minutes the step may run before it is cancelled.
+
+<a id="nestedatt--spec--jobs--steps--env"></a>
+### Nested Schema for `spec.jobs.steps.env`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--spec--jobs--with"></a>
+### Nested Schema for `spec.jobs.with`
+
+Read-Only:
+
+- `name` (String)
+- `value` (Attributes) (see [below for nested schema](#nestedatt--spec--jobs--with--value))
+
+<a id="nestedatt--spec--jobs--with--value"></a>
+### Nested Schema for `spec.jobs.with.value`
+
+
+
+<a id="nestedatt--spec--jobs--workflow"></a>
+### Nested Schema for `spec.jobs.workflow`
+
+Read-Only:
+
+- `group` (String)
+- `kind` (String)
+- `version` (String)
+
+
+
+<a id="nestedatt--spec--transaction"></a>
+### Nested Schema for `spec.transaction`
+
+Read-Only:
+
+- `inputs` (Attributes List) Named inputs to extract from resources in the transaction. (see [below for nested schema](#nestedatt--spec--transaction--inputs))
+
+<a id="nestedatt--spec--transaction--inputs"></a>
+### Nested Schema for `spec.transaction.inputs`
+
+Read-Only:
+
+- `default` (Attributes) Value used when extraction yields no results. (see [below for nested schema](#nestedatt--spec--transaction--inputs--default))
+- `description` (String) A short description of the input.
+- `extract` (String) A dot-delimited path, e.g. "metadata.name" or "spec.version", to the value to pull
+from each matching resource. Array selectors and JSONPath expressions are not supported.
+- `gvk` (Attributes) The group, version and kind of resources to extract from. (see [below for nested schema](#nestedatt--spec--transaction--inputs--gvk))
+- `name` (String) The unique name of the input.
+- `required` (Boolean) Whether this input is mandatory. If extraction yields no values and no
+default is set, the transaction fails.
+- `type` (List of String) The resource change types (Create, Update, Delete) from which to extract fields.
+An omitted or empty list selects all change types.
+
+<a id="nestedatt--spec--transaction--inputs--default"></a>
+### Nested Schema for `spec.transaction.inputs.default`
+
+
+<a id="nestedatt--spec--transaction--inputs--gvk"></a>
+### Nested Schema for `spec.transaction.inputs.gvk`
+
+Read-Only:
+
+- `group` (String)
+- `kind` (String)
+- `version` (String)
+
+
+
+
+<a id="nestedatt--spec--triggers"></a>
+### Nested Schema for `spec.triggers`
+
+Read-Only:
+
+- `events` (Attributes) Resource events (Create, Update, Delete) that trigger the pipeline. (see [below for nested schema](#nestedatt--spec--triggers--events))
+- `workflow_call` (Attributes) Marks this pipeline as a reusable workflow, declaring the inputs it
+accepts and the outputs it returns. (see [below for nested schema](#nestedatt--spec--triggers--workflow_call))
+
+<a id="nestedatt--spec--triggers--events"></a>
+### Nested Schema for `spec.triggers.events`
+
+Read-Only:
+
+- `resource_trigger` (Attributes List) Filters that select which resource events trigger the pipeline,
+by resource type, fields and labels. (see [below for nested schema](#nestedatt--spec--triggers--events--resource_trigger))
+
+<a id="nestedatt--spec--triggers--events--resource_trigger"></a>
+### Nested Schema for `spec.triggers.events.resource_trigger`
+
+Read-Only:
+
+- `fields` (List of String) Paths within the resource, e.g. "spec.version", that trigger the
+pipeline when modified.
+- `gvk` (Attributes) The group, version and kind of resources to watch. (see [below for nested schema](#nestedatt--spec--triggers--events--resource_trigger--gvk))
+- `labels` (List of String) Labels a resource must carry for its events to trigger the pipeline.
+- `type` (List of String) The event types (Create, Update, Delete) that activate this trigger.
+
+<a id="nestedatt--spec--triggers--events--resource_trigger--gvk"></a>
+### Nested Schema for `spec.triggers.events.resource_trigger.gvk`
+
+Read-Only:
+
+- `group` (String)
+- `kind` (String)
+- `version` (String)
+
+
+
+
+<a id="nestedatt--spec--triggers--workflow_call"></a>
+### Nested Schema for `spec.triggers.workflow_call`
+
+Read-Only:
+
+- `inputs` (Attributes List) Input parameters the workflow accepts from its caller. (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--inputs))
+- `outputs` (Attributes List) Values the workflow returns to its caller. (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--outputs))
+
+<a id="nestedatt--spec--triggers--workflow_call--inputs"></a>
+### Nested Schema for `spec.triggers.workflow_call.inputs`
+
+Read-Only:
+
+- `default` (Attributes) Value used when the caller does not provide one. (see [below for nested schema](#nestedatt--spec--triggers--workflow_call--inputs--default))
+- `description` (String) A short description of the input.
+- `input_type` (String) Type of the input (String, Number, Boolean).
+- `is_array` (Boolean) Whether this input accepts an array of values of the declared input type.
+- `name` (String) The unique name of the input.
+- `required` (Boolean) Whether the caller must provide this input.
+
+<a id="nestedatt--spec--triggers--workflow_call--inputs--default"></a>
+### Nested Schema for `spec.triggers.workflow_call.inputs.default`
+
+
+
+<a id="nestedatt--spec--triggers--workflow_call--outputs"></a>
+### Nested Schema for `spec.triggers.workflow_call.outputs`
+
+Read-Only:
+
+- `description` (String) A short description of the output.
+- `name` (String) The unique name of the output.
+- `output_type` (String) Type of the output (String, Number, Boolean).
+- `output_value` (String) An expression producing the output, like ${{ jobs.*.outputs.* }}.
+
+
+
+
+
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`
 
 Read-Only:
 
-- `valid` (Boolean) A pipeline definition is valid if it has all required fields and passes validation checks
-(e.g., no circular dependencies, valid workflow references, valid dependencies among jobs, etc.)
-- `validation_error` (String) If the definition is not valid, this field contains a message describing the validation error
+- `valid` (Boolean) True when the definition has all required fields and passes validation checks,
+e.g. no circular dependencies, and valid workflow references and job dependencies.
+- `validation_error` (String) Describes the validation failure when the definition is not valid.

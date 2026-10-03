@@ -78,8 +78,8 @@ Optional:
 
 Required:
 
-- `group` (String) The group of the resource the alarm is raised against, for example core.eda.nokia.com
-- `kind` (String) The kind of the resource that the alarm is rasied against, for example Interface
+- `group` (String) The resource group that the alarm is raised against
+- `kind` (String) The resource kind that the alarm is rasied against
 
 Optional:
 
@@ -91,7 +91,7 @@ Optional:
 
 Required:
 
-- `source_group` (String) The group of the resource that raises the alarm, for example core.eda.nokia.com
+- `source_group` (String) The resource group which raises the alarm
 - `type` (String) Type of the alarm, for example InterfaceDown
 
 

@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) AlarmDefinitionSpec defines the desired state of Alarm (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,23 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) AlarmDefinitionSpec defines the desired state of Alarm (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) AlarmDefinitionStatus defines the observed state of Alarm (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `cluster_specific` (Boolean) Specifies if the alarm is within the EDA cluster, such as a pod issue
-- `description` (String) Description of the alarm
-- `group` (String) The API Group of the resouce the alarm is raised against.
-If unset, the alarm may be raised against multiple resource definitions
-- `kind` (String) The resouce kind the alarm is raised against.
-If unset, the alarm may be raised against multiple resource definitions
-- `severity` (String) Default alarm severity. If unset, severity is variable.
-- `source_group` (String) The API group of the alarm source. This identifies the application which raises the alarm.
-- `type` (String) Type of the alarm
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -88,6 +69,22 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `cluster_specific` (Boolean) Specifies if the alarm is within the EDA cluster, such as a pod issue
+- `description` (String) Description of the alarm
+- `group` (String) The API Group of the resouce the alarm is raised against.
+If unset, the alarm may be raised against multiple resource definitions
+- `kind` (String) The resouce kind the alarm is raised against.
+If unset, the alarm may be raised against multiple resource definitions
+- `severity` (String) Default alarm severity. If unset, severity is variable.
+- `source_group` (String) The API group of the alarm source. This identifies the application which raises the alarm.
+- `type` (String) Type of the alarm
 
 
 <a id="nestedatt--items--status"></a>

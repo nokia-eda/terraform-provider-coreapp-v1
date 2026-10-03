@@ -104,7 +104,7 @@ func BranchListDataSourceSchema(ctx context.Context) schema.Schema {
 						"spec": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{
 								"cluster_provider": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "ClusterProvider is the name of the ClusterProvider resource to use for this branch\nif not set than local cluster will be used using vcluster",
 									MarkdownDescription: "ClusterProvider is the name of the ClusterProvider resource to use for this branch\nif not set than local cluster will be used using vcluster",
 								},
@@ -114,7 +114,7 @@ func BranchListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional: true,
+							Computed: true,
 						},
 						"status": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{

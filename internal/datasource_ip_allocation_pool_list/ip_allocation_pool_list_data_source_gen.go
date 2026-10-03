@@ -104,7 +104,7 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 						"spec": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{
 								"publish_allocations": schema.BoolAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 									MarkdownDescription: "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 								},
@@ -112,12 +112,12 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"allocate_broadcast_address": schema.BoolAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Permit the allocation of the broadcast address.",
 												MarkdownDescription: "Permit the allocation of the broadcast address.",
 											},
 											"allocate_network_address": schema.BoolAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Permit the allocation of the network address.",
 												MarkdownDescription: "Permit the allocation of the network address.",
 											},
@@ -125,17 +125,17 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Name of this allocation.",
 															MarkdownDescription: "Name of this allocation.",
 														},
 														"pool_instance": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Pool instance, if empty applies to all instances.",
 															MarkdownDescription: "Pool instance, if empty applies to all instances.",
 														},
 														"value": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Allocation to reserve.",
 															MarkdownDescription: "Allocation to reserve.",
 														},
@@ -146,7 +146,7 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 														},
 													},
 												},
-												Optional:            true,
+												Computed:            true,
 												Description:         "List of reservations to exclude from allocations from this segment.",
 												MarkdownDescription: "List of reservations to exclude from allocations from this segment.",
 											},
@@ -154,12 +154,12 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"end": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Value to reserve to.",
 															MarkdownDescription: "Value to reserve to.",
 														},
 														"start": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Value to start reserving.",
 															MarkdownDescription: "Value to start reserving.",
 														},
@@ -170,12 +170,12 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 														},
 													},
 												},
-												Optional:            true,
+												Computed:            true,
 												Description:         "List of ranges to exclude from allocations from this segment.",
 												MarkdownDescription: "List of ranges to exclude from allocations from this segment.",
 											},
 											"subnet": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "IPv4 or IPv6 subnet, e.g. 10.1.1.0/24.",
 												MarkdownDescription: "IPv4 or IPv6 subnet, e.g. 10.1.1.0/24.",
 											},
@@ -186,7 +186,7 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of segments containing IPv4 or IPv6 addresses to allocate.",
 									MarkdownDescription: "List of segments containing IPv4 or IPv6 addresses to allocate.",
 								},
@@ -196,7 +196,7 @@ func IpAllocationPoolListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "IPAllocationPool is a generic IP allocation pool supporting allocation of IPv4 and/or IPv6 addresses from a set of segments.\nIt is different from IPInSubnetAllocationPool in that it returns a single unzoned IP address, i.e. an IP address without a subnet. For example a 10.1.1.0/24 segment could return 10.1.1.1.\nConsult application documentation to know which pool type to use for a given use case.",
 							MarkdownDescription: "IPAllocationPool is a generic IP allocation pool supporting allocation of IPv4 and/or IPv6 addresses from a set of segments.\nIt is different from IPInSubnetAllocationPool in that it returns a single unzoned IP address, i.e. an IP address without a subnet. For example a 10.1.1.0/24 segment could return 10.1.1.1.\nConsult application documentation to know which pool type to use for a given use case.",
 						},

@@ -31,10 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) WorkflowDefinitionSpec defines the desired state of FlowDefinition (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -42,38 +38,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) WorkflowDefinitionSpec defines the desired state of FlowDefinition (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) WorkflowDefinitionStatus defines the observed state of FlowDefinition (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `flow_definition_resource` (Attributes) the resource type to be used for this flow, can only be set if Schema is not set (see [below for nested schema](#nestedatt--items--spec--flow_definition_resource))
-- `flow_definition_schema` (Attributes) the schema for the flow, can only be set if Resource is not set (see [below for nested schema](#nestedatt--items--spec--flow_definition_schema))
-- `image` (String) Container image containing the flow. For example "ghcr.io/nokia-eda/apps/operatingsystem:v1.0.0".
-- `image_pull_secrets` (List of String) Secrets to use to pull the image for this workflow.
-- `namespaced` (Boolean) If set, resources of this CRD are namespace scoped
-
-<a id="nestedatt--items--spec--flow_definition_resource"></a>
-### Nested Schema for `items.spec.flow_definition_resource`
-
-Optional:
-
-- `group` (String)
-- `kind` (String)
-- `version` (String)
-
-
-<a id="nestedatt--items--spec--flow_definition_schema"></a>
-### Nested Schema for `items.spec.flow_definition_schema`
-
-Optional:
-
-- `json_schema_spec` (String) A string containing the JSON schema the workflow accepts as input.
-- `json_schema_status` (String) A string containing the JSON schema the workflow will populate as output.
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -103,6 +69,37 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `flow_definition_resource` (Attributes) The resource type to be used for this flow, can only be set if flowDefinitionSchema is not set (see [below for nested schema](#nestedatt--items--spec--flow_definition_resource))
+- `flow_definition_schema` (Attributes) The schema for the flow, can only be set if flowDefinitionResource is not set (see [below for nested schema](#nestedatt--items--spec--flow_definition_schema))
+- `image` (String) Container image containing the flow. For example "ghcr.io/nokia-eda/apps/operatingsystem:v1.0.0".
+- `image_pull_secrets` (List of String) Secrets to use to pull the image for this workflow.
+- `namespaced` (Boolean) If set, resources of this CRD are namespace scoped
+
+<a id="nestedatt--items--spec--flow_definition_resource"></a>
+### Nested Schema for `items.spec.flow_definition_resource`
+
+Read-Only:
+
+- `group` (String)
+- `kind` (String)
+- `version` (String)
+
+
+<a id="nestedatt--items--spec--flow_definition_schema"></a>
+### Nested Schema for `items.spec.flow_definition_schema`
+
+Read-Only:
+
+- `json_schema_spec` (String) A string containing the JSON schema the workflow accepts as input.
+- `json_schema_status` (String) A string containing the JSON schema the workflow will populate as output.
+
 
 
 <a id="nestedatt--items--status"></a>

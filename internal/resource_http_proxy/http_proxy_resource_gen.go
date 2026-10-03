@@ -166,6 +166,7 @@ func HttpProxyResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header.",
 						MarkdownDescription: "SignatureHeaderVerification, when set, requires incoming requests to include a valid HMAC in the given header.",
 					},

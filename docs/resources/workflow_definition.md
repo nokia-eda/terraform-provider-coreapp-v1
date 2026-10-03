@@ -52,8 +52,8 @@ Required:
 
 Optional:
 
-- `flow_definition_resource` (Attributes) the resource type to be used for this flow, can only be set if Schema is not set (see [below for nested schema](#nestedatt--spec--flow_definition_resource))
-- `flow_definition_schema` (Attributes) the schema for the flow, can only be set if Resource is not set (see [below for nested schema](#nestedatt--spec--flow_definition_schema))
+- `flow_definition_resource` (Attributes) The resource type to be used for this flow, can only be set if flowDefinitionSchema is not set (see [below for nested schema](#nestedatt--spec--flow_definition_resource))
+- `flow_definition_schema` (Attributes) The schema for the flow, can only be set if flowDefinitionResource is not set (see [below for nested schema](#nestedatt--spec--flow_definition_schema))
 - `image_pull_secrets` (List of String) Secrets to use to pull the image for this workflow.
 - `namespaced` (Boolean) If set, resources of this CRD are namespace scoped
 

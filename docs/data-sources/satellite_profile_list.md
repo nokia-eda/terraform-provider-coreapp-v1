@@ -35,10 +35,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -46,33 +42,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `container_image` (String) Container image to use when simulating Satellite Nodes referencing this SatelliteProfile, e.g. ghcr.io/nokia/sros:24.7.r1.
-- `image_pull_secret` (String) Secret used to authenticate to the container registry where the container image is hosted.
-- `images` (Attributes List) URLs hosting software images for bootstrapping Satellite Nodes referencing this SatelliteProfile. (see [below for nested schema](#nestedatt--items--spec--images))
-- `license` (String) ConfigMap containing a license for Satellite Nodes referencing this SatelliteProfile.
-- `operating_system` (String) Sets the operating system of this SatelliteProfile, e.g. sros.
-- `platform_path` (String) JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.type.
-- `serial_number_path` (String) JSPath to use for retrieving the serial number string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.serial-number.
-- `version` (String) Sets the software version of this SatelliteProfile, e.g. 24.7.r1 (for sros).
-- `version_match` (String) Regular expression to match the node-retrieved version string to Satellite Node version, e.g. v0\.0\.0.*.
-- `version_path` (String) JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .system.information.version.
-
-<a id="nestedatt--items--spec--images"></a>
-### Nested Schema for `items.spec.images`
-
-Optional:
-
-- `image` (String) URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.
-- `image_md5` (String) URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -102,6 +73,32 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `container_image` (String) Container image to use when simulating Satellite Nodes referencing this SatelliteProfile, e.g. ghcr.io/nokia/sros:24.7.r1.
+- `image_pull_secret` (String) Secret used to authenticate to the container registry where the container image is hosted.
+- `images` (Attributes List) URLs hosting software images for bootstrapping Satellite Nodes referencing this SatelliteProfile. (see [below for nested schema](#nestedatt--items--spec--images))
+- `license` (String) ConfigMap containing a license for Satellite Nodes referencing this SatelliteProfile.
+- `operating_system` (String) Sets the operating system of this SatelliteProfile, e.g. sros.
+- `platform_path` (String) JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.type.
+- `serial_number_path` (String) JSPath to use for retrieving the serial number string from Satellite Nodes referencing this SatelliteProfile, e.g. .platform.chassis.serial-number.
+- `version` (String) Sets the software version of this SatelliteProfile, e.g. 24.7.r1 (for sros).
+- `version_match` (String) Regular expression to match the node-retrieved version string to Satellite Node version, e.g. v0\.0\.0.*.
+- `version_path` (String) JSPath to use for retrieving the version string from Satellite Nodes referencing this SatelliteProfile, e.g. .system.information.version.
+
+<a id="nestedatt--items--spec--images"></a>
+### Nested Schema for `items.spec.images`
+
+Read-Only:
+
+- `image` (String) URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.
+- `image_md5` (String) URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.
+
 
 
 <a id="nestedatt--items--status"></a>

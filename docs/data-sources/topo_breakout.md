@@ -23,7 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) TopoBreakoutSpec defines the desired state of TopoBreakout (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -32,18 +31,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) TopoBreakoutSpec defines the desired state of TopoBreakout (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) TopoBreakoutStatus defines the observed state of TopoBreakout (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `channels` (Number) The number of breakout channels to create
-- `interface` (List of String) A list of normalized parent interface/port
-- `node` (List of String) Reference to a list of TopoNodes where the parent interfaces are to be broken out
-- `speed` (String) The speed of each breakout channel
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -73,6 +62,17 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `channels` (Number) The number of breakout channels to create
+- `interface` (List of String) A list of normalized parent interface/port
+- `node` (List of String) Reference to a list of TopoNodes where the parent interfaces are to be broken out
+- `speed` (String) The speed of each breakout channel
 
 
 <a id="nestedatt--status"></a>

@@ -102,7 +102,7 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"publish_allocations": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 						MarkdownDescription: "If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.",
 					},
@@ -113,17 +113,17 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Name of this allocation.",
 												MarkdownDescription: "Name of this allocation.",
 											},
 											"pool_instance": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Pool instance, if empty applies to all instances.",
 												MarkdownDescription: "Pool instance, if empty applies to all instances.",
 											},
 											"value": schema.Int64Attribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Index to reserve.",
 												MarkdownDescription: "Index to reserve.",
 											},
@@ -134,7 +134,7 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of reservations to exclude from allocations from this segment.",
 									MarkdownDescription: "List of reservations to exclude from allocations from this segment.",
 								},
@@ -142,12 +142,12 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"end": schema.Int64Attribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Value to reserve to.",
 												MarkdownDescription: "Value to reserve to.",
 											},
 											"start": schema.Int64Attribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Value to start reserving.",
 												MarkdownDescription: "Value to start reserving.",
 											},
@@ -158,17 +158,17 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Range of reservations to exclude from allocations from this segment.",
 									MarkdownDescription: "Range of reservations to exclude from allocations from this segment.",
 								},
 								"size": schema.Int64Attribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Number of elements in the segment.",
 									MarkdownDescription: "Number of elements in the segment.",
 								},
 								"start": schema.Int64Attribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Starting value of the segment.",
 									MarkdownDescription: "Starting value of the segment.",
 								},
@@ -179,7 +179,7 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "List of segments containing indexes to allocate.",
 						MarkdownDescription: "List of segments containing indexes to allocate.",
 					},
@@ -189,7 +189,7 @@ func IndexAllocationPoolDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "IndexAllocationPool is a generic allocation pool supporting allocation of indexes from a set of segments.\nIt supports allocating things like VLANs, subinterface indexes, autonomous system numbers, or any other integer-based index.",
 				MarkdownDescription: "IndexAllocationPool is a generic allocation pool supporting allocation of indexes from a set of segments.\nIt supports allocating things like VLANs, subinterface indexes, autonomous system numbers, or any other integer-based index.",
 			},

@@ -23,9 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) IPAllocationPool is a generic IP allocation pool supporting allocation of IPv4 and/or IPv6 addresses from a set of segments.
-It is different from IPInSubnetAllocationPool in that it returns a single unzoned IP address, i.e. an IP address without a subnet. For example a 10.1.1.0/24 segment could return 10.1.1.1.
-Consult application documentation to know which pool type to use for a given use case. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -34,47 +31,10 @@ Consult application documentation to know which pool type to use for a given use
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) IPAllocationPool is a generic IP allocation pool supporting allocation of IPv4 and/or IPv6 addresses from a set of segments.
+It is different from IPInSubnetAllocationPool in that it returns a single unzoned IP address, i.e. an IP address without a subnet. For example a 10.1.1.0/24 segment could return 10.1.1.1.
+Consult application documentation to know which pool type to use for a given use case. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) IPAllocationPoolStatus defines the observed state of IPAllocationPool (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `publish_allocations` (Boolean) If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.
-- `segments` (Attributes List) List of segments containing IPv4 or IPv6 addresses to allocate. (see [below for nested schema](#nestedatt--spec--segments))
-
-<a id="nestedatt--spec--segments"></a>
-### Nested Schema for `spec.segments`
-
-Optional:
-
-- `allocate_broadcast_address` (Boolean) Permit the allocation of the broadcast address.
-- `allocate_network_address` (Boolean) Permit the allocation of the network address.
-- `allocations` (Attributes List) List of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--allocations))
-- `reservations` (Attributes List) List of ranges to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--reservations))
-- `subnet` (String) IPv4 or IPv6 subnet, e.g. 10.1.1.0/24.
-
-<a id="nestedatt--spec--segments--allocations"></a>
-### Nested Schema for `spec.segments.allocations`
-
-Optional:
-
-- `name` (String) Name of this allocation.
-- `pool_instance` (String) Pool instance, if empty applies to all instances.
-- `value` (String) Allocation to reserve.
-
-
-<a id="nestedatt--spec--segments--reservations"></a>
-### Nested Schema for `spec.segments.reservations`
-
-Optional:
-
-- `end` (String) Value to reserve to.
-- `start` (String) Value to start reserving.
-
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -104,6 +64,46 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `publish_allocations` (Boolean) If true, allocations in segments will be published to EDB, available to query via EQL and trigger state applications off of.
+- `segments` (Attributes List) List of segments containing IPv4 or IPv6 addresses to allocate. (see [below for nested schema](#nestedatt--spec--segments))
+
+<a id="nestedatt--spec--segments"></a>
+### Nested Schema for `spec.segments`
+
+Read-Only:
+
+- `allocate_broadcast_address` (Boolean) Permit the allocation of the broadcast address.
+- `allocate_network_address` (Boolean) Permit the allocation of the network address.
+- `allocations` (Attributes List) List of reservations to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--allocations))
+- `reservations` (Attributes List) List of ranges to exclude from allocations from this segment. (see [below for nested schema](#nestedatt--spec--segments--reservations))
+- `subnet` (String) IPv4 or IPv6 subnet, e.g. 10.1.1.0/24.
+
+<a id="nestedatt--spec--segments--allocations"></a>
+### Nested Schema for `spec.segments.allocations`
+
+Read-Only:
+
+- `name` (String) Name of this allocation.
+- `pool_instance` (String) Pool instance, if empty applies to all instances.
+- `value` (String) Allocation to reserve.
+
+
+<a id="nestedatt--spec--segments--reservations"></a>
+### Nested Schema for `spec.segments.reservations`
+
+Read-Only:
+
+- `end` (String) Value to reserve to.
+- `start` (String) Value to start reserving.
+
+
 
 
 <a id="nestedatt--status"></a>

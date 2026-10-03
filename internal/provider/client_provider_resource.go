@@ -11,41 +11,41 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/eda/apiclient"
-	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/resource_transaction_pipeline"
+	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/resource_client_provider"
 	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/tfutils"
 )
 
 const (
-	create_rs_transactionPipeline = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines"
-	read_rs_transactionPipeline   = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}"
-	update_rs_transactionPipeline = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}"
-	delete_rs_transactionPipeline = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines/{name}"
+	create_rs_clientProvider = "/apps/core.eda.nokia.com/v1/clientproviders"
+	read_rs_clientProvider   = "/apps/core.eda.nokia.com/v1/clientproviders/{name}"
+	update_rs_clientProvider = "/apps/core.eda.nokia.com/v1/clientproviders/{name}"
+	delete_rs_clientProvider = "/apps/core.eda.nokia.com/v1/clientproviders/{name}"
 )
 
 var (
-	_ resource.Resource                = (*transactionPipelineResource)(nil)
-	_ resource.ResourceWithConfigure   = (*transactionPipelineResource)(nil)
-	_ resource.ResourceWithImportState = (*transactionPipelineResource)(nil)
+	_ resource.Resource                = (*clientProviderResource)(nil)
+	_ resource.ResourceWithConfigure   = (*clientProviderResource)(nil)
+	_ resource.ResourceWithImportState = (*clientProviderResource)(nil)
 )
 
-func NewTransactionPipelineResource() resource.Resource {
-	return &transactionPipelineResource{}
+func NewClientProviderResource() resource.Resource {
+	return &clientProviderResource{}
 }
 
-type transactionPipelineResource struct {
+type clientProviderResource struct {
 	client *apiclient.EdaApiClient
 }
 
-func (r *transactionPipelineResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_transaction_pipeline"
+func (r *clientProviderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_client_provider"
 }
 
-func (r *transactionPipelineResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
-	resp.Schema = resource_transaction_pipeline.TransactionPipelineResourceSchema(ctx)
+func (r *clientProviderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+	resp.Schema = resource_client_provider.ClientProviderResourceSchema(ctx)
 }
 
-func (r *transactionPipelineResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data resource_transaction_pipeline.TransactionPipelineModel
+func (r *clientProviderResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data resource_client_provider.ClientProviderModel
 
 	// Read Terraform plan data into the model
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -70,19 +70,17 @@ func (r *transactionPipelineResource) Create(ctx context.Context, req resource.C
 
 	// Create API call logic
 	tflog.Info(ctx, "Create()::API request", map[string]any{
-		"path": create_rs_transactionPipeline,
+		"path": create_rs_clientProvider,
 		"body": spew.Sdump(reqBody),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err = r.client.Create(ctx, create_rs_transactionPipeline, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-	}, reqBody, &result)
+	err = r.client.Create(ctx, create_rs_clientProvider, nil, reqBody, &result)
 
 	tflog.Info(ctx, "Create()::API returned", map[string]any{
-		"path":      create_rs_transactionPipeline,
+		"path":      create_rs_clientProvider,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -95,13 +93,12 @@ func (r *transactionPipelineResource) Create(ctx context.Context, req resource.C
 	// Read the resource again to populate any values not available in the response from Create()
 	t0 = time.Now()
 
-	err = r.client.Get(ctx, read_rs_transactionPipeline, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
+	err = r.client.Get(ctx, read_rs_clientProvider, map[string]string{
+		"name": tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_rs_transactionPipeline,
+		"path":      read_rs_clientProvider,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -121,8 +118,8 @@ func (r *transactionPipelineResource) Create(ctx context.Context, req resource.C
 	resp.Diagnostics.Append(resp.State.Set(ctx, data)...)
 }
 
-func (r *transactionPipelineResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data resource_transaction_pipeline.TransactionPipelineModel
+func (r *clientProviderResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data resource_client_provider.ClientProviderModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -133,20 +130,19 @@ func (r *transactionPipelineResource) Read(ctx context.Context, req resource.Rea
 
 	// Read API call logic
 	tflog.Info(ctx, "Read()::API request", map[string]any{
-		"path": read_rs_transactionPipeline,
+		"path": read_rs_clientProvider,
 		"data": spew.Sdump(data),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err := r.client.Get(ctx, read_rs_transactionPipeline, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
+	err := r.client.Get(ctx, read_rs_clientProvider, map[string]string{
+		"name": tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_rs_transactionPipeline,
+		"path":      read_rs_clientProvider,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -167,8 +163,8 @@ func (r *transactionPipelineResource) Read(ctx context.Context, req resource.Rea
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *transactionPipelineResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data resource_transaction_pipeline.TransactionPipelineModel
+func (r *clientProviderResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data resource_client_provider.ClientProviderModel
 
 	// Read Terraform plan data into the model
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -191,20 +187,19 @@ func (r *transactionPipelineResource) Update(ctx context.Context, req resource.U
 
 	// Update API call logic
 	tflog.Info(ctx, "Update()::API request", map[string]any{
-		"path": update_rs_transactionPipeline,
+		"path": update_rs_clientProvider,
 		"body": spew.Sdump(reqBody),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err = r.client.Update(ctx, update_rs_transactionPipeline, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
+	err = r.client.Update(ctx, update_rs_clientProvider, map[string]string{
+		"name": tfutils.StringValue(data.Metadata.Name),
 	}, reqBody, &result)
 
 	tflog.Info(ctx, "Update()::API returned", map[string]any{
-		"path":      update_rs_transactionPipeline,
+		"path":      update_rs_clientProvider,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -217,13 +212,12 @@ func (r *transactionPipelineResource) Update(ctx context.Context, req resource.U
 	// Read the resource again to populate any values not available in the response from Update()
 	t0 = time.Now()
 
-	err = r.client.Get(ctx, read_rs_transactionPipeline, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
+	err = r.client.Get(ctx, read_rs_clientProvider, map[string]string{
+		"name": tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_rs_transactionPipeline,
+		"path":      read_rs_clientProvider,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -244,8 +238,8 @@ func (r *transactionPipelineResource) Update(ctx context.Context, req resource.U
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *transactionPipelineResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data resource_transaction_pipeline.TransactionPipelineModel
+func (r *clientProviderResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data resource_client_provider.ClientProviderModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -256,20 +250,19 @@ func (r *transactionPipelineResource) Delete(ctx context.Context, req resource.D
 
 	// Delete API call logic
 	tflog.Info(ctx, "Delete()::API request", map[string]any{
-		"path": delete_rs_transactionPipeline,
+		"path": delete_rs_clientProvider,
 		"data": spew.Sdump(data),
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
 
-	err := r.client.Delete(ctx, delete_rs_transactionPipeline, map[string]string{
-		"namespace": tfutils.StringValue(data.Metadata.Namespace),
-		"name":      tfutils.StringValue(data.Metadata.Name),
+	err := r.client.Delete(ctx, delete_rs_clientProvider, map[string]string{
+		"name": tfutils.StringValue(data.Metadata.Name),
 	}, &result)
 
 	tflog.Info(ctx, "Delete()::API returned", map[string]any{
-		"path":      delete_rs_transactionPipeline,
+		"path":      delete_rs_clientProvider,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -281,7 +274,7 @@ func (r *transactionPipelineResource) Delete(ctx context.Context, req resource.D
 }
 
 // Configure adds the provider configured client to the resource.
-func (r *transactionPipelineResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *clientProviderResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	// Add a nil check when handling ProviderData because Terraform
 	// sets that data after it calls the ConfigureProvider RPC.
 	if req.ProviderData == nil {
@@ -301,12 +294,11 @@ func (r *transactionPipelineResource) Configure(_ context.Context, req resource.
 }
 
 // ImportState implements resource.ResourceWithImportState.
-func (r *transactionPipelineResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *clientProviderResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	parts := strings.Split(req.ID, "/")
-	if len(parts) < 2 {
-		resp.Diagnostics.AddError("Invalid ID", fmt.Sprintf("Expected format: id = <namespace/name>, got: id = %s", req.ID))
+	if len(parts) < 1 {
+		resp.Diagnostics.AddError("Invalid ID", fmt.Sprintf("Expected format: id = <name>, got: id = %s", req.ID))
 		return
 	}
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("metadata").AtName("namespace"), parts[0])...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("metadata").AtName("name"), parts[1])...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("metadata").AtName("name"), parts[0])...)
 }

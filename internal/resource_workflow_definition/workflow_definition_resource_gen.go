@@ -125,6 +125,7 @@ func WorkflowDefinitionResourceSchema(ctx context.Context) schema.Schema {
 						Attributes: map[string]schema.Attribute{
 							"group": schema.StringAttribute{
 								Optional: true,
+								Computed: true,
 							},
 							"kind": schema.StringAttribute{
 								Required: true,
@@ -139,18 +140,21 @@ func WorkflowDefinitionResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
-						Description:         "the resource type to be used for this flow, can only be set if Schema is not set",
-						MarkdownDescription: "the resource type to be used for this flow, can only be set if Schema is not set",
+						Computed:            true,
+						Description:         "The resource type to be used for this flow, can only be set if flowDefinitionSchema is not set",
+						MarkdownDescription: "The resource type to be used for this flow, can only be set if flowDefinitionSchema is not set",
 					},
 					"flow_definition_schema": schema.SingleNestedAttribute{
 						Attributes: map[string]schema.Attribute{
 							"json_schema_spec": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "A string containing the JSON schema the workflow accepts as input.",
 								MarkdownDescription: "A string containing the JSON schema the workflow accepts as input.",
 							},
 							"json_schema_status": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "A string containing the JSON schema the workflow will populate as output.",
 								MarkdownDescription: "A string containing the JSON schema the workflow will populate as output.",
 							},
@@ -161,8 +165,9 @@ func WorkflowDefinitionResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
-						Description:         "the schema for the flow, can only be set if Resource is not set",
-						MarkdownDescription: "the schema for the flow, can only be set if Resource is not set",
+						Computed:            true,
+						Description:         "The schema for the flow, can only be set if flowDefinitionResource is not set",
+						MarkdownDescription: "The schema for the flow, can only be set if flowDefinitionResource is not set",
 					},
 					"image": schema.StringAttribute{
 						Required:            true,
@@ -172,6 +177,7 @@ func WorkflowDefinitionResourceSchema(ctx context.Context) schema.Schema {
 					"image_pull_secrets": schema.ListAttribute{
 						ElementType:         types.StringType,
 						Optional:            true,
+						Computed:            true,
 						Description:         "Secrets to use to pull the image for this workflow.",
 						MarkdownDescription: "Secrets to use to pull the image for this workflow.",
 					},

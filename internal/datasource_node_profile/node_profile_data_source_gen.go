@@ -102,12 +102,12 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"annotate": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Indicates if NPP should annotate sent configuration.",
 						MarkdownDescription: "Indicates if NPP should annotate sent configuration.",
 					},
 					"container_image": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Container image to use when simulating TopoNodes referencing this NodeProfile, e.g. ghcr.io/nokia/srlinux:24.7.1.",
 						MarkdownDescription: "Container image to use when simulating TopoNodes referencing this NodeProfile, e.g. ghcr.io/nokia/srlinux:24.7.1.",
 					},
@@ -117,13 +117,13 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"option": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "DHCPv4 option to return to the TopoNode.",
 											MarkdownDescription: "DHCPv4 option to return to the TopoNode.",
 										},
 										"value": schema.ListAttribute{
 											ElementType:         types.StringType,
-											Optional:            true,
+											Computed:            true,
 											Description:         "Value to return to the TopoNode for the specified option.",
 											MarkdownDescription: "Value to return to the TopoNode for the specified option.",
 										},
@@ -134,7 +134,7 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 										},
 									},
 								},
-								Optional:            true,
+								Computed:            true,
 								Description:         "DHCPv4 options to return to TopoNodes referencing this NodeProfile.",
 								MarkdownDescription: "DHCPv4 options to return to TopoNodes referencing this NodeProfile.",
 							},
@@ -142,13 +142,13 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"option": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "DHCPv6 option to return to the TopoNode.",
 											MarkdownDescription: "DHCPv6 option to return to the TopoNode.",
 										},
 										"value": schema.ListAttribute{
 											ElementType:         types.StringType,
-											Optional:            true,
+											Computed:            true,
 											Description:         "Value to return to the TopoNode for the specified option.",
 											MarkdownDescription: "Value to return to the TopoNode for the specified option.",
 										},
@@ -159,22 +159,22 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 										},
 									},
 								},
-								Optional:            true,
+								Computed:            true,
 								Description:         "DHCPv6 options to return to TopoNodes referencing this NodeProfile.",
 								MarkdownDescription: "DHCPv6 options to return to TopoNodes referencing this NodeProfile.",
 							},
 							"management_poolv4": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "IPInSubnetAllocationPool to use for IPv4 allocations of the management address for TopoNodes referencing this NodeProfile.",
 								MarkdownDescription: "IPInSubnetAllocationPool to use for IPv4 allocations of the management address for TopoNodes referencing this NodeProfile.",
 							},
 							"management_poolv6": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "IPInSubnetAllocationPool to use for IPv6 allocations of the management address for TopoNodes referencing this NodeProfile.",
 								MarkdownDescription: "IPInSubnetAllocationPool to use for IPv6 allocations of the management address for TopoNodes referencing this NodeProfile.",
 							},
 							"preferred_address_family": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "Preferred IP address family",
 								MarkdownDescription: "Preferred IP address family",
 							},
@@ -184,12 +184,12 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 								AttrTypes: DhcpValue{}.AttributeTypes(ctx),
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "DHCP options to use when onboarding the TopoNode. Optional if not bootstrapping using EDA.",
 						MarkdownDescription: "DHCP options to use when onboarding the TopoNode. Optional if not bootstrapping using EDA.",
 					},
 					"image_pull_secret": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Secret used to authenticate to the container registry where the container image is hosted.",
 						MarkdownDescription: "Secret used to authenticate to the container registry where the container image is hosted.",
 					},
@@ -197,12 +197,12 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"image": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.",
 									MarkdownDescription: "URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.",
 								},
 								"image_md5": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.",
 									MarkdownDescription: "URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.",
 								},
@@ -213,73 +213,73 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "URLs hosting software images for bootstrapping TopoNodes referencing this NodeProfile.",
 						MarkdownDescription: "URLs hosting software images for bootstrapping TopoNodes referencing this NodeProfile.",
 					},
 					"license": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "ConfigMap containing a license for TopoNodes referencing this NodeProfile.",
 						MarkdownDescription: "ConfigMap containing a license for TopoNodes referencing this NodeProfile.",
 					},
 					"llm_db": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "URL containing LLDB  to use when interacting with LLM-DB and OpenAI for query autocompletion, e.g. http://eda-asvr/llmdb/ce-llm-db-srlinux-24.7.1.tar.gz.",
 						MarkdownDescription: "URL containing LLDB  to use when interacting with LLM-DB and OpenAI for query autocompletion, e.g. http://eda-asvr/llmdb/ce-llm-db-srlinux-24.7.1.tar.gz.",
 					},
 					"node_user": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Reference to a NodeUser to use for authentication to TopoNodes referencing this NodeProfile.",
 						MarkdownDescription: "Reference to a NodeUser to use for authentication to TopoNodes referencing this NodeProfile.",
 					},
 					"onboarding_password": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Sensitive:           true,
 						Description:         "The password to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.",
 						MarkdownDescription: "The password to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.",
 					},
 					"onboarding_username": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The username to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.",
 						MarkdownDescription: "The username to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.",
 					},
 					"operating_system": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Sets the operating system of this NodeProfile, e.g. srl.",
 						MarkdownDescription: "Sets the operating system of this NodeProfile, e.g. srl.",
 					},
 					"platform_path": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.type.",
 						MarkdownDescription: "JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.type.",
 					},
 					"port": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Port used to establish a connection to the TopoNode, e.g. 57400.",
 						MarkdownDescription: "Port used to establish a connection to the TopoNode, e.g. 57400.",
 					},
 					"serial_number_path": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "JSPath to use for retrieving the serial number string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.serial-number.",
 						MarkdownDescription: "JSPath to use for retrieving the serial number string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.serial-number.",
 					},
 					"version": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Sets the software version of this NodeProfile, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).",
 						MarkdownDescription: "Sets the software version of this NodeProfile, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).",
 					},
 					"version_match": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Regular expression to match the node-retrieved version string to TopoNode version, e.g. v0\\.0\\.0.*.",
 						MarkdownDescription: "Regular expression to match the node-retrieved version string to TopoNode version, e.g. v0\\.0\\.0.*.",
 					},
 					"version_path": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .system.information.version.",
 						MarkdownDescription: "JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .system.information.version.",
 					},
 					"yang": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "URL containing YANG modules and schema profile to use when interacting with TopoNodes referencing this NodeProfile, e.g. http://eda-asvr/schemaprofiles/srlinux-24.7.1.zip.",
 						MarkdownDescription: "URL containing YANG modules and schema profile to use when interacting with TopoNodes referencing this NodeProfile, e.g. http://eda-asvr/schemaprofiles/srlinux-24.7.1.zip.",
 					},
@@ -289,7 +289,7 @@ func NodeProfileDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "NodeProfileSpec defines the desired state of NodeProfile",
 				MarkdownDescription: "NodeProfileSpec defines the desired state of NodeProfile",
 			},

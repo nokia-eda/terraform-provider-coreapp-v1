@@ -127,6 +127,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 						Attributes: map[string]schema.Attribute{
 							"host": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Target host where Fluentbit or Fluentd are listening for Forward messages.",
 								MarkdownDescription: "Target host where Fluentbit or Fluentd are listening for Forward messages.",
 							},
@@ -139,6 +140,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 							},
 							"port": schema.Int64Attribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "TCP Port of the target service.",
 								MarkdownDescription: "TCP Port of the target service.",
 								Validators: []validator.Int64{
@@ -152,6 +154,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "Fluentd Forward protocol output",
 						MarkdownDescription: "Fluentd Forward protocol output",
 					},
@@ -201,6 +204,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 							},
 							"syslog_facility_key": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Key from the original record that contains the Syslog facility number.",
 								MarkdownDescription: "Key from the original record that contains the Syslog facility number.",
 							},
@@ -226,6 +230,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 							},
 							"syslog_maxsize": schema.Int64Attribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Maximum size allowed per message, in bytes.",
 								MarkdownDescription: "Maximum size allowed per message, in bytes.",
 							},
@@ -238,21 +243,25 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 							},
 							"syslog_msgid_key": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Key name from the original record that contains the Message ID associated to the message.",
 								MarkdownDescription: "Key name from the original record that contains the Message ID associated to the message.",
 							},
 							"syslog_procid_key": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Key name from the original record that contains the Process ID that generated the message.",
 								MarkdownDescription: "Key name from the original record that contains the Process ID that generated the message.",
 							},
 							"syslog_sd_key": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Key name from the original record that contains the Structured Data (SD) content.",
 								MarkdownDescription: "Key name from the original record that contains the Structured Data (SD) content.",
 							},
 							"syslog_severity_key": schema.StringAttribute{
 								Optional:            true,
+								Computed:            true,
 								Description:         "Key from the original record that contains the Syslog severity number.",
 								MarkdownDescription: "Key from the original record that contains the Syslog severity number.",
 							},
@@ -279,6 +288,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 									},
 								},
 								Optional:            true,
+								Computed:            true,
 								Description:         "Syslog TLS",
 								MarkdownDescription: "Syslog TLS",
 							},
@@ -289,6 +299,7 @@ func LogOutputResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "Syslog output",
 						MarkdownDescription: "Syslog output",
 					},

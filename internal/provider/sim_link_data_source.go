@@ -8,36 +8,36 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
-	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/datasource_transaction_pipeline_list"
+	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/datasource_sim_link"
 	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/eda/apiclient"
 	"github.com/nokia/eda/apps/terraform-provider-coreapp/internal/tfutils"
 )
 
-const read_ds_transactionPipelineList = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/transactionpipelines"
+const read_ds_simLink = "/apps/core.eda.nokia.com/v1/namespaces/{namespace}/simlinks/{name}"
 
 var (
-	_ datasource.DataSource              = (*transactionPipelineListDataSource)(nil)
-	_ datasource.DataSourceWithConfigure = (*transactionPipelineListDataSource)(nil)
+	_ datasource.DataSource              = (*simLinkDataSource)(nil)
+	_ datasource.DataSourceWithConfigure = (*simLinkDataSource)(nil)
 )
 
-func NewTransactionPipelineListDataSource() datasource.DataSource {
-	return &transactionPipelineListDataSource{}
+func NewSimLinkDataSource() datasource.DataSource {
+	return &simLinkDataSource{}
 }
 
-type transactionPipelineListDataSource struct {
+type simLinkDataSource struct {
 	client *apiclient.EdaApiClient
 }
 
-func (d *transactionPipelineListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_transaction_pipeline_list"
+func (d *simLinkDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_sim_link"
 }
 
-func (d *transactionPipelineListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
-	resp.Schema = datasource_transaction_pipeline_list.TransactionPipelineListDataSourceSchema(ctx)
+func (d *simLinkDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+	resp.Schema = datasource_sim_link.SimLinkDataSourceSchema(ctx)
 }
 
-func (d *transactionPipelineListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data datasource_transaction_pipeline_list.TransactionPipelineListModel
+func (d *simLinkDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data datasource_sim_link.SimLinkModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
@@ -55,19 +55,20 @@ func (d *transactionPipelineListDataSource) Read(ctx context.Context, req dataso
 
 	// Read API call logic
 	tflog.Info(ctx, "Read()::API request", map[string]any{
-		"path":  read_ds_transactionPipelineList,
+		"path":  read_ds_simLink,
 		"data":  spew.Sdump(data),
 		"query": queryParams,
 	})
 
 	t0 := time.Now()
 	result := map[string]any{}
-	err = d.client.GetByQuery(ctx, read_ds_transactionPipelineList, map[string]string{
+	err = d.client.GetByQuery(ctx, read_ds_simLink, map[string]string{
 		"namespace": tfutils.StringValue(data.Namespace),
+		"name":      tfutils.StringValue(data.Name),
 	}, queryParams, &result)
 
 	tflog.Info(ctx, "Read()::API returned", map[string]any{
-		"path":      read_ds_transactionPipelineList,
+		"path":      read_ds_simLink,
 		"result":    spew.Sdump(result),
 		"timeTaken": time.Since(t0).String(),
 	})
@@ -89,7 +90,7 @@ func (d *transactionPipelineListDataSource) Read(ctx context.Context, req dataso
 }
 
 // Configure adds the provider configured client to the data source.
-func (r *transactionPipelineListDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (r *simLinkDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	// Add a nil check when handling ProviderData because Terraform
 	// sets that data after it calls the ConfigureProvider RPC.
 	if req.ProviderData == nil {

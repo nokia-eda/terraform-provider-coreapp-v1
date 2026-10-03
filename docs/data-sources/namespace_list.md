@@ -31,11 +31,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) A Namespace is a logical partition within the cluster that provides a mechanism for isolating resources.
-Namespaces allow for resource segmentation, enabling multiple teams or applications to share the same cluster without conflict. (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -43,24 +38,9 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) A Namespace is a logical partition within the cluster that provides a mechanism for isolating resources.
+Namespaces allow for resource segmentation, enabling multiple teams or applications to share the same cluster without conflict. (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) NamespaceStatus defines the observed state of Namespace (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `bootstrap` (Attributes) Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty. (see [below for nested schema](#nestedatt--items--spec--bootstrap))
-- `description` (String) An optional description of the use of the namespace.
-
-<a id="nestedatt--items--spec--bootstrap"></a>
-### Nested Schema for `items.spec.bootstrap`
-
-Optional:
-
-- `from_namespace` (String) The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -90,6 +70,23 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `bootstrap` (Attributes) Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty. (see [below for nested schema](#nestedatt--items--spec--bootstrap))
+- `description` (String) An optional description of the use of the namespace.
+
+<a id="nestedatt--items--spec--bootstrap"></a>
+### Nested Schema for `items.spec.bootstrap`
+
+Read-Only:
+
+- `from_namespace` (String) The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.
+
 
 
 <a id="nestedatt--items--status"></a>

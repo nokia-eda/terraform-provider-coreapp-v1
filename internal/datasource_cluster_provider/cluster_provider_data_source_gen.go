@@ -97,22 +97,22 @@ func ClusterProviderDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"address": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Address is the external address where branches on this cluster provider will be accessible\nIf not specified will default to load balencer ip address",
 						MarkdownDescription: "Address is the external address where branches on this cluster provider will be accessible\nIf not specified will default to load balencer ip address",
 					},
 					"kubeconfig_secret": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "KubeconfigSecret is the name of the secret containing the kubeconfig for connecting to this cluster",
 						MarkdownDescription: "KubeconfigSecret is the name of the secret containing the kubeconfig for connecting to this cluster",
 					},
 					"no_virtual_cluster": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "NoVirtualCluster will run branch directly on remote kubernetes with no virtual api server.\nOnly applicable when KubeconfigSecret is set and only one\nbranch can be run on Kubernetes cluster as no k8s virtualization.",
 						MarkdownDescription: "NoVirtualCluster will run branch directly on remote kubernetes with no virtual api server.\nOnly applicable when KubeconfigSecret is set and only one\nbranch can be run on Kubernetes cluster as no k8s virtualization.",
 					},
 					"start_port_range": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "StartPortRange is the starting port number for allocating ports to services on this cluster",
 						MarkdownDescription: "StartPortRange is the starting port number for allocating ports to services on this cluster",
 					},
@@ -122,7 +122,7 @@ func ClusterProviderDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional: true,
+				Computed: true,
 			},
 			"status": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{},

@@ -23,8 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) The NodeUser resource represents a user that can be deployed to a set of TopoNodes. It supports managing the user's password, SSH keys, and group bindings.
-Additionally a NodeUser is referenced by a NodeProfile to indicate how NPP should connect to TopoNodes. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -33,28 +31,9 @@ Additionally a NodeUser is referenced by a NodeProfile to indicate how NPP shoul
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) The NodeUser resource represents a user that can be deployed to a set of TopoNodes. It supports managing the user's password, SSH keys, and group bindings.
+Additionally a NodeUser is referenced by a NodeProfile to indicate how NPP should connect to TopoNodes. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) Deployment status of this NodeUser. (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `group_bindings` (Attributes List) Matching of this user to node-specific permissions via groups. (see [below for nested schema](#nestedatt--spec--group_bindings))
-- `password` (String, Sensitive) Password for this user.
-- `ssh_public_keys` (List of String) SSH public keys to deploy for the user.
-- `username` (String) Name of this user. If not provided, the name of the resource will be used.
-
-<a id="nestedatt--spec--group_bindings"></a>
-### Nested Schema for `spec.group_bindings`
-
-Optional:
-
-- `groups` (List of String) Assigned groups for this user.
-- `node_selector` (List of String) Selector to use when selecting TopoNodes to deploy this user to.
-- `nodes` (List of String) TopoNodes to deploy this user to.
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -84,6 +63,28 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `group_bindings` (Attributes List) Matching of this user to node-specific permissions via groups. (see [below for nested schema](#nestedatt--spec--group_bindings))
+- `password` (String, Sensitive) Password for this user.
+- `ssh_public_keys` (List of String) SSH public keys to deploy for the user.
+- `type` (String) Determines whether the user is authenticated locally on the node or remotely through RADIUS or TACACS+. When set to Remote, no configuration is pushed to the node for this user.
+- `username` (String) Name of this user. If not provided, the name of the resource will be used.
+
+<a id="nestedatt--spec--group_bindings"></a>
+### Nested Schema for `spec.group_bindings`
+
+Read-Only:
+
+- `groups` (List of String) Assigned groups for this user.
+- `node_selector` (List of String) Selector to use when selecting TopoNodes to deploy this user to.
+- `nodes` (List of String) TopoNodes to deploy this user to.
+
 
 
 <a id="nestedatt--status"></a>

@@ -22,8 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) A Namespace is a logical partition within the cluster that provides a mechanism for isolating resources.
-Namespaces allow for resource segmentation, enabling multiple teams or applications to share the same cluster without conflict. (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -32,24 +30,9 @@ Namespaces allow for resource segmentation, enabling multiple teams or applicati
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) A Namespace is a logical partition within the cluster that provides a mechanism for isolating resources.
+Namespaces allow for resource segmentation, enabling multiple teams or applications to share the same cluster without conflict. (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) NamespaceStatus defines the observed state of Namespace (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `bootstrap` (Attributes) Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty. (see [below for nested schema](#nestedatt--spec--bootstrap))
-- `description` (String) An optional description of the use of the namespace.
-
-<a id="nestedatt--spec--bootstrap"></a>
-### Nested Schema for `spec.bootstrap`
-
-Optional:
-
-- `from_namespace` (String) The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -79,6 +62,23 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `bootstrap` (Attributes) Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty. (see [below for nested schema](#nestedatt--spec--bootstrap))
+- `description` (String) An optional description of the use of the namespace.
+
+<a id="nestedatt--spec--bootstrap"></a>
+### Nested Schema for `spec.bootstrap`
+
+Read-Only:
+
+- `from_namespace` (String) The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.
+
 
 
 <a id="nestedatt--status"></a>

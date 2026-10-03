@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,16 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `cluster_provider` (String) ClusterProvider is the name of the ClusterProvider resource to use for this branch
-if not set than local cluster will be used using vcluster
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -70,6 +61,15 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `cluster_provider` (String) ClusterProvider is the name of the ClusterProvider resource to use for this branch
+if not set than local cluster will be used using vcluster
 
 
 <a id="nestedatt--status"></a>

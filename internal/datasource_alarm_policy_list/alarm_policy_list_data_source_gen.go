@@ -106,12 +106,12 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 								"action": schema.SingleNestedAttribute{
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Action to apply to matched alarms",
 											MarkdownDescription: "Action to apply to matched alarms",
 										},
 										"override_severity": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Severity to apply when using ChangeSeverity action",
 											MarkdownDescription: "Severity to apply when using ChangeSeverity action",
 										},
@@ -121,7 +121,7 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: ActionValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Action to apply to matched alarms",
 									MarkdownDescription: "Action to apply to matched alarms",
 								},
@@ -130,18 +130,18 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 										"alarm_resource": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"group": schema.StringAttribute{
-													Optional:            true,
-													Description:         "The group of the resource the alarm is raised against, for example core.eda.nokia.com",
-													MarkdownDescription: "The group of the resource the alarm is raised against, for example core.eda.nokia.com",
+													Computed:            true,
+													Description:         "The resource group that the alarm is raised against",
+													MarkdownDescription: "The resource group that the alarm is raised against",
 												},
 												"kind": schema.StringAttribute{
-													Optional:            true,
-													Description:         "The kind of the resource that the alarm is rasied against, for example Interface",
-													MarkdownDescription: "The kind of the resource that the alarm is rasied against, for example Interface",
+													Computed:            true,
+													Description:         "The resource kind that the alarm is rasied against",
+													MarkdownDescription: "The resource kind that the alarm is rasied against",
 												},
 												"names": schema.ListAttribute{
 													ElementType:         types.StringType,
-													Optional:            true,
+													Computed:            true,
 													Description:         "List of resource names that alarm is rasied against, for example leaf-1-ethernet-1-1",
 													MarkdownDescription: "List of resource names that alarm is rasied against, for example leaf-1-ethernet-1-1",
 												},
@@ -151,19 +151,19 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: AlarmResourceValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Apply policy to alarms raised against a resource kind or a specific resource instance",
 											MarkdownDescription: "Apply policy to alarms raised against a resource kind or a specific resource instance",
 										},
 										"alarm_type": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"source_group": schema.StringAttribute{
-													Optional:            true,
-													Description:         "The group of the resource that raises the alarm, for example core.eda.nokia.com",
-													MarkdownDescription: "The group of the resource that raises the alarm, for example core.eda.nokia.com",
+													Computed:            true,
+													Description:         "The resource group which raises the alarm",
+													MarkdownDescription: "The resource group which raises the alarm",
 												},
 												"type": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Type of the alarm, for example InterfaceDown",
 													MarkdownDescription: "Type of the alarm, for example InterfaceDown",
 												},
@@ -173,12 +173,12 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: AlarmTypeValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Apply policy to alarms of a specific type",
 											MarkdownDescription: "Apply policy to alarms of a specific type",
 										},
 										"namespace": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Apply policy to alarms in a specific namespace. If unset, policy matches all namespaces.",
 											MarkdownDescription: "Apply policy to alarms in a specific namespace. If unset, policy matches all namespaces.",
 										},
@@ -186,7 +186,7 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 											Attributes: map[string]schema.Attribute{
 												"nodes": schema.ListAttribute{
 													ElementType:         types.StringType,
-													Optional:            true,
+													Computed:            true,
 													Description:         "List of affected nodes to match the alarm policy",
 													MarkdownDescription: "List of affected nodes to match the alarm policy",
 												},
@@ -196,7 +196,7 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: TargetsAffectedValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Apply policy to alarms affecting specific targets",
 											MarkdownDescription: "Apply policy to alarms affecting specific targets",
 										},
@@ -206,7 +206,7 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: MatchValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Match criteria for alarms",
 									MarkdownDescription: "Match criteria for alarms",
 								},
@@ -216,7 +216,7 @@ func AlarmPolicyListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "AlarmPolicy defines rules to modify the default properties of raised alarms",
 							MarkdownDescription: "AlarmPolicy defines rules to modify the default properties of raised alarms",
 						},

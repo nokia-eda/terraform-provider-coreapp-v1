@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0
+
+Initial release of 26.8 support.
+
+- Add `client_provider`, `client_table`, `cluster_sim_link`, `cluster_topo_link`, `deviation`, `sim_link`, and `sim_node` resources and data sources.
+- Remove the `transaction_pipeline` resource and data source.
+
+## 1.1.1
+
+- Mark the `client_secret` provider attribute as sensitive and fix provider configuration handling.
+
+## 1.1.0
+
+- Add `alarm_policy`, `branch`, `cluster_provider`, `log_output`, `node_security_profile`, `pipeline_definition`, `satellite_profile`, and `transaction_pipeline` resources and data sources.
+- Add satellite node configuration on `topo_node`.
+
 ## 1.0.2
 
 - Add DHCP option 56-NTPServers to the list of allowed values.

@@ -97,79 +97,79 @@ func AlarmDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"additional_text": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "AdditionalText adds extra context related to alarm",
 						MarkdownDescription: "AdditionalText adds extra context related to alarm",
 					},
 					"cluster_specific": schema.BoolAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Specifies if the alarm is within cluster, such as pod issue, or external issue, such as with BGP session on node",
 						MarkdownDescription: "Specifies if the alarm is within cluster, such as pod issue, or external issue, such as with BGP session on node",
 					},
 					"description": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Description of the alarm",
 						MarkdownDescription: "Description of the alarm",
 					},
 					"group": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The group of the resouce the alarm is associated with, for example core.eda.nokia.com",
 						MarkdownDescription: "The group of the resouce the alarm is associated with, for example core.eda.nokia.com",
 					},
 					"js_path": schema.ListAttribute{
 						ElementType:         types.StringType,
-						Optional:            true,
+						Computed:            true,
 						Description:         "Provide a JSON path to the resource or object that the alarm is associated with, for example .node{.name=='leaf-1-1'}.srl{.version=='24.7.1'}.interface{.name=='ethernet-1-11'",
 						MarkdownDescription: "Provide a JSON path to the resource or object that the alarm is associated with, for example .node{.name=='leaf-1-1'}.srl{.version=='24.7.1'}.interface{.name=='ethernet-1-11'",
 					},
 					"kind": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The kind of the resource the alarm is associated with, for example TopoNode",
 						MarkdownDescription: "The kind of the resource the alarm is associated with, for example TopoNode",
 					},
 					"name": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Name of the alarm, this is typically the alarm Kind followed by a unique identifier such as InterfaceDown-leaf-1-1-ethernet-1-11",
 						MarkdownDescription: "Name of the alarm, this is typically the alarm Kind followed by a unique identifier such as InterfaceDown-leaf-1-1-ethernet-1-11",
 					},
 					"parent_alarm": schema.ListAttribute{
 						ElementType:         types.StringType,
-						Optional:            true,
+						Computed:            true,
 						Description:         "ParentAlarm is the name of the parent alarm, if any, for example LinecardDown-leaf-1-1-Linecard1",
 						MarkdownDescription: "ParentAlarm is the name of the parent alarm, if any, for example LinecardDown-leaf-1-1-Linecard1",
 					},
 					"probable_cause": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "ProbableCause is the probable cause of the alarm",
 						MarkdownDescription: "ProbableCause is the probable cause of the alarm",
 					},
 					"remedial_action": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "RemedialAction is the proposed remedial action for the alarm",
 						MarkdownDescription: "RemedialAction is the proposed remedial action for the alarm",
 					},
 					"resource": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The name of the resouce the alarm is associated with, for example leaf-1-1",
 						MarkdownDescription: "The name of the resouce the alarm is associated with, for example leaf-1-1",
 					},
 					"severity": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Severity for this alarm",
 						MarkdownDescription: "Severity for this alarm",
 					},
 					"source_group": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The group of the resource that raise the alarm, for example core.eda.nokia.com",
 						MarkdownDescription: "The group of the resource that raise the alarm, for example core.eda.nokia.com",
 					},
 					"source_kind": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The kind of the resource that raised the alarm, for example InterfaceState",
 						MarkdownDescription: "The kind of the resource that raised the alarm, for example InterfaceState",
 					},
 					"source_resource": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The resource that raised the alarm, for example",
 						MarkdownDescription: "The resource that raised the alarm, for example",
 					},
@@ -177,7 +177,7 @@ func AlarmDataSourceSchema(ctx context.Context) schema.Schema {
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									Optional: true,
+									Computed: true,
 								},
 							},
 							CustomType: TargetsAffectedType{
@@ -186,10 +186,10 @@ func AlarmDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 							},
 						},
-						Optional: true,
+						Computed: true,
 					},
 					"type": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "Type of the alarm, for example InterfaceDown",
 						MarkdownDescription: "Type of the alarm, for example InterfaceDown",
 					},
@@ -199,7 +199,7 @@ func AlarmDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "AlarmSpec defines the desired state of Alarm",
 				MarkdownDescription: "AlarmSpec defines the desired state of Alarm",
 			},

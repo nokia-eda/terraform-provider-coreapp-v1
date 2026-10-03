@@ -99,7 +99,7 @@ func NamespaceDataSourceSchema(ctx context.Context) schema.Schema {
 					"bootstrap": schema.SingleNestedAttribute{
 						Attributes: map[string]schema.Attribute{
 							"from_namespace": schema.StringAttribute{
-								Optional:            true,
+								Computed:            true,
 								Description:         "The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.",
 								MarkdownDescription: "The namespace from which to bootstrap resources.  If empty, bootstrap resources are taken from the installed applications' specifications.",
 							},
@@ -109,12 +109,12 @@ func NamespaceDataSourceSchema(ctx context.Context) schema.Schema {
 								AttrTypes: BootstrapValue{}.AttributeTypes(ctx),
 							},
 						},
-						Optional:            true,
+						Computed:            true,
 						Description:         "Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty.",
 						MarkdownDescription: "Bootstrap configuration for the namespace - if empty no bootstrapping is performed and namespace will be empty.",
 					},
 					"description": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "An optional description of the use of the namespace.",
 						MarkdownDescription: "An optional description of the use of the namespace.",
 					},
@@ -124,7 +124,7 @@ func NamespaceDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "A Namespace is a logical partition within the cluster that provides a mechanism for isolating resources.\nNamespaces allow for resource segmentation, enabling multiple teams or applications to share the same cluster without conflict.",
 				MarkdownDescription: "A Namespace is a logical partition within the cluster that provides a mechanism for isolating resources.\nNamespaces allow for resource segmentation, enabling multiple teams or applications to share the same cluster without conflict.",
 			},

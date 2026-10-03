@@ -127,6 +127,7 @@ func EdgeInterfaceResourceSchema(ctx context.Context) schema.Schema {
 				Attributes: map[string]schema.Attribute{
 					"bridge_domain": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Reference to a Bridge Domain",
 						MarkdownDescription: "Reference to a Bridge Domain",
 					},
@@ -153,6 +154,7 @@ func EdgeInterfaceResourceSchema(ctx context.Context) schema.Schema {
 								},
 								"primary": schema.BoolAttribute{
 									Optional:            true,
+									Computed:            true,
 									Description:         "Indicates which address to use as primary for broadcast",
 									MarkdownDescription: "Indicates which address to use as primary for broadcast",
 								},
@@ -164,6 +166,7 @@ func EdgeInterfaceResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "List of gateway IPv4 addresses in ip/mask form - e.g. 192.168.0.1/24",
 						MarkdownDescription: "List of gateway IPv4 addresses in ip/mask form - e.g. 192.168.0.1/24",
 					},
@@ -177,6 +180,7 @@ func EdgeInterfaceResourceSchema(ctx context.Context) schema.Schema {
 								},
 								"primary": schema.BoolAttribute{
 									Optional:            true,
+									Computed:            true,
 									Description:         "Indicates which address to use as primary for broadcast",
 									MarkdownDescription: "Indicates which address to use as primary for broadcast",
 								},
@@ -188,6 +192,7 @@ func EdgeInterfaceResourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						Optional:            true,
+						Computed:            true,
 						Description:         "List of gateway IPv6 addresses in ip/mask form - e.g. fc00::1/120",
 						MarkdownDescription: "List of gateway IPv6 addresses in ip/mask form - e.g. fc00::1/120",
 					},
@@ -198,11 +203,13 @@ func EdgeInterfaceResourceSchema(ctx context.Context) schema.Schema {
 					},
 					"router": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Reference to a Router",
 						MarkdownDescription: "Reference to a Router",
 					},
 					"vlan_id": schema.Int64Attribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Single value between 0-4094 supported",
 						MarkdownDescription: "Single value between 0-4094 supported",
 						Validators: []validator.Int64{

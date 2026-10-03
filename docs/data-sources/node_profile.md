@@ -23,7 +23,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) NodeProfileSpec defines the desired state of NodeProfile (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -32,71 +31,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) NodeProfileSpec defines the desired state of NodeProfile (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `annotate` (Boolean) Indicates if NPP should annotate sent configuration.
-- `container_image` (String) Container image to use when simulating TopoNodes referencing this NodeProfile, e.g. ghcr.io/nokia/srlinux:24.7.1.
-- `dhcp` (Attributes) DHCP options to use when onboarding the TopoNode. Optional if not bootstrapping using EDA. (see [below for nested schema](#nestedatt--spec--dhcp))
-- `image_pull_secret` (String) Secret used to authenticate to the container registry where the container image is hosted.
-- `images` (Attributes List) URLs hosting software images for bootstrapping TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--spec--images))
-- `license` (String) ConfigMap containing a license for TopoNodes referencing this NodeProfile.
-- `llm_db` (String) URL containing LLDB  to use when interacting with LLM-DB and OpenAI for query autocompletion, e.g. http://eda-asvr/llmdb/ce-llm-db-srlinux-24.7.1.tar.gz.
-- `node_user` (String) Reference to a NodeUser to use for authentication to TopoNodes referencing this NodeProfile.
-- `onboarding_password` (String, Sensitive) The password to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.
-- `onboarding_username` (String) The username to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.
-- `operating_system` (String) Sets the operating system of this NodeProfile, e.g. srl.
-- `platform_path` (String) JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.type.
-- `port` (Number) Port used to establish a connection to the TopoNode, e.g. 57400.
-- `serial_number_path` (String) JSPath to use for retrieving the serial number string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.serial-number.
-- `version` (String) Sets the software version of this NodeProfile, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).
-- `version_match` (String) Regular expression to match the node-retrieved version string to TopoNode version, e.g. v0\.0\.0.*.
-- `version_path` (String) JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .system.information.version.
-- `yang` (String) URL containing YANG modules and schema profile to use when interacting with TopoNodes referencing this NodeProfile, e.g. http://eda-asvr/schemaprofiles/srlinux-24.7.1.zip.
-
-<a id="nestedatt--spec--dhcp"></a>
-### Nested Schema for `spec.dhcp`
-
-Optional:
-
-- `dhcp4_options` (Attributes List) DHCPv4 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--spec--dhcp--dhcp4_options))
-- `dhcp6_options` (Attributes List) DHCPv6 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--spec--dhcp--dhcp6_options))
-- `management_poolv4` (String) IPInSubnetAllocationPool to use for IPv4 allocations of the management address for TopoNodes referencing this NodeProfile.
-- `management_poolv6` (String) IPInSubnetAllocationPool to use for IPv6 allocations of the management address for TopoNodes referencing this NodeProfile.
-- `preferred_address_family` (String) Preferred IP address family
-
-<a id="nestedatt--spec--dhcp--dhcp4_options"></a>
-### Nested Schema for `spec.dhcp.dhcp4_options`
-
-Optional:
-
-- `option` (String) DHCPv4 option to return to the TopoNode.
-- `value` (List of String) Value to return to the TopoNode for the specified option.
-
-
-<a id="nestedatt--spec--dhcp--dhcp6_options"></a>
-### Nested Schema for `spec.dhcp.dhcp6_options`
-
-Optional:
-
-- `option` (String) DHCPv6 option to return to the TopoNode.
-- `value` (List of String) Value to return to the TopoNode for the specified option.
-
-
-
-<a id="nestedatt--spec--images"></a>
-### Nested Schema for `spec.images`
-
-Optional:
-
-- `image` (String) URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.
-- `image_md5` (String) URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.
-
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -126,6 +62,70 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `annotate` (Boolean) Indicates if NPP should annotate sent configuration.
+- `container_image` (String) Container image to use when simulating TopoNodes referencing this NodeProfile, e.g. ghcr.io/nokia/srlinux:24.7.1.
+- `dhcp` (Attributes) DHCP options to use when onboarding the TopoNode. Optional if not bootstrapping using EDA. (see [below for nested schema](#nestedatt--spec--dhcp))
+- `image_pull_secret` (String) Secret used to authenticate to the container registry where the container image is hosted.
+- `images` (Attributes List) URLs hosting software images for bootstrapping TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--spec--images))
+- `license` (String) ConfigMap containing a license for TopoNodes referencing this NodeProfile.
+- `llm_db` (String) URL containing LLDB  to use when interacting with LLM-DB and OpenAI for query autocompletion, e.g. http://eda-asvr/llmdb/ce-llm-db-srlinux-24.7.1.tar.gz.
+- `node_user` (String) Reference to a NodeUser to use for authentication to TopoNodes referencing this NodeProfile.
+- `onboarding_password` (String, Sensitive) The password to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.
+- `onboarding_username` (String) The username to use when onboarding TopoNodes referencing this NodeProfile, e.g. admin.
+- `operating_system` (String) Sets the operating system of this NodeProfile, e.g. srl.
+- `platform_path` (String) JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.type.
+- `port` (Number) Port used to establish a connection to the TopoNode, e.g. 57400.
+- `serial_number_path` (String) JSPath to use for retrieving the serial number string from TopoNodes referencing this NodeProfile, e.g. .platform.chassis.serial-number.
+- `version` (String) Sets the software version of this NodeProfile, e.g. 24.7.1 (for srl), or 24.7.r1 (for sros).
+- `version_match` (String) Regular expression to match the node-retrieved version string to TopoNode version, e.g. v0\.0\.0.*.
+- `version_path` (String) JSPath to use for retrieving the version string from TopoNodes referencing this NodeProfile, e.g. .system.information.version.
+- `yang` (String) URL containing YANG modules and schema profile to use when interacting with TopoNodes referencing this NodeProfile, e.g. http://eda-asvr/schemaprofiles/srlinux-24.7.1.zip.
+
+<a id="nestedatt--spec--dhcp"></a>
+### Nested Schema for `spec.dhcp`
+
+Read-Only:
+
+- `dhcp4_options` (Attributes List) DHCPv4 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--spec--dhcp--dhcp4_options))
+- `dhcp6_options` (Attributes List) DHCPv6 options to return to TopoNodes referencing this NodeProfile. (see [below for nested schema](#nestedatt--spec--dhcp--dhcp6_options))
+- `management_poolv4` (String) IPInSubnetAllocationPool to use for IPv4 allocations of the management address for TopoNodes referencing this NodeProfile.
+- `management_poolv6` (String) IPInSubnetAllocationPool to use for IPv6 allocations of the management address for TopoNodes referencing this NodeProfile.
+- `preferred_address_family` (String) Preferred IP address family
+
+<a id="nestedatt--spec--dhcp--dhcp4_options"></a>
+### Nested Schema for `spec.dhcp.dhcp4_options`
+
+Read-Only:
+
+- `option` (String) DHCPv4 option to return to the TopoNode.
+- `value` (List of String) Value to return to the TopoNode for the specified option.
+
+
+<a id="nestedatt--spec--dhcp--dhcp6_options"></a>
+### Nested Schema for `spec.dhcp.dhcp6_options`
+
+Read-Only:
+
+- `option` (String) DHCPv6 option to return to the TopoNode.
+- `value` (List of String) Value to return to the TopoNode for the specified option.
+
+
+
+<a id="nestedatt--spec--images"></a>
+### Nested Schema for `spec.images`
+
+Read-Only:
+
+- `image` (String) URL hosting the software image, e.g. srlimages/srlinux-24.7.1.bin.
+- `image_md5` (String) URL hosting the software image md5 hash. e.g. srlimages/srlinux-24.7.1.bin.md5.
+
 
 
 <a id="nestedatt--status"></a>

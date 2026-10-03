@@ -245,6 +245,7 @@ Optional:
 "NoIpAddress"
    NPP is running but there is no IP address for node. This only happens in sim setups when
    CX has not created the simulated node, or the simulated pod failed to launch due to image error.
+- `node_state_last_change` (String) Indicates when this node last changed state.
 - `npp_details` (String) NPP address and port for this TopoNode.
 - `npp_pod` (String) NPP pod name
 - `npp_state` (String) The current state of the connection between ConfigEngine and NPP.
